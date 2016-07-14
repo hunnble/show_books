@@ -1,0 +1,21 @@
+<%- include header -%>
+<% books.forEach(function (book, index) { %>
+<section>
+    <header>
+        <h3 class="name"><%= book.name %></h3>
+        <span class="author"><%= book.author %></span>
+    </header>
+    <a href="/book/<%= book.name %>/<%= book.author %>">豆瓣相关</a>
+    <a href="/add_comment/<%= book.name %>/<%= book.author %>">写点什么</a>
+    <button class="removeBtn">删除本书</button>
+</section>
+<% }) %>
+</article>
+<script>
+    <%- include ../public/javascripts/jquery.min.js %>
+</script>
+<script>
+    <%- include ../public/javascripts/archive.js %>
+</script>
+</body>
+</html>

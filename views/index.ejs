@@ -1,0 +1,24 @@
+<%- include header -%>
+<ul class="logs">
+<% logs.forEach(function (log) { %>
+<% if (log.operation == 'add') { %>
+    <li class="add">
+    <span><%- log.username %></span>
+    <span>添加了</span>
+    <span><<<%- log.book %>>></span>
+    <a href=<%- log.link %>>查看</a>
+<% } else if (log.operation == 'comment') { %>
+    <li class="comment">
+    <span><%- log.username %></span>
+    <span>写了新评论</span>
+    <a href=<%- log.link %>>查看</a>
+<% } else { %>
+    <li class="remove">
+    <span><%- log.username %></span>
+    <span>删除了</span>
+    <span><<<%- log.book %>>></span>
+<% } %>
+    </li>
+<% }) %>
+</ul>
+<%- include footer -%>
