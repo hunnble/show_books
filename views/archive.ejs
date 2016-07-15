@@ -7,9 +7,27 @@
     </header>
     <a href="/book/<%= book.name %>/<%= book.author %>">豆瓣相关</a>
     <a href="/add_comment/<%= book.name %>/<%= book.author %>">写点什么</a>
-    <button class="removeBtn">删除本书</button>
+    <button class="removeBtn removeBook">删除本书</button>
+    <ul>
+        <% book.comments.forEach(function (comment) { %>
+        <li class="comment">
+            <button class="removeBtn removeComment">删除此评论</button>
+            <input type="text" disabled class="hide commentId" value=<%- comment._id %> />
+            <%- comment.comment %>
+        </li>
+        <% }) %>
+    </ul>
 </section>
 <% }) %>
+<div class="page">
+    <br />
+    <% if (!isFirstPage) { %>
+    <span class="prepage"><a title="上一页" href="?p=<%= page-1 %>">上一页</a></span>
+    <% } %>
+    <% if (!isLastPage) { %>
+    <span class="nextpage"><a title="下一页" href="?p=<%= page+1 %>">下一页</a></span>
+    <% } %>
+</div>
 </article>
 <script>
     <%- include ../public/javascripts/jquery.min.js %>

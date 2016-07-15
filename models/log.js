@@ -4,7 +4,9 @@ var mongodb = require('./db');
 
 var LOGNAME = require('../settings').LOGNAME;
 
-var Log = function () {};
+var Log = function () {
+    this.perPage = 10;
+};
 
 Log.prototype.add = function (username, time, operation, book, link, callback) {
     async.waterfall([
@@ -35,7 +37,9 @@ Log.prototype.add = function (username, time, operation, book, link, callback) {
     });
 };
 
-Log.prototype.getAll = function (option, callback) {
+Log.prototype.getAll = function (option, page, callback) {
+    var self = this;
+
     if (!option) {
         option = {};
     }
@@ -51,10 +55,15 @@ Log.prototype.getAll = function (option, callback) {
             });
         },
         function (collection, cb) {
-            collection.find(option).sort({
-                time: -1
-            }).toArray(function (err, logs) {
-                cb(err, logs);
+            collection.count(option, function (err, total) {
+                collection.find(option, {
+                    'skip': (page - 1) * self.perPage,
+                    'limit': self.perPage
+                }).sort({
+                    'time': -1
+                }).toArray(function (err, logs) {
+                    cb(err, [logs, total]);
+                });
             });
         }
     ], function (err, result) {
@@ -62,7 +71,7 @@ Log.prototype.getAll = function (option, callback) {
         if (err) {
             return callback(err, {});
         }
-        return callback(err, result);
+        return callback(err, result[0], result[1]);
     });
 };
 

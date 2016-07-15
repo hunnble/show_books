@@ -1,5 +1,8 @@
-<sidebar class="sidebar">
+<aside class="sidebar">
     <ul>
+        <% if (user) { %>
+        <li><img class="headerImg" src=<%- user.head %> title=<%- user.name %> /></li>
+        <% } %>
         <li><a href="/">主页</a></li>
         <% if (user) { %>
         <li><a href="/logout">注销</a></li>
@@ -10,4 +13,4 @@
         <% } %>
         <li><a href="/archive">目录</a></li>
     </ul>
-</sidebar>
+</aside>

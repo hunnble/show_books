@@ -14,11 +14,16 @@ var log  = new Log();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  log.getAll({}, function (err, logs) {
+  var page = req.query.p ? parseInt(req.query.p, 10) : 1;
+
+  log.getAll({}, page, function (err, logs, total) {
     res.render('index', {
       title: '书单',
       logs: logs,
       user: req.session.user,
+      page: page,
+      isFirstPage: page <= 1,
+      isLastPage: ((page - 1) * log.perPage + logs.length) >= total,
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
@@ -125,7 +130,9 @@ router.post('/add_book', function (req, res) {
 
 router.get('/archive', checkLogin);
 router.get('/archive', function (req, res) {
-  book.getAll(req.session.user.name, function (err, books) {
+  var page = req.query.p ? parseInt(req.query.p, 10) : 1;
+
+  book.getAll(req.session.user.name, page, function (err, books, total) {
     if (!books) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
@@ -134,6 +141,9 @@ router.get('/archive', function (req, res) {
       title: '目录',
       books: books,
       user: req.session.user,
+      page: page,
+      isFirstPage: page <= 1,
+      isLastPage: ((page - 1) * book.perPage + books.length) >= total,
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
@@ -142,8 +152,12 @@ router.get('/archive', function (req, res) {
 
 router.post('/archive', checkLogin);
 router.post('/archive', function (req, res) {
-  book.remove(req.body.name, req.body.author, req.session.user.name, function (err) {});
-  log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
+  if(req.body.commentId) {
+    book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
+  } else {
+    book.remove(req.body.name, req.body.author, req.session.user.name, function (err) {});
+    log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
+  }
 });
 
 router.get('/book/:name/:author', checkLogin);
@@ -177,7 +191,7 @@ router.post('/add_comment/:name/:author', function (req, res) {
   if (req.body.isAjax) {
     res.send(markdown.toHTML(req.body.comment));
   } else {
-    book.update(req.params.name, req.params.author, req.body.comment, req.session.user.name, function (err) {
+    book.addComment(req.params.name, req.params.author, req.body.comment, req.session.user.name, function (err) {
       if (err) {
         req.flash('error', err);
         return res.redirect('back');

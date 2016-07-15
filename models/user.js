@@ -37,7 +37,7 @@ User.prototype.get = function (name, callback) {
 
 User.prototype.add = function (name, password, email, callback) {
     var email_md5 = crypto.createHash('md5').update(email.toLowerCase()).digest('hex'),
-        head = 'http://www.gravatar.com/avatar/' + email_md5 + '?s=48',
+        head = 'http://www.gravatar.com/avatar/' + email_md5 + '?s=80',
         user = {
             'name': name.trim(),
             'password': crypto.createHash('md5').update(password).digest('hex'),

@@ -5,7 +5,9 @@ var mongodb = require('./db');
 
 var BOOKNAME = require('../settings').BOOKNAME;
 
-function Book () {}
+function Book () {
+    this.perPage = 5
+}
 
 Book.prototype.get = function (name, author, username, callback) {
     async.waterfall([
@@ -77,7 +79,9 @@ Book.prototype.add = function (name, author, username, callback) {
     });
 };
 
-Book.prototype.getAll = function (username, callback) {
+Book.prototype.getAll = function (username, page, callback) {
+    var self = this;
+
     async.waterfall([
         function (cb) {
             mongodb.open(function (err, db) {
@@ -90,12 +94,24 @@ Book.prototype.getAll = function (username, callback) {
             });
         },
         function (collection, cb) {
-            collection.find({
+            collection.count({
                 'username': username
-            }).sort({
-                time: -1
-            }).toArray(function (err, books) {
-                cb(err, books);
+            }, function (err, total) {
+                collection.find({
+                    'username': username
+                },{
+                    'skip': (page - 1) * self.perPage,
+                    'limit': self.perPage
+                }).sort({
+                    'time': -1
+                }).toArray(function (err, books) {
+                    books.forEach(function (book) {
+                        book.comments.forEach(function (comment, index) {
+                            book.comments[index].comment = markdown.toHTML(comment.comment);
+                        });
+                    });
+                    cb(err, [books, total]);
+                });
             });
         }
     ], function (err, result) {
@@ -103,7 +119,7 @@ Book.prototype.getAll = function (username, callback) {
         if (err) {
             return callback(err);
         }
-        return callback(err, result);
+        return callback(err, result[0], result[1]);
     });
 };
 
@@ -139,7 +155,7 @@ Book.prototype.remove = function (name, author, username, callback) {
     });
 };
 
-Book.prototype.update = function (name, author, comment, username, callback) {
+Book.prototype.addComment = function (name, author, comment, username, callback) {
     async.waterfall([
         function (cb) {
             mongodb.open(function (err, db) {
@@ -158,7 +174,46 @@ Book.prototype.update = function (name, author, comment, username, callback) {
                 'username': username
             }, {
                 $push: {
-                    'comments': comment
+                    'comments': {
+                        '_id': (new Date()).getTime(),
+                        'comment': comment
+                    }
+                }
+            }, function (err) {
+                cb(err);
+            });
+        }
+    ], function (err) {
+        mongodb.close();
+        if (err) {
+            return callback(err);
+        }
+        return callback(null);
+    });
+};
+
+Book.prototype.removeComment = function (name, author, commentId, username, callback) {
+    async.waterfall([
+        function (cb) {
+            mongodb.open(function (err, db) {
+                cb(err, db);
+            });
+        },
+        function (db, cb) {
+            db.collection(BOOKNAME, function (err, collection) {
+                cb(err, collection);
+            });
+        },
+        function (collection, cb) {
+            collection.update({
+                'name': name,
+                'author': author,
+                'username': username
+            }, {
+                $pull: {
+                    'comments': {
+                        '_id': Number(commentId)
+                    }
                 }
             }, function (err) {
                 cb(err);

@@ -1,0 +1,92 @@
+html,
+body {
+  height: 100%;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+}
+ol,
+ul {
+  list-style: none;
+}
+h1 {
+  font-size: 225%;
+  font-weight: normal;
+}
+h2 {
+  font-size: 200%;
+  font-weight: normal;
+}
+h3 {
+  font-size: 175%;
+  font-weight: normal;
+}
+h4 {
+  font-size: 150%;
+  font-weight: normal;
+}
+h5 {
+  font-size: 125%;
+  font-weight: normal;
+}
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+a {
+  color: #00B7FF;
+}
+a:not(:hover) {
+  text-decoration: none;
+}
+.sidebar {
+  position: fixed;
+  right: 0;
+  width: 25%;
+  height: 100%;
+  background-color: #bbdfc9;
+}
+.sidebar .headerImg {
+  border-radius: 50%;
+}
+.sidebar > ul {
+  margin-top: 50%;
+  min-height: 40%;
+}
+.sidebar > ul > li {
+  line-height: 40px;
+  text-align: center;
+  font-size: 24px;
+}
+.sidebar > ul > li > a {
+  color: #fff;
+}
+.main {
+  margin-right: 25%;
+}

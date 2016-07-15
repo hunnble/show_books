@@ -2,17 +2,11 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/css/style.css' />
 </head>
 <body>
-<header>
-    <h1><%= title %></h1>
-    <% if (user) { %>
-    <img src=<%- user.head %> title=<%- user.name %> />
-    <% } %>
-</header>
 <%- include sidebar -%>
-<article>
+<article class="main">
     <% if (success) { %>
     <div class="success"><%= success %></div>
     <% } %>
