@@ -5,7 +5,7 @@ var mongodb = require('./db');
 var LOGNAME = require('../settings').LOGNAME;
 
 var Log = function () {
-    this.perPage = 10;
+    this.perPage = 15;
 };
 
 Log.prototype.add = function (username, time, operation, book, link, callback) {

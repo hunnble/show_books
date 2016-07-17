@@ -35,6 +35,9 @@ ol,
 ul {
   list-style: none;
 }
+.hide {
+  display: none;
+}
 h1 {
   font-size: 225%;
   font-weight: normal;
@@ -61,18 +64,51 @@ h6 {
 }
 a {
   color: #00B7FF;
-}
-a:not(:hover) {
   text-decoration: none;
+}
+.btn {
+  border: 0 solid transparent;
+  border-radius: 14px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #52b9ea;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.btn:hover {
+  -webkit-box-shadow: 0 0 14px #222;
+  -moz-box-shadow: 0 0 14px #222;
+  box-shadow: 0 0 14px #222;
+}
+.success {
+  background-color: #6dea67;
+}
+.error {
+  background-color: #fc861a;
+}
+.success,
+.error {
+  display: inline-block;
+  margin: 7px;
+  padding: 7px;
+  border-radius: 7px;
+  color: #fff;
+  font-size: 16px;
 }
 .sidebar {
   position: fixed;
   right: 0;
   width: 25%;
   height: 100%;
-  background-color: #bbdfc9;
+  background-color: #52b9ea;
+  opacity: 0.5;
 }
 .sidebar .headerImg {
+  -webkit-box-shadow: 0 0 12px #000;
+  -moz-box-shadow: 0 0 12px #000;
+  box-shadow: 0 0 12px #000;
   border-radius: 50%;
 }
 .sidebar > ul {
@@ -80,13 +116,218 @@ a:not(:hover) {
   min-height: 40%;
 }
 .sidebar > ul > li {
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  margin: 0 5%;
+  border-radius: 7px;
   line-height: 40px;
   text-align: center;
   font-size: 24px;
 }
+.sidebar > ul > li:not(:first-child):hover {
+  background-color: #fff;
+}
+.sidebar > ul > li:not(:first-child):hover > a {
+  color: #52b9ea;
+}
 .sidebar > ul > li > a {
+  display: inline-block;
+  width: 100%;
   color: #fff;
 }
 .main {
+  position: relative;
   margin-right: 25%;
+  padding: 28px;
+  min-height: 80%;
+}
+.logs {
+  font-size: 18px;
+  padding: 14px;
+}
+.logs > h3 {
+  padding-bottom: 7px;
+  border-bottom: 1px solid #F2F2F2;
+}
+.logs > .add {
+  -webkit-transition: padding 1s;
+  -moz-transition: padding 1s;
+  -ms-transition: padding 1s;
+  -o-transition: padding 1s;
+  transition: padding 1s;
+  margin: 14px 0;
+}
+.logs > .add:hover {
+  padding-left: 14px;
+}
+.logs .log {
+  display: inline-block;
+  margin: 7px 0;
+}
+.logs .time {
+  padding: 4px 7px;
+  border-radius: 7px;
+  background-color: #F2F2F2;
+  color: #fc861a;
+}
+.page {
+  padding: 14px;
+}
+.prepage > a,
+.nextpage > a {
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  display: inline-block;
+  padding: 7px;
+  background-color: #52b9ea;
+  color: #fff;
+}
+.prepage > a:hover,
+.nextpage > a:hover {
+  background-color: #F2F2F2;
+  color: #52b9ea;
+}
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 14px #222;
+  -moz-box-shadow: 0 0 14px #222;
+  box-shadow: 0 0 14px #222;
+  padding: 28px;
+}
+form > input {
+  margin: 14px;
+  height: 24px;
+  line-height: 24px;
+}
+form > input[type=text],
+form > input[type=password],
+form > input[type=email] {
+  display: block;
+  border: 2px solid #F2F2F2;
+  border-radius: 7px;
+  min-width: 200px;
+  text-indent: 7px;
+  outline: none;
+}
+form > input[type=text]:focus,
+form > input[type=password]:focus,
+form > input[type=email]:focus {
+  border-color: #222;
+}
+form > input[type=submit],
+form > input[type=reset],
+form > input[type=button] {
+  border: 0 solid transparent;
+  border-radius: 14px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #52b9ea;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  height: 28px;
+  width: 64px;
+}
+form > input[type=submit]:hover,
+form > input[type=reset]:hover,
+form > input[type=button]:hover {
+  -webkit-box-shadow: 0 0 14px #222;
+  -moz-box-shadow: 0 0 14px #222;
+  box-shadow: 0 0 14px #222;
+}
+form > input[type=checkbox] {
+  display: inline-block;
+  margin-right: 0;
+  vertical-align: middle;
+}
+form > input[type=submit] {
+  margin-left: 77px;
+}
+form > span {
+  display: inline-block;
+  margin: 14px 0;
+  height: 24px;
+  vertical-align: middle;
+  line-height: 24px;
+}
+form .form-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+button {
+  border: 0 solid transparent;
+  border-radius: 14px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #52b9ea;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+button:hover {
+  -webkit-box-shadow: 0 0 14px #222;
+  -moz-box-shadow: 0 0 14px #222;
+  box-shadow: 0 0 14px #222;
+}
+#books > section {
+  margin: 14px;
+  min-height: 180px;
+}
+#books > section > header a {
+  display: block;
+  font-size: 200%;
+  color: #222;
+}
+#books > section > header > img {
+  float: right;
+  margin: 0 14px;
+}
+#books > section > header > .book_tag {
+  border: 0 solid transparent;
+  border-radius: 14px;
+  display: inline-block;
+  line-height: 28px;
+  background-color: #52b9ea;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  width: auto;
+  padding: 3px 7px;
+  margin: 7px;
+  border-radius: 0;
+  background-color: #fc861a;
+}
+#books > section > header > .book_tag:hover {
+  -webkit-box-shadow: 0 0 14px #222;
+  -moz-box-shadow: 0 0 14px #222;
+  box-shadow: 0 0 14px #222;
+}
+.removeBtn {
+  width: auto;
+  padding: 3px 7px;
+}
+.removeComment {
+  background-color: #fc861a;
+}
+.commentContent {
+  float: right;
+  width: 50%;
 }

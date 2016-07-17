@@ -1,16 +1,16 @@
 <%- include header -%>
 <ul class="logs">
+<h3>动态</h3>
 <% logs.forEach(function (log) { %>
 <% if (log.operation == 'add') { %>
     <li class="add">
-    <span><%- log.username %></span>
-    <span>添加了</span>
-    <span><< <%- log.book %> >></span>
+    <p class="log"><%- log.username %>添加了<< <%- log.book %> >></p>
+    <span class="time"><%- log.time.getMonth()+1 %>-<%- log.time.getDate() %> <%- log.time.toLocaleTimeString() %></span>
     <a href=<%- log.link %>>查看</a>
 <% } else if (log.operation == 'comment') { %>
-    <li class="comment">
-    <span><%- log.username %></span>
-    <span>写了新评论</span>
+    <li class="add">
+    <p class="log"><%- log.username %>写了新评论</p>
+    <span class="time"><%- log.time.getMonth()+1 %>-<%- log.time.getDate() %> <%- log.time.toLocaleTimeString() %></span>
     <a href=<%- log.link %>>查看</a>
 <% } %>
     </li>
