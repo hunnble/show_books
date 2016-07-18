@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('.removeBook').click(function () {
         var $removeItem = $(this).parent();
 
@@ -11,12 +12,13 @@ $(document).ready(function () {
             $removeItem.remove();
         }
     });
+
     $('.removeComment').click(function () {
         var $removeItem = $(this).parent();
 
         if (confirm('确认删除这条书评?')) {
             var $bookBlock = $removeItem.parent().parent();
-            console.log($removeItem.find('.commentId').val());
+
             $.post('/archive', {
                 'isComment': true,
                 'name': $bookBlock.find('.name').html(),
@@ -26,4 +28,13 @@ $(document).ready(function () {
             $removeItem.remove();
         }
     });
+
+    $('.showCommentBtn').click(function () {
+        var $comment = $(this).parent().find('.comment');
+
+        $('.curComment').hide(500).removeClass('curComment');
+
+        $comment.addClass('curComment').show(500);
+    });
+
 });

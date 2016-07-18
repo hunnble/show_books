@@ -1,17 +1,12 @@
 <%- include header -%>
-<form method="post">
-    <textarea class="comment" name="comment" cols="40" rows="10" placeholder="书评" required></textarea>
+<form method="post" class="add_comment_form">
+    <textarea name="comment" placeholder="书评" required></textarea>
     <input type="submit" value="提交评论" />
 </form>
 <p>
-    已输入<span class="wordNumber">0</span>字
+    预览(已输入<span class="wordNumber">0</span>字)
 </p>
-<section>
-    <header>
-        <h3>预览</h3>
-    </header>
-    <div class="preview"></div>
-</section>
+<div class="preview"></div>
 </article>
 
 <script>

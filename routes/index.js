@@ -16,7 +16,7 @@ var log  = new Log();
 router.get('/', function(req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
-  log.getAll({}, page, function (err, logs, total) {
+  log.getAll({}, page, function (err, logs, total, page) {
     res.render('index', {
       title: '书单',
       logs: logs,
@@ -121,9 +121,14 @@ router.post('/add_book', function (req, res) {
         req.flash('error', '添加失败: ' + err);
         return res.redirect('/add_book');
       }
-      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/'+req.body['name']+'/'+req.body['author'], function (err) {});
-      req.flash('success', '添加成功');
-      res.redirect('/');
+      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/'+req.body['name']+'/'+req.body['author'], function (err) {
+        if (err) {
+          req.flash('error', '添加失败: ' + err);
+          return res.redirect('/add_book');
+        }
+        req.flash('success', '添加成功');
+        res.redirect('/');
+      });
     });
   });
 });

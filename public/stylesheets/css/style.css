@@ -24,19 +24,15 @@ textarea,
 p,
 blockquote,
 th,
-td {
+td,
+button {
   padding: 0;
   margin: 0;
-}
-body {
   font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 ol,
 ul {
   list-style: none;
-}
-.hide {
-  display: none;
 }
 h1 {
   font-size: 225%;
@@ -68,7 +64,7 @@ a {
 }
 .btn {
   border: 0 solid transparent;
-  border-radius: 14px;
+  border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
@@ -231,7 +227,7 @@ form > input[type=submit],
 form > input[type=reset],
 form > input[type=button] {
   border: 0 solid transparent;
-  border-radius: 14px;
+  border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
@@ -273,7 +269,7 @@ form .form-footer {
 }
 button {
   border: 0 solid transparent;
-  border-radius: 14px;
+  border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
@@ -302,7 +298,7 @@ button:hover {
 }
 #books > section > header > .book_tag {
   border: 0 solid transparent;
-  border-radius: 14px;
+  border-radius: 4px;
   display: inline-block;
   line-height: 28px;
   background-color: #52b9ea;
@@ -320,14 +316,121 @@ button:hover {
   -moz-box-shadow: 0 0 14px #222;
   box-shadow: 0 0 14px #222;
 }
+.book {
+  margin-right: 50%;
+  padding: 21px;
+  background-color: #F2F2F2;
+}
+.name,
+.author {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #222;
+}
+.author {
+  margin-left: 7px;
+}
 .removeBtn {
   width: auto;
   padding: 3px 7px;
 }
-.removeComment {
-  background-color: #fc861a;
+.comment {
+  position: absolute;
+  top: 14px;
+  right: 0;
+  padding: 2%;
+  width: 46%;
+  color: #fc861a;
 }
-.commentContent {
+.comment h1 {
+  color: #6dea67;
+}
+.comment h2 {
+  color: #6dea67;
+}
+.comment h3 {
+  color: #6dea67;
+}
+.comment h4 {
+  color: #6dea67;
+}
+.comment h5 {
+  color: #6dea67;
+}
+.comment h6 {
+  color: #6dea67;
+}
+.comment li {
+  margin-bottom: 70px;
+}
+.removeComment {
+  display: block;
   float: right;
-  width: 50%;
+  margin: 14px;
+  background-color: #52b9ea;
+}
+.add_comment_form {
+  -webkit-box-shadow: 0 0 0 #fff;
+  -moz-box-shadow: 0 0 0 #fff;
+  box-shadow: 0 0 0 #fff;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+  top: 55%;
+  left: 0;
+  height: 50%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.add_comment_form > textarea {
+  border: none;
+  margin: 0 auto auto 42px;
+  width: 40%;
+  height: 100%;
+  outline: none;
+}
+.add_comment_form > input[type=submit] {
+  width: auto;
+  height: auto;
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url(../fonts/icomoon.eot?2umzxb);
+  src: url(../fonts/icomoon.eot?2umzxb#iefix) format('embedded-opentype'), url(../fonts/icomoon.ttf?2umzxb) format('truetype'), url(../fonts/icomoon.woff?2umzxb) format('woff'), url(../fonts/icomoon.svg?2umzxb#icomoon) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.preview {
+  padding: 21px;
+  background-color: #F2F2F2;
+  color: #fc861a;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-home3:before {
+  content: "\e902";
+}
+.icon-price-tags:before {
+  content: "\e936";
+}
+.icon-undo2:before {
+  content: "\e967";
+}
+.icon-upload2:before {
+  content: "\e9c6";
 }

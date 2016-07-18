@@ -1,19 +1,20 @@
 <%- include header -%>
 <% books.forEach(function (book) { %>
-<section>
+<section class="book">
     <header>
         <h3 class="name"><%= book.name %></h3>
         <span class="author"><%= book.author %></span>
     </header>
     <a class="btn" href="/book/<%= book.name %>/<%= book.author %>">豆瓣相关</a>
-    <a class="btn" href="/add_comment/<%= book.name %>/<%= book.author %>">写点什么</a>
     <button class="removeBtn removeBook">删除本书</button>
-    <ul>
+    <a class="btn" href="/add_comment/<%= book.name %>/<%= book.author %>">写笔记</a>
+    <button class="showCommentBtn">查看笔记</button>
+    <ul class="comment" style="display: none">
         <% book.comments.forEach(function (comment) { %>
-        <li class="comment">
-            <button class="removeBtn removeComment">删除此评论</button>
-            <input type="text" disabled class="hide commentId" value=<%- comment._id %> />
+        <li>
             <div class="commentContent"><%- comment.comment %></div>
+            <button class="removeBtn removeComment">删除此评论</button>
+            <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
         </li>
         <% }) %>
     </ul>

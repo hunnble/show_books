@@ -6,7 +6,7 @@ var mongodb = require('./db');
 var BOOKNAME = require('../settings').BOOKNAME;
 
 function Book () {
-    this.perPage = 5
+    this.perPage = 5;
 }
 
 Book.prototype.get = function (name, author, username, callback) {

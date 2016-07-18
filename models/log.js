@@ -6,6 +6,7 @@ var LOGNAME = require('../settings').LOGNAME;
 
 var Log = function () {
     this.perPage = 15;
+    this.maxPage = 3;
 };
 
 Log.prototype.add = function (username, time, operation, book, link, callback) {
@@ -40,6 +41,10 @@ Log.prototype.add = function (username, time, operation, book, link, callback) {
 Log.prototype.getAll = function (option, page, callback) {
     var self = this;
 
+    if (page > self.maxPage) {
+        page = self.maxPage;
+    }
+
     if (!option) {
         option = {};
     }
@@ -62,7 +67,7 @@ Log.prototype.getAll = function (option, page, callback) {
                 }).sort({
                     'time': -1
                 }).toArray(function (err, logs) {
-                    cb(err, [logs, total]);
+                    cb(err, [logs, Math.min(total, self.perPage * self.maxPage), page]);
                 });
             });
         }
@@ -71,7 +76,7 @@ Log.prototype.getAll = function (option, page, callback) {
         if (err) {
             return callback(err, {});
         }
-        return callback(err, result[0], result[1]);
+        return callback(err, result[0], result[1], result[2]);
     });
 };
 

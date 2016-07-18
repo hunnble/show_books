@@ -3,15 +3,15 @@
         <% if (user) { %>
         <li><img class="headerImg" src=<%- user.head %> title=<%- user.name %> /></li>
         <% } %>
-        <li><a href="/">主页</a></li>
+        <li><a href="/"><span class="icon-home3"></span>&nbsp;主页</a></li>
         <% if (user) { %>
-        <li><a href="/logout">注销</a></li>
-        <li><a href="/add_book">添加新书</a></li>
+        <li><a href="/logout"><span class="icon-undo2"></span>&nbsp;注销</a></li>
+        <li><a href="/add_book"><span class="icon-upload2"></span>&nbsp;添加新书</a></li>
         <% } else { %>
-        <li><a href="/register">注册</a></li>
-        <li><a href="/login">登录</a></li>
+        <li><a href="/register"><span class="icon-undo2"></span>&nbsp;注册</a></li>
+        <li><a href="/login"><span class="icon-upload2"></span>&nbsp;登录</a></li>
         <% } %>
-        <li><a href="/archive">目录</a></li>
+        <li><a href="/archive"><span class="icon-price-tags"></span>&nbsp;目录</a></li>
     </ul>
     <% if (success) { %>
     <div class="success"><%= success %></div>
