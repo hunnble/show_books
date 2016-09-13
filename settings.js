@@ -5,7 +5,8 @@ var settings = {
     port: 27017,
     USERNAME: 'booklist_users',
     BOOKNAME: 'booklist_books',
-    LOGNAME: 'booklist_logs'
+    LOGNAME: 'booklist_logs',
+    url: 'mongodb://localhost:27017/booklist'
 };
 
 module.exports = settings;

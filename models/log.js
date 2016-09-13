@@ -1,7 +1,7 @@
 var async = require('async');
 
 var mongodb = require('./db');
-
+var url = require('../settings').url;
 var LOGNAME = require('../settings').LOGNAME;
 
 var Log = function () {
@@ -12,16 +12,16 @@ var Log = function () {
 Log.prototype.add = function (username, time, operation, book, link, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(LOGNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.insert({
                 'username': username,
                 'time': time,
@@ -29,11 +29,11 @@ Log.prototype.add = function (username, time, operation, book, link, callback) {
                 'book': book,
                 'link': link
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         err ? callback(err) : callback(null);
     });
 };
@@ -50,16 +50,16 @@ Log.prototype.getAll = function (option, page, callback) {
     }
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(LOGNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.count(option, function (err, total) {
                 collection.find(option, {
                     'skip': (page - 1) * self.perPage,
@@ -67,12 +67,12 @@ Log.prototype.getAll = function (option, page, callback) {
                 }).sort({
                     'time': -1
                 }).toArray(function (err, logs) {
-                    cb(err, [logs, Math.min(total, self.perPage * self.maxPage), page]);
+                    cb(err, [logs, Math.min(total, self.perPage * self.maxPage), page], db);
                 });
             });
         }
-    ], function (err, result) {
-        mongodb.close();
+    ], function (err, result, db) {
+        db.close();
         if (err) {
             return callback(err, {});
         }

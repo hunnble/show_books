@@ -2,7 +2,7 @@ var async = require('async');
 var markdown = require('markdown').markdown;
 
 var mongodb = require('./db');
-
+var url = require('../settings').url;
 var BOOKNAME = require('../settings').BOOKNAME;
 
 function Book () {
@@ -12,26 +12,26 @@ function Book () {
 Book.prototype.get = function (name, author, username, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.findOne({
                 'name': name,
                 'author': author,
                 'username': username
             }, function (err, user) {
-                cb(err, user);
+                cb(err, user, db);
             });
         }
-    ], function (err, result) {
-        mongodb.close();
+    ], function (err, result, db) {
+        db.close();
         if(err) {
             return callback(err);
         }
@@ -54,24 +54,24 @@ Book.prototype.add = function (name, author, username, callback) {
 
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.insert(book, {
                 save: true
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -84,16 +84,16 @@ Book.prototype.getAll = function (username, page, callback) {
 
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.count({
                 'username': username
             }, function (err, total) {
@@ -110,12 +110,12 @@ Book.prototype.getAll = function (username, page, callback) {
                             book.comments[index].comment = markdown.toHTML(comment.comment);
                         });
                     });
-                    cb(err, [books, total]);
+                    cb(err, [books, total], db);
                 });
             });
         }
-    ], function (err, result) {
-        mongodb.close();
+    ], function (err, result, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -126,16 +126,16 @@ Book.prototype.getAll = function (username, page, callback) {
 Book.prototype.remove = function (name, author, username, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.remove({
                 'name': name,
                 'author': author,
@@ -143,11 +143,11 @@ Book.prototype.remove = function (name, author, username, callback) {
             }, {
                 w: 1
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -158,16 +158,16 @@ Book.prototype.remove = function (name, author, username, callback) {
 Book.prototype.addComment = function (name, author, comment, username, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.update({
                 'name': name,
                 'author': author,
@@ -180,11 +180,11 @@ Book.prototype.addComment = function (name, author, comment, username, callback)
                     }
                 }
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -195,16 +195,16 @@ Book.prototype.addComment = function (name, author, comment, username, callback)
 Book.prototype.removeComment = function (name, author, commentId, username, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(BOOKNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.update({
                 'name': name,
                 'author': author,
@@ -216,11 +216,11 @@ Book.prototype.removeComment = function (name, author, commentId, username, call
                     }
                 }
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         if (err) {
             return callback(err);
         }

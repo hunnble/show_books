@@ -2,7 +2,7 @@ var async = require('async');
 var crypto = require('crypto');
 
 var mongodb = require('./db');
-
+var url = require('../settings').url;
 var USERNAME = require('../settings').USERNAME;
 
 function User () {}
@@ -10,24 +10,24 @@ function User () {}
 User.prototype.get = function (name, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(USERNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.findOne({
                 'name': name
             }, function (err, user) {
-                cb(err, user);
+                cb(err, user, db);
             });
         }
-    ], function (err, result) {
-        mongodb.close();
+    ], function (err, result, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -47,24 +47,24 @@ User.prototype.add = function (name, password, email, callback) {
 
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(USERNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.insert(user, {
                 safe: true
             }, function (err, user) {
-                cb(err, user);
+                cb(err, user, db);
             });
         }
-    ], function (err, result) {
-        mongodb.close();
+    ], function (err, result, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -75,16 +75,16 @@ User.prototype.add = function (name, password, email, callback) {
 User.prototype.remove = function (name, password, email, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(USERNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.remove({
                 'name': name,
                 'password': crypto.createHash('md5').update(password).digest('hex'),
@@ -92,11 +92,11 @@ User.prototype.remove = function (name, password, email, callback) {
             }, {
                 w: 1
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
     ], function (err) {
-        mongodb.close();
+        db.close();
         if (err) {
             return callback(err);
         }
@@ -107,16 +107,16 @@ User.prototype.remove = function (name, password, email, callback) {
 User.prototype.update = function (name, password, email, callback) {
     async.waterfall([
         function (cb) {
-            mongodb.open(function (err, db) {
+            mongodb.connect(url, function (err, db) {
                 cb(err, db);
             });
         },
         function (db, cb) {
             db.collection(USERNAME, function (err, collection) {
-                cb(err, collection);
+                cb(err, collection, db);
             });
         },
-        function (collection, cb) {
+        function (collection, db, cb) {
             collection.update({
                 'name': name,
                 'email': email
@@ -125,11 +125,11 @@ User.prototype.update = function (name, password, email, callback) {
                     'password': crypto.createHash('md5').update(password).digest('hex')
                 }
             }, function (err) {
-                cb(err);
+                cb(err, db);
             });
         }
-    ], function (err) {
-        mongodb.close();
+    ], function (err, db) {
+        db.close();
         if (err) {
             return callback(err);
         }
