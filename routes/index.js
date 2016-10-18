@@ -17,6 +17,9 @@ router.get('/', function(req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
   log.getAll({}, page, function (err, logs, total, page) {
+    if (!Array.isArray(logs)) {
+        logs = [];
+    }
     res.render('index', {
       title: '书单',
       logs: logs,
@@ -51,15 +54,22 @@ router.post('/register', function (req, res) {
       req.flash('error', '两次输入的密码不一致');
       return res.redirect('/register');
     }
-    user.add(req.body['name'], req.body['password'], req.body['email'], function (err) {
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('/register');
-      }
-      req.session.user = _user;
-      req.flash('success', '注册成功');
-      return res.redirect('/');
-    });
+    var verification = validateRegister(req.body['name'], req.body['password'], req.body['password2']);
+    if (!verification.success) {
+      req.flash('error', verification.errMsg);
+      return res.redirect('/register');
+    } else {
+      user.add(req.body['name'], req.body['password'], req.body['email'], function (err) {
+        if (err) {
+          console.error(err);
+          req.flash('error', '注册失败，请重试');
+          return res.redirect('/register');
+        }
+        req.session.user = _user;
+        req.flash('success', '注册成功');
+        return res.redirect('/');
+      });
+    }
   });
 });
 
@@ -222,6 +232,24 @@ function checkNotLogin(req, res, next) {
     res.redirect('back');
   }
   next();
+}
+
+function validateRegister(name, password, password2) {
+  if (name.length < 6 || name.length > 16 || /^a-zA-Z0-9/.test(name)) {
+    return {
+      success: false,
+      errMsg: '用户名长度不符合规范，应当是6-16位英文或数字的组合'
+    }
+  }
+  if (password.length < 6 || password > 20 || password2.length < 6 || password2 > 20) {
+    return {
+      success: false,
+      errMsg: '密码长度不符合规范，应当是6-20位'
+    }
+  }
+  return {
+    success: true
+  }
 }
 
 module.exports = router;

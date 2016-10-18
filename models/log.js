@@ -33,7 +33,7 @@ Log.prototype.add = function (username, time, operation, book, link, callback) {
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         err ? callback(err) : callback(null);
     });
 };
@@ -72,7 +72,7 @@ Log.prototype.getAll = function (option, page, callback) {
             });
         }
     ], function (err, result, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err, {});
         }

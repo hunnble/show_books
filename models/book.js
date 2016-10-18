@@ -31,7 +31,7 @@ Book.prototype.get = function (name, author, username, callback) {
             });
         }
     ], function (err, result, db) {
-        db.close();
+        db && db.close();
         if(err) {
             return callback(err);
         }
@@ -71,7 +71,7 @@ Book.prototype.add = function (name, author, username, callback) {
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -115,7 +115,7 @@ Book.prototype.getAll = function (username, page, callback) {
             });
         }
     ], function (err, result, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -147,7 +147,7 @@ Book.prototype.remove = function (name, author, username, callback) {
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -184,7 +184,7 @@ Book.prototype.addComment = function (name, author, comment, username, callback)
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -220,7 +220,7 @@ Book.prototype.removeComment = function (name, author, commentId, username, call
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }

@@ -6,7 +6,7 @@ var settings = {
     USERNAME: 'booklist_users',
     BOOKNAME: 'booklist_books',
     LOGNAME: 'booklist_logs',
-    url: 'mongodb://localhost:27017/booklist'
+    // url: 'mongodb://localhost:27017/booklist'
 };
 
 module.exports = settings;

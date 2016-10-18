@@ -27,7 +27,7 @@ User.prototype.get = function (name, callback) {
             });
         }
     ], function (err, result, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -64,7 +64,7 @@ User.prototype.add = function (name, password, email, callback) {
             });
         }
     ], function (err, result, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -96,7 +96,7 @@ User.prototype.remove = function (name, password, email, callback) {
             });
         }
     ], function (err) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
@@ -129,7 +129,7 @@ User.prototype.update = function (name, password, email, callback) {
             });
         }
     ], function (err, db) {
-        db.close();
+        db && db.close();
         if (err) {
             return callback(err);
         }
