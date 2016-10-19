@@ -1,12 +1,12 @@
-@sidebarColor: #7B6093;
+@mainColor: #7B6093;
 @black: #000000;
 @white: #ffffff;
 @lightGrey: #222222;
 @lightBlue: #00B7FF;
 @green: #6dea67;
 @red: #f44336;
-@orange: #fc861a;
 @sliver: #F2F2F2;
+@navHeight: 40px;
 @level1: 10;
 @level2: 9;
 
@@ -65,7 +65,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: @sidebarColor;
+  background-color: @mainColor;
   color: @white;
   text-align: center;
   cursor: pointer;
@@ -84,7 +84,7 @@ a {
   background-color: @green;
 }
 .error {
-  background-color: @orange;
+  background-color: @mainColor;
 }
 .success, .error {
   display: inline-block;
@@ -98,34 +98,37 @@ a {
 .sideBarSwitcher {
   position: fixed;
   right: 12px;
-  top: 12px;
+  top: 0;
   z-index: @level1;
-  width: 16px;
-  height: 16px;
-  background-color: @black;
+  width: @navHeight;
+  height: @navHeight;
   cursor: pointer;
+  >span {
+    display: block;
+    margin-top: 15%;
+    width: 100%;
+    height: percentage(0.1);
+    background-color: @white;
+  }
 }
 .sidebar {
   position: fixed;
   z-index: @level2;
-  right: 0;
-  width: 25%;
-  height: 100%;
-  background-color: @sidebarColor;
+  width: 100%;
+  height: @navHeight;
+  background-color: @mainColor;
   >ul {
-    margin-top: 50%;
-    min-height: 40%;
     >li {
       .transitionMixin(background-color, 0.5s);
-      margin: 0 5%;
-      border-radius: 7px;
-      line-height: 40px;
+      display: inline-block;
+      padding: 0 12px;
+      height: @navHeight;
+      line-height: @navHeight;
       text-align: center;
-      font-size: 24px;
       &:hover {
         background-color: @white;
         >a {
-          color: @sidebarColor;
+          color: @mainColor;
         }
       }
       >a {
@@ -140,12 +143,20 @@ a {
 .main {
   .borderBox();
   position: relative;
-  padding: 28px;
-  width: 75%;
+  padding-top: @navHeight;
   min-height: 100%;
-  .indexImg {
-    min-height: 50%;
-  }
+  // background-image: url('../../images/lowpoloky.png');
+  // background-repeat: no-repeat;
+  // background-size: cover;
+}
+.bgImg {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../images/lowpoly.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .logs {
@@ -170,7 +181,7 @@ a {
     padding: 4px 7px;
     border-radius: 7px;
     background-color: @sliver;
-    color: @orange;
+    color: @mainColor;
   }
 }
 
@@ -183,11 +194,11 @@ a {
     .transitionMixin(background-color, 0.5s);
     display: inline-block;
     padding: 7px;
-    background-color: @sidebarColor;
+    background-color: @mainColor;
     color: @white;
     &:hover {
       background-color: @sliver;
-      color: @sidebarColor;
+      color: @mainColor;
     }
   }
 }
@@ -201,9 +212,9 @@ form {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 14px @lightGrey;
-  -moz-box-shadow: 0 0 14px @lightGrey;
-  box-shadow: 0 0 14px @lightGrey;
+  // -webkit-box-shadow: 0 0 14px @lightGrey;
+  // -moz-box-shadow: 0 0 14px @lightGrey;
+  // box-shadow: 0 0 14px @lightGrey;
   padding: 28px;
   > input {
     margin: 14px;
@@ -258,7 +269,9 @@ button {
 
 #books > section {
   margin: 14px;
+  padding: 14px;
   min-height: 180px;
+  background-color: @white;
   >header {
     a {
       display: block;
@@ -270,12 +283,15 @@ button {
       margin: 0 14px;
     }
     >.book_tag {
-      .btn();
       width: auto;
       padding: 3px 7px;
       margin: 7px;
+      line-height: 28px;
       border-radius: 0;
-      background-color: @orange;
+      font-size: 12px;
+      background-color: @mainColor;
+      color: @white;
+      cursor: pointer;
     }
   }
 }
@@ -305,9 +321,6 @@ button {
 .comment {
   .loopRemoveComment (@num) when (@num > 0) {
     .loopRemoveComment(@num - 1);
-    h@{num} {
-      color: @green;
-    }
   }
   .loopRemoveComment(6);
   .borderBox();
@@ -316,7 +329,7 @@ button {
   right: 0;
   padding: 2%;
   width: 46%;
-  color: @orange;
+  color: @mainColor;
   li {
     margin-bottom: 70px;
   }
@@ -326,7 +339,7 @@ button {
   display: block;
   float: right;
   margin: 14px;
-  background-color: @sidebarColor;
+  background-color: @mainColor;
 }
 
 .preview {
@@ -336,7 +349,7 @@ button {
   bottom: 50%;
   margin: 21px;
   width: 100%;
-  color: @orange;
+  color: @mainColor;
   overflow-y: scroll;
   word-wrap:break-word
 }

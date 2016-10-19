@@ -3,34 +3,30 @@ $(document).ready(function () {
 	/**
 	 * sidebar
 	 */
-	
+
 	$('.sideBarSwitcher').click(function () {
+		var $sideBarSwitcher = $('.sideBarSwitcher');
 		var $sidebar = $('.sidebar');
-		var $main = $('.main');
-		var curRight = $sidebar.css('right');
+		var curTop = $sidebar.css('top');
 
 		$sidebar.stop(true, true);
-		if (curRight === 0 || curRight === '0px') {
+		if (curTop === 0 || curTop === '0px') {
 			$sidebar.animate({
-				'right': '-' + $sidebar.css('width')
+				'top': '-' + $sidebar.css('height')
 			}, 300);
-			$main.animate({
-				'width': '100%'
-			}, 300);
+			$sideBarSwitcher.find('span').css('backgroundColor', '#7B6093');
 		} else {
 			$sidebar.animate({
-				'right': 0
+				'top': 0
 			}, 300);
-			$main.animate({
-				'width': parseInt($main.css('width'), 10) - parseInt($sidebar.css('width'), 10) + 'px'
-			}, 300);
+			$sideBarSwitcher.find('span').css('backgroundColor', '#ffffff');
 		}
 	});
 
 	/**
 	 * archive
 	 */
-	
+
 	$('.removeBook').click(function () {
         var $removeItem = $(this).parent();
 

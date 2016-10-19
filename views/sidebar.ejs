@@ -1,9 +1,10 @@
-<div class="sideBarSwitcher"></div>
-<aside class="sidebar">
+<div class="sideBarSwitcher">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav class="sidebar">
     <ul>
-        <!-- <% if (user) { %>
-        <li><img class="headerImg" src=<%- user.head %> title=<%- user.name %> /></li>
-        <% } %> -->
         <li><a href="/"><span class="icon-home3"></span>&nbsp;主页</a></li>
         <% if (user) { %>
         <li><a href="/logout"><span class="icon-undo2"></span>&nbsp;注销</a></li>
@@ -20,4 +21,4 @@
     <% if (error) { %>
     <div class="error"><%= error %></div>
     <% } %>
-</aside>
+</nav>

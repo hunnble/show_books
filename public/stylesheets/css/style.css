@@ -83,7 +83,7 @@ a {
   background-color: #6dea67;
 }
 .error {
-  background-color: #fc861a;
+  background-color: #7B6093;
 }
 .success,
 .error {
@@ -97,24 +97,25 @@ a {
 .sideBarSwitcher {
   position: fixed;
   right: 12px;
-  top: 12px;
+  top: 0;
   z-index: 10;
-  width: 16px;
-  height: 16px;
-  background-color: #000000;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
+}
+.sideBarSwitcher > span {
+  display: block;
+  margin-top: 15%;
+  width: 100%;
+  height: 10%;
+  background-color: #ffffff;
 }
 .sidebar {
   position: fixed;
   z-index: 9;
-  right: 0;
-  width: 25%;
-  height: 100%;
+  width: 100%;
+  height: 40px;
   background-color: #7B6093;
-}
-.sidebar > ul {
-  margin-top: 50%;
-  min-height: 40%;
 }
 .sidebar > ul > li {
   -webkit-transition: background-color 0.5s;
@@ -122,11 +123,11 @@ a {
   -ms-transition: background-color 0.5s;
   -o-transition: background-color 0.5s;
   transition: background-color 0.5s;
-  margin: 0 5%;
-  border-radius: 7px;
+  display: inline-block;
+  padding: 0 12px;
+  height: 40px;
   line-height: 40px;
   text-align: center;
-  font-size: 24px;
 }
 .sidebar > ul > li:hover {
   background-color: #ffffff;
@@ -143,12 +144,17 @@ a {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
-  padding: 28px;
-  width: 75%;
+  padding-top: 40px;
   min-height: 100%;
 }
-.main .indexImg {
-  min-height: 50%;
+.bgImg {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../images/lowpoly.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .logs {
   font-size: 18px;
@@ -177,7 +183,7 @@ a {
   padding: 4px 7px;
   border-radius: 7px;
   background-color: #F2F2F2;
-  color: #fc861a;
+  color: #7B6093;
 }
 .page {
   padding: 14px;
@@ -208,9 +214,6 @@ form {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 14px #222222;
-  -moz-box-shadow: 0 0 14px #222222;
-  box-shadow: 0 0 14px #222222;
   padding: 28px;
 }
 form > input {
@@ -297,7 +300,9 @@ button:hover {
 }
 #books > section {
   margin: 14px;
+  padding: 14px;
   min-height: 180px;
+  background-color: #ffffff;
 }
 #books > section > header a {
   display: block;
@@ -309,24 +314,15 @@ button:hover {
   margin: 0 14px;
 }
 #books > section > header > .book_tag {
-  border: 0 solid transparent;
-  border-radius: 4px;
-  display: inline-block;
-  line-height: 28px;
-  background-color: #7B6093;
-  color: #ffffff;
-  text-align: center;
-  cursor: pointer;
   width: auto;
   padding: 3px 7px;
   margin: 7px;
+  line-height: 28px;
   border-radius: 0;
-  background-color: #fc861a;
-}
-#books > section > header > .book_tag:hover {
-  -webkit-box-shadow: 0 0 14px #222222;
-  -moz-box-shadow: 0 0 14px #222222;
-  box-shadow: 0 0 14px #222222;
+  font-size: 12px;
+  background-color: #7B6093;
+  color: #ffffff;
+  cursor: pointer;
 }
 .book {
   margin-right: 50%;
@@ -355,25 +351,7 @@ button:hover {
   right: 0;
   padding: 2%;
   width: 46%;
-  color: #fc861a;
-}
-.comment h1 {
-  color: #6dea67;
-}
-.comment h2 {
-  color: #6dea67;
-}
-.comment h3 {
-  color: #6dea67;
-}
-.comment h4 {
-  color: #6dea67;
-}
-.comment h5 {
-  color: #6dea67;
-}
-.comment h6 {
-  color: #6dea67;
+  color: #7B6093;
 }
 .comment li {
   margin-bottom: 70px;
@@ -392,7 +370,7 @@ button:hover {
   bottom: 50%;
   margin: 21px;
   width: 100%;
-  color: #fc861a;
+  color: #7B6093;
   overflow-y: scroll;
   word-wrap: break-word;
 }
