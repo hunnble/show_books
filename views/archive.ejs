@@ -5,7 +5,7 @@
         <h3 class="name"><%= book.name %></h3>
         <span class="author"><%= book.author %></span>
     </header>
-    <a class="btn" href="/book/<%= book.name %>/<%= book.author %>">豆瓣相关</a>
+    <a class="btn" href="/book/<%= book.name %>/<%= book.author %>">相似书籍</a>
     <button class="removeBtn removeBook">删除本书</button>
     <a class="btn" href="/add_comment/<%= book.name %>/<%= book.author %>">写笔记</a>
     <button class="showCommentBtn">查看笔记</button>
@@ -29,12 +29,4 @@
     <span class="nextpage"><a title="下一页" href="?p=<%= page+1 %>">下一页</a></span>
     <% } %>
 </div>
-</article>
-<script>
-    <%- include ../public/javascripts/jquery.min.js %>
-</script>
-<script>
-    <%- include ../public/javascripts/archive.js %>
-</script>
-</body>
-</html>
+<%- include footer -%>

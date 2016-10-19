@@ -1,8 +1,14 @@
-@sidebarColor: #52b9ea;
+@sidebarColor: #7B6093;
+@black: #000000;
+@white: #ffffff;
+@lightGrey: #222222;
+@lightBlue: #00B7FF;
 @green: #6dea67;
 @red: #f44336;
 @orange: #fc861a;
 @sliver: #F2F2F2;
+@level1: 10;
+@level2: 9;
 
 html, body {
   height: 100%;
@@ -26,7 +32,7 @@ ol, ul {
   .generate-h(@n, (@i + 1));
 }
 a {
-  color: #00B7FF;
+  color: @lightBlue;
   text-decoration: none;
 }
 
@@ -59,14 +65,18 @@ a {
   padding: 3px 7px;
   line-height: 28px;
   background-color: @sidebarColor;
-  color: #fff;
+  color: @white;
   text-align: center;
   cursor: pointer;
   &:hover {
-    -webkit-box-shadow: 0 0 14px #222;
-    -moz-box-shadow: 0 0 14px #222;
-    box-shadow: 0 0 14px #222;
+    -webkit-box-shadow: 0 0 14px @lightGrey;
+    -moz-box-shadow: 0 0 14px @lightGrey;
+    box-shadow: 0 0 14px @lightGrey;
   }
+}
+.borderBox() {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .success {
@@ -80,23 +90,27 @@ a {
   margin: 7px;
   padding: 7px;
   border-radius: 7px;
-  color: #fff;
+  color: @white;
   font-size: 16px;
 }
 
+.sideBarSwitcher {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  z-index: @level1;
+  width: 16px;
+  height: 16px;
+  background-color: @black;
+  cursor: pointer;
+}
 .sidebar {
   position: fixed;
+  z-index: @level2;
   right: 0;
   width: 25%;
   height: 100%;
   background-color: @sidebarColor;
-  opacity: 0.5;
-  .headerImg {
-    -webkit-box-shadow: 0 0 12px #000;
-    -moz-box-shadow: 0 0 12px #000;
-    box-shadow: 0 0 12px #000;
-    border-radius: 50%;
-  }
   >ul {
     margin-top: 50%;
     min-height: 40%;
@@ -107,8 +121,8 @@ a {
       line-height: 40px;
       text-align: center;
       font-size: 24px;
-      &:not(:first-child):hover {
-        background-color: #fff;
+      &:hover {
+        background-color: @white;
         >a {
           color: @sidebarColor;
         }
@@ -116,18 +130,21 @@ a {
       >a {
         display: inline-block;
         width: 100%;
-        color: #fff;
-
+        color: @white;
       }
     }
   }
 }
 
 .main {
+  .borderBox();
   position: relative;
-  margin-right: 25%;
   padding: 28px;
-  min-height: 80%;
+  width: 75%;
+  min-height: 100%;
+  .indexImg {
+    min-height: 50%;
+  }
 }
 
 .logs {
@@ -166,7 +183,7 @@ a {
     display: inline-block;
     padding: 7px;
     background-color: @sidebarColor;
-    color: #fff;
+    color: @white;
     &:hover {
       background-color: @sliver;
       color: @sidebarColor;
@@ -183,9 +200,9 @@ form {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0 14px #222;
-  -moz-box-shadow: 0 0 14px #222;
-  box-shadow: 0 0 14px #222;
+  -webkit-box-shadow: 0 0 14px @lightGrey;
+  -moz-box-shadow: 0 0 14px @lightGrey;
+  box-shadow: 0 0 14px @lightGrey;
   padding: 28px;
   > input {
     margin: 14px;
@@ -199,13 +216,15 @@ form {
       text-indent: 7px;
       outline: none;
       &:focus {
-        border-color: #222;
+        border-color: @lightGrey;
       }
     }
     &[type=submit], &[type=reset], &[type=button] {
       .btn();
-      height: 28px;
-      width: 64px;
+      padding: 0;
+      height: 30px;
+      line-height: 30px;
+      min-width: 64px;
     }
     &[type=checkbox] {
       display: inline-block;
@@ -243,7 +262,7 @@ button {
     a {
       display: block;
       font-size: 200%;
-      color: #222;
+      color: @lightGrey;
     }
     >img {
       float: right;
@@ -262,6 +281,7 @@ button {
 
 .book {
   margin-right: 50%;
+  margin-bottom: 6px;
   padding: 21px;
   background-color: @sliver;
 }
@@ -269,7 +289,7 @@ button {
 .name, .author {
   display: inline-block;
   margin-bottom: 7px;
-  color: #222;
+  color: @lightGrey;
 }
 
 .author {
@@ -308,9 +328,9 @@ button {
 }
 
 .add_comment_form {
-  -webkit-box-shadow: 0 0 0 #fff;
-  -moz-box-shadow: 0 0 0 #fff;
-  box-shadow: 0 0 0 #fff;
+  -webkit-box-shadow: 0 0 0 @white;
+  -moz-box-shadow: 0 0 0 @white;
+  box-shadow: 0 0 0 @white;
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);

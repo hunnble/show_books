@@ -12,26 +12,34 @@ var book = new Book();
 var user = new User();
 var log  = new Log();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  var page = req.query.p ? parseInt(req.query.p, 10) : 1;
-
-  log.getAll({}, page, function (err, logs, total, page) {
-    if (!Array.isArray(logs)) {
-        logs = [];
-    }
-    res.render('index', {
-      title: '书单',
-      logs: logs,
-      user: req.session.user,
-      page: page,
-      isFirstPage: page <= 1,
-      isLastPage: ((page - 1) * log.perPage + logs.length) >= total,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
-    });
+router.get('/', function (req, res) {
+  res.render('index', {
+    title: '主页',
+    user: req.session.user,
+    success: req.flash('success').toString(),
+    error: req.flash('error').toString()
   });
 });
+
+// router.get('/logs', function(req, res) {
+//   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
+
+//   log.getAll({}, page, function (err, logs, total, page) {
+//     if (!Array.isArray(logs)) {
+//         logs = [];
+//     }
+//     res.render('log', {
+//       title: '书单',
+//       logs: logs,
+//       user: req.session.user,
+//       page: page,
+//       isFirstPage: page <= 1,
+//       isLastPage: ((page - 1) * log.perPage + logs.length) >= total,
+//       success: req.flash('success').toString(),
+//       error: req.flash('error').toString()
+//     });
+//   });
+// });
 
 router.get('/register', checkNotLogin);
 router.get('/register', function (req, res) {
