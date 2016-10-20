@@ -7,6 +7,8 @@
 @red: #f44336;
 @sliver: #F2F2F2;
 @navHeight: 40px;
+@bookWidth: 106px;
+@bookHeight: 136px;
 @level1: 10;
 @level2: 9;
 
@@ -47,6 +49,12 @@ a {
   -o-transition: @attr @duration;
   transition: @attr @duration;
 }
+.topLinearBgColorMixin(@startBg, @endBg) {
+  background: -moz-linear-gradient(top, @startBg, @endBg);
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(@startBg), to(@endBg));
+  background: -webkit-linear-gradient(top, @startBg, @endBg);
+  background: -o-linear-gradient(top, @startBg, @endBg);
+}
 .backgroundImage(@url) {
   height: 100%;
   width: 100%;
@@ -61,6 +69,22 @@ a {
   filter: blur(@c);
 
   filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=@c, MakeShadow=false); /* IE6~IE9 */
+}
+.greyFilter() {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+}
+.cancelGreyFilter() {
+  -webkit-filter: grayscale(0);
+  -moz-filter: grayscale(0);
+  -ms-filter: grayscale(0);
+  -o-filter: grayscale(0);
+  filter: grayscale(0);
+  filter: none;
 }
 .btn {
   border: 0 solid transparent;
@@ -147,9 +171,6 @@ a {
   position: relative;
   padding-top: @navHeight;
   min-height: 100%;
-  // background-image: url('../../images/lowpoloky.png');
-  // background-repeat: no-repeat;
-  // background-size: cover;
 }
 .bgImg {
   position: fixed;
@@ -276,35 +297,76 @@ button {
   min-height: 180px;
   background-color: @white;
   >header {
-    a {
-      display: block;
-      font-size: 200%;
+    .bookTitle {
+      margin-right: 12px;
+      font-size: 32px;
+      color: @lightGrey;
+    }
+    .bookAuthor {
+      font-size: 12px;
       color: @lightGrey;
     }
     >img {
       float: right;
       margin: 0 14px;
     }
-    >.book_tag {
-      width: auto;
-      padding: 3px 7px;
-      margin: 7px;
-      line-height: 28px;
-      border-radius: 0;
-      font-size: 12px;
-      background-color: @mainColor;
-      color: @white;
-      cursor: pointer;
-    }
+  }
+  >.book_tag {
+    width: auto;
+    padding: 3px 7px;
+    margin: 7px;
+    line-height: 28px;
+    border-radius: 0;
+    font-size: 12px;
+    background-color: @mainColor;
+    color: @white;
+    cursor: pointer;
   }
 }
 
+.booksWrapper {
+  padding: 12px;
+  overflow-x: scroll;
+}
 .book {
-  .borderBox();
-  margin: 2%;
-  padding: 21px;
-  width: 48%;
-  background-color: @sliver;
+  .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.2));
+  display: inline-block;
+  margin: 6px 12px;
+  height: @bookHeight;
+  vertical-align: top;
+  word-wrap: break-word;
+  word-break: break-all;
+  &:hover {
+    .greyFilter();
+  }
+  >header {
+    float: left;
+    img {
+      width: @bookWidth;
+      height: @bookHeight;
+    }
+  }
+  span, a, button {
+    margin: 0;
+    font-size: 12px;
+    text-align: left;
+  }
+  span {
+    display: block;
+  }
+  a, button {
+    padding: 0;
+    background-color: transparent;
+    color: @lightGrey;
+    &:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+  .bookBtns {
+    margin-left: @bookWidth;
+    padding: 12px;
+  }
 }
 
 .name, .author {

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var async = require('async');
+var rqst = require('superagent');
 var crypto = require('crypto');
 var markdown = require('markdown').markdown;
 
@@ -69,7 +71,6 @@ router.post('/register', function (req, res) {
     } else {
       user.add(req.body['name'], req.body['password'], req.body['email'], function (err) {
         if (err) {
-          console.error(err);
           req.flash('error', '注册失败，请重试');
           return res.redirect('/register');
         }
@@ -129,35 +130,66 @@ router.get('/add_book', function (req, res) {
 
 router.post('/add_book', checkLogin);
 router.post('/add_book', function (req, res) {
-  book.get({
-    name: req.body.name,
-    author: req.body.author,
-    username: req.session.user.name
-  }, function (err, _book) {
-    if (_book) {
-      req.flash('error', '书籍已存在');
-      return res.redirect('/add_book');
-    }
-    book.add(req.body.name, req.body.author, req.session.user.name, function (err) {
-      if (err) {
-        req.flash('error', '添加失败: ' + err);
-        return res.redirect('/add_book');
-      }
-      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
-        if (err) {
-          req.flash('error', '添加失败: ' + err);
-          return res.redirect('/add_book');
-        }
-        req.flash('success', '添加成功');
-        res.redirect('/');
-      });
-    });
-  });
+  res.redirect('/book/' + encodeURI(req.body.name));
+  // async.waterfall([
+    // function (cb) {
+    //   book.get({
+    //     name: req.body.name,
+    //     username: req.session.user.name
+    //   }, function (err, _book) {
+    //     cb(err, _book);
+    //   });
+    // },
+    // function (_book, cb) {
+    //   if (_book) {
+    //     req.flash('error', '书籍已存在');
+    //     return res.redirect('/add_book');
+    //   }
+    //   cb();
+    // },
+    // function (cb) {
+    //   rqst
+    //     .get('https://api.douban.com/v2/book/search')
+    //     .query({
+    //       q: req.body.name,
+    //       count: 1
+    //     })
+    //     .end(function (err, res) {
+    //       cb(err, res);
+    //     });
+    // },
+    // function (res, cb) {
+    //   var op = {
+    //     name: req.body.name,
+    //     author: req.body.author,
+    //     username: req.session.user.name,
+    //     img: ''
+    //   };
+    //   if (res.status == 200 && res.body.books.length > 0 && res.body.books[0].image) {
+    //     op.img = res.body.books[0].images.large;
+    //   }
+    //   book.add(op, function (err) {
+    //     cb(err);
+    //   });
+    // },
+    // function (cb) {
+    //   log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
+    //     cb(err);
+    //   });
+    // }
+  // ], function (err) {
+    // if (err) {
+    //   req.flash('error', '添加失败: ' + err);
+    //   return res.redirect('/add_book');
+    // }
+    // req.flash('success', '添加成功');
+    // res.redirect('/');
+  // });
 });
 
 router.get('/archive', checkLogin);
 router.get('/archive', function (req, res) {
-  res.redirect('/archive/' + req.session.user.name);
+  res.redirect('/archive/' + encodeURI(req.session.user.name));
 });
 
 router.get('/archive/:username', checkLogin);
@@ -191,27 +223,91 @@ router.post('/archive', function (req, res) {
   } else if(req.body.commentId) {
     book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
   } else {
-    book.remove(req.body.name, req.body.author, req.session.user.name, function (err) {});
+    book.remove({
+      name: req.body.name,
+      bookId: req.body.bookId,
+      username: req.session.user.name
+    }, function (err) {});
     log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
   }
 });
 
-router.get('/book/:name/:author', checkLogin);
-router.get('/book/:name/:author', function (req, res) {
-  book.get({
-    name: req.params.name,
-    author: req.params.author,
-    username: req.session.user.name
-  }, function (err, _book) {
-    if (!_book) {
-      req.flash('error', '获取书籍信息失败');
-      return res.redirect('/');
+router.get('/book/:name', checkLogin);
+router.get('/book/:name', function (req, res) {
+  // book.get({
+  //   name: req.params.name,
+  //   author: req.params.author,
+  //   username: req.session.user.name
+  // }, function (err, _book) {
+  //   if (!_book) {
+  //     req.flash('error', '获取书籍信息失败');
+  //     return res.redirect('/');
+  //   }
+  //   res.render('book', {
+  //     title: _book.name,
+  //     user: req.session.user,
+  //     success: req.flash('success').toString(),
+  //     error: req.flash('error').toString()
+  //   });
+  // });
+  res.render('book', {
+    title: req.params.name,
+    user: req.session.user,
+    success: req.flash('success').toString(),
+    error: req.flash('error').toString()
+  });
+});
+
+router.post('/book', checkLogin);
+router.post('/book', function (req, res) {
+  async.waterfall([
+    function (cb) {
+      book.get({
+        bookId: req.body.bookId,
+        username: req.session.user.name
+      }, function (err, _book) {
+        cb(err, _book);
+      });
+    },
+    function (_book, cb) {
+      if (_book) {
+        req.flash('error', '已收藏过此书籍');
+        return res.send({
+          success: false
+        });
+      }
+      cb(null);
+    },
+    function (cb) {
+      var op = {
+        name: req.body.name,
+        author: req.body.author || '',
+        bookId: req.body.bookId,
+        isbn10: req.body.isbn10,
+        isbn13: req.body.isbn13,
+        username: req.session.user.name,
+        img: req.body.img || ''
+      };
+      book.add(op, function (err) {
+        cb(err);
+      });
+    },
+    function (cb) {
+      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
+        cb(err);
+      });
     }
-    res.render('book', {
-      title: _book.name,
-      user: req.session.user,
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
+  ], function (err) {
+    if (err) {
+      req.flash('error', '添加失败: ' + err);
+      // return;
+      res.send({
+        success: false
+      });
+    }
+    req.flash('success', '添加成功');
+    res.send({
+      success: true
     });
   });
 });
@@ -277,17 +373,17 @@ function validateRegister(name, password, password2) {
     return {
       success: false,
       errMsg: '用户名长度不符合规范，应当是6-16位英文或数字的组合'
-    }
+    };
   }
   if (password.length < 6 || password > 20 || password2.length < 6 || password2 > 20) {
     return {
       success: false,
       errMsg: '密码长度不符合规范，应当是6-20位'
-    }
+    };
   }
   return {
     success: true
-  }
+  };
 }
 
 module.exports = router;

@@ -28,12 +28,13 @@ $(document).ready(function () {
 	 */
 
 	$('.removeBook').click(function () {
-    var $removeItem = $(this).parent();
+    var $removeItem = $(this).parent().parent();
 
     if (confirm('确认删除这本书')) {
       $.post('/archive', {
         'isComment': false,
 				'username': window.location.href.split('/').reverse()[0],
+				'bookId': $(this).parent().find('.bookId').val(),
         'name': $removeItem.find('.name').html(),
         'author': $removeItem.find('.author').html(),
 								'commentId': null
@@ -65,6 +66,14 @@ $(document).ready(function () {
 				$comment.show(500);
 				$('.curComment').hide(500).removeClass('curComment');
   });
+
+	// $('.book')
+	// 	.mouseenter(function () {
+	// 		$(this).find('.bookBtns').stop(true, true).fadeIn(300);
+	// 	})
+	// 	.mouseleave(function () {
+	// 		$(this).find('.bookBtns').stop(true, true).fadeOut(300);
+	// 	});
 
   /**
    * add_comment

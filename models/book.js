@@ -6,7 +6,7 @@ var url = require('../settings').url;
 var BOOKNAME = require('../settings').BOOKNAME;
 
 function Book () {
-  this.perPage = 5;
+  this.perPage = 100;
 }
 
 Book.prototype.get = function (op, callback) {
@@ -35,11 +35,15 @@ Book.prototype.get = function (op, callback) {
   });
 };
 
-Book.prototype.add = function (name, author, username, callback) {
+Book.prototype.add = function (op, callback) {
   var book = {
-    'name': name.trim().split(/\s+/).join(''),
-    'author': author.trim().split(/\s+/).join(''),
-    'username': username,
+    'bookId': op.bookId,
+    'isbn10': op.isbn10,
+    'isbn13': op.isbn13,
+    'name': op.name.trim().split(/\s+/).join(''),
+    'author': op.author.trim().split(/\s+/).join(''),
+    'username': op.username,
+    'img': op.img,
     'comments': [],
     'time': new Date()
   };
@@ -119,7 +123,7 @@ Book.prototype.getAll = function (username, page, callback) {
   });
 };
 
-Book.prototype.remove = function (name, author, username, callback) {
+Book.prototype.remove = function (op, callback) {
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -132,11 +136,7 @@ Book.prototype.remove = function (name, author, username, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.remove({
-        'name': name,
-        'author': author,
-        'username': username
-      }, {
+      collection.remove(op, {
         w: 1
       }, function (err) {
         cb(err, db);
