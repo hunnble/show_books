@@ -3,8 +3,8 @@
     <textarea name="comment" placeholder="书评" required></textarea>
     <input type="submit" value="发布笔记" />
 </form>
-<p>
-    预览(已输入<span class="wordNumber">0</span>字)
+<p class="wordHint">
+    预览(支持markdown格式文本,已输入<span class="wordNumber">0</span>字)
 </p>
-<div class="preview"></div>
+<div class="preview markdown-body"></div>
 <%- include footer -%>

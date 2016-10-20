@@ -157,9 +157,15 @@ router.post('/add_book', function (req, res) {
 
 router.get('/archive', checkLogin);
 router.get('/archive', function (req, res) {
+  res.redirect('/archive/' + req.session.user.name);
+});
+
+router.get('/archive/:username', checkLogin);
+router.get('/archive/:username', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
-  book.getAll(req.session.user.name, page, function (err, books, total) {
+  // book.getAll(req.session.user.name, page, function (err, books, total) {
+  book.getAll(req.params.username, page, function (err, books, total) {
     if (!books) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
@@ -168,6 +174,7 @@ router.get('/archive', function (req, res) {
       title: '目录',
       books: books,
       user: req.session.user,
+      username: req.params.username,
       page: page,
       isFirstPage: page <= 1,
       isLastPage: ((page - 1) * book.perPage + books.length) >= total,
@@ -179,7 +186,9 @@ router.get('/archive', function (req, res) {
 
 router.post('/archive', checkLogin);
 router.post('/archive', function (req, res) {
-  if(req.body.commentId) {
+  if (req.body.username !== req.session.user.name) {
+    return;
+  } else if(req.body.commentId) {
     book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
   } else {
     book.remove(req.body.name, req.body.author, req.session.user.name, function (err) {});

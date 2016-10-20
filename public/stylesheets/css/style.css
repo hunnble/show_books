@@ -160,6 +160,7 @@ a:hover {
 .logs {
   font-size: 18px;
   padding: 14px;
+  text-align: right;
 }
 .logs > h3 {
   padding-bottom: 7px;
@@ -188,6 +189,7 @@ a:hover {
 }
 .page {
   padding: 14px;
+  text-align: right;
 }
 .prepage > a,
 .nextpage > a {
@@ -321,8 +323,11 @@ button:hover {
   cursor: pointer;
 }
 .book {
-  margin: 12px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 2%;
   padding: 21px;
+  width: 48%;
   background-color: #F2F2F2;
 }
 .name,
@@ -341,9 +346,11 @@ button:hover {
 .comment {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  position: fixed;
+  top: 42px;
   right: 0;
   padding: 12px;
-  width: 100%;
+  width: 48%;
   color: #7B6093;
 }
 .comment li {
@@ -355,17 +362,26 @@ button:hover {
   margin: 14px;
   background-color: #7B6093;
 }
+.wordHint {
+  float: right;
+  color: #222222;
+  font-size: 12px;
+}
 .preview {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: absolute;
-  top: 48px;
-  bottom: 50%;
+  top: 42px;
+  right: 0;
+  bottom: 0;
   padding: 21px;
-  width: 100%;
-  color: #7B6093;
+  width: 50%;
   overflow-y: scroll;
   word-wrap: break-word;
+}
+.preview ol,
+.preview ul {
+  list-style: auto;
 }
 .add_comment_form {
   -webkit-box-sizing: border-box;
@@ -376,13 +392,15 @@ button:hover {
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
   position: absolute;
-  top: 50%;
+  top: 21px;
+  bottom: 0;
   left: 0;
-  height: 40%;
   margin: 0;
-  padding: 0;
-  width: 100%;
+  padding: 21px;
+  width: 50%;
   background-color: #F2F2F2;
+  opacity: 0.8;
+  text-align: right;
 }
 .add_comment_form > textarea {
   -webkit-box-sizing: border-box;
@@ -397,9 +415,10 @@ button:hover {
   background-color: #F2F2F2;
 }
 .add_comment_form > input[type=submit] {
+  margin-right: 12px;
+  padding: 3px 12px;
   width: auto;
   height: auto;
-  padding: 3px 12px;
 }
 @font-face {
   font-family: 'icomoon';

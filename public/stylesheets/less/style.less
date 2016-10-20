@@ -54,13 +54,13 @@ a {
   -webkit-background-size: 100%, 100%;
   background-size: 100% 100%;
 }
-.blur() {
-  -webkit-filter: blur(10px); /* Chrome, Opera */
-  -moz-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
+.blur(@c) {
+  -webkit-filter: blur(@c); /* Chrome, Opera */
+  -moz-filter: blur(@c);
+  -ms-filter: blur(@c);
+  filter: blur(@c);
 
-  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=@c, MakeShadow=false); /* IE6~IE9 */
 }
 .btn {
   border: 0 solid transparent;
@@ -189,6 +189,7 @@ a {
 
 .page {
   padding: 14px;
+  text-align: right;
 }
 
 .prepage, .nextpage {
@@ -299,8 +300,10 @@ button {
 }
 
 .book {
-  margin: 12px;
+  .borderBox();
+  margin: 2%;
   padding: 21px;
+  width: 48%;
   background-color: @sliver;
 }
 
@@ -325,9 +328,11 @@ button {
   }
   .loopRemoveComment(6);
   .borderBox();
+  position: fixed;
+  top: 42px;
   right: 0;
   padding: 12px;
-  width: 100%;
+  width: 48%;
   color: @mainColor;
   li {
     margin-bottom: 70px;
@@ -341,16 +346,24 @@ button {
   background-color: @mainColor;
 }
 
+.wordHint {
+  float: right;
+  color: @lightGrey;
+  font-size: 12px;
+}
 .preview {
   .borderBox();
   position: absolute;
-  top: 48px;
-  bottom: 50%;
+  top: 42px;
+  right: 0;
+  bottom: 0;
   padding: 21px;
-  width: 100%;
-  color: @mainColor;
+  width: 50%;
   overflow-y: scroll;
-  word-wrap:break-word
+  word-wrap: break-word;
+  ol, ul {
+    list-style: auto;
+  }
 }
 
 .add_comment_form {
@@ -361,13 +374,15 @@ button {
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
   position: absolute;
-  top: 50%;
+  top: 21px;
+  bottom: 0;
   left: 0;
-  height: 40%;
   margin: 0;
-  padding: 0;
-  width: 100%;
+  padding: 21px;
+  width: 50%;
   background-color: @sliver;
+  opacity: 0.8;
+  text-align: right;
   >textarea {
     .borderBox();
     resize: none;
@@ -380,9 +395,10 @@ button {
     background-color: @sliver;
   }
   >input[type=submit] {
+    margin-right: 12px;
+    padding: 3px 12px;
     width: auto;
     height: auto;
-    padding: 3px 12px;
   }
 }
 

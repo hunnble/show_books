@@ -6,15 +6,19 @@
         <span class="author"><%= book.author %></span>
     </header>
     <a class="btn" href="/book/<%= book.name %>/<%= book.author %>">相似书籍</a>
-    <button class="removeBtn removeBook">删除本书</button>
-    <a class="btn" href="/add_comment/<%= book.name %>/<%= book.author %>">写笔记</a>
+    <% if (username === user.name) { %>
+      <button class="removeBtn removeBook">删除本书</button>
+      <a class="btn" href="/add_comment/<%= book.name %>/<%= book.author %>">写笔记</a>
+    <% } %>
     <button class="showCommentBtn">查看笔记</button>
-    <ul class="comment" style="display: none">
+    <ul class="comment">
         <% book.comments.forEach(function (comment) { %>
         <li>
             <div class="commentContent"><%- comment.comment %></div>
-            <button class="removeBtn removeComment">删除此笔记</button>
-            <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
+            <% if (username === user.name) { %>        
+              <button class="removeBtn removeComment">删除此笔记</button>
+              <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
+            <% } %>
         </li>
         <% }) %>
     </ul>
