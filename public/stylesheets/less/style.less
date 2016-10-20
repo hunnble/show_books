@@ -1,12 +1,12 @@
 @mainColor: #7B6093;
 @black: #000000;
 @white: #ffffff;
-@lightGrey: #222222;
+@darkGrey: #222222;
 @lightBlue: #00B7FF;
 @green: #6dea67;
 @red: #f44336;
 @sliver: #F2F2F2;
-@navHeight: 40px;
+@navHeight: 50px;
 @bookWidth: 106px;
 @bookHeight: 136px;
 @level1: 10;
@@ -54,6 +54,12 @@ a {
   background: -webkit-gradient(linear, 50% 0, 50% 100%, from(@startBg), to(@endBg));
   background: -webkit-linear-gradient(top, @startBg, @endBg);
   background: -o-linear-gradient(top, @startBg, @endBg);
+}
+.leftLinearBgColorMixin(@startBg, @endBg) {
+  background: -moz-linear-gradient(left, @startBg, @endBg);
+  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(@startBg), to(@endBg));
+  background: -webkit-linear-gradient(left, @startBg, @endBg);
+  background: -o-linear-gradient(left, @startBg, @endBg);
 }
 .backgroundImage(@url) {
   height: 100%;
@@ -131,18 +137,22 @@ a {
   cursor: pointer;
   >span {
     display: block;
-    margin-top: 15%;
-    width: 100%;
-    height: percentage(0.4 / 3);
+    margin-top: percentage(0.8 / 6);
+    width: 80%;
+    height: percentage(0.8 / 9);
     background-color: @white;
+    &:first-child {
+      margin-top: 20%;
+    }
   }
 }
 .sidebar {
+  .leftLinearBgColorMixin(lighten(@mainColor, 10%), darken(@mainColor, 10%));
   position: fixed;
   z-index: @level2;
   width: 100%;
   height: @navHeight;
-  background-color: @mainColor;
+  // background-color: @mainColor;
   >ul {
     >li {
       .transitionMixin(background-color, 0.5s);
@@ -231,13 +241,19 @@ form {
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 42px;
   width: 80%;
+  max-width: 400px;
+  background-color: @white;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+  >h1, >h2, >h3, >h4, >h5, >h6 {
+    color: @mainColor;
+  }
   > input {
     .borderBox();
     margin: 14px auto;
@@ -252,7 +268,7 @@ form {
       text-indent: 7px;
       outline: none;
       &:focus {
-        // border-color: @lightGrey;
+        // border-color: @darkGrey;
       }
     }
     &[type=submit], &[type=reset], &[type=button] {
@@ -292,34 +308,43 @@ button {
 }
 
 #books > section {
+  .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.5));
   margin: 14px;
   padding: 14px;
   min-height: 180px;
-  background-color: @white;
   >header {
     .bookTitle {
       margin-right: 12px;
       font-size: 32px;
-      color: @lightGrey;
+      color: @darkGrey;
+      text-decoration: none;
     }
     .bookAuthor {
       font-size: 12px;
-      color: @lightGrey;
+      color: @darkGrey;
     }
     >img {
       float: right;
       margin: 0 14px;
     }
+    .bookBtn {
+      .topLinearBgColorMixin(@mainColor, lighten(@mainColor, 20%));
+      margin-left: 12px;
+      padding: 0 7px;
+      &:hover {
+        .topLinearBgColorMixin(@mainColor, @mainColor);
+      }
+    }
   }
-  >.book_tag {
+  .bookTag {
     width: auto;
     padding: 3px 7px;
     margin: 7px;
     line-height: 28px;
     border-radius: 0;
     font-size: 12px;
-    background-color: @mainColor;
-    color: @white;
+    background-color: darken(@white, 10%);
+    color: @darkGrey;
     cursor: pointer;
   }
 }
@@ -357,7 +382,7 @@ button {
   a, button {
     padding: 0;
     background-color: transparent;
-    color: @lightGrey;
+    color: @darkGrey;
     &:hover {
       background-color: transparent;
       text-decoration: underline;
@@ -372,7 +397,7 @@ button {
 .name, .author {
   display: inline-block;
   margin-bottom: 7px;
-  color: @lightGrey;
+  color: @darkGrey;
 }
 
 .author {
@@ -410,7 +435,7 @@ button {
 
 .wordHint {
   float: right;
-  color: @lightGrey;
+  color: @darkGrey;
   font-size: 12px;
 }
 .preview {
@@ -501,4 +526,50 @@ button {
 }
 .icon-upload2:before {
   content: "\e9c6";
+}
+
+@media only all and (max-width: 640px) {
+  .sideBarSwitcher {
+    display: none;
+  }
+  .sidebar {
+    >ul {
+      width: 100%;
+      >li {
+        float: left;
+        padding: 0;
+        width: 25%;
+        font-size: 12px;
+      }
+    }
+  }
+  #books > section {
+    font-size: 12px;
+    >header {
+      .bookTitle {
+        display: block;
+        font-size: 18px;
+      }
+      .bookAuthor {
+        display: block;
+      }
+      .bookBtn {
+        margin-left: 0;
+      }
+    }
+    .bookTags {
+      margin-right: 50%;
+    }
+    .bookTag {
+      width: auto;
+      margin: 0 3px;
+      padding: 0 3px;
+      word-wrap: normal;
+      word-break: normal;
+    }
+  }
+  .book {
+    width: 80%;
+    margin: 12px 10%;
+  }
 }

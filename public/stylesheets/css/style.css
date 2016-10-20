@@ -100,23 +100,29 @@ a:hover {
   right: 12px;
   top: 0;
   z-index: 10;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
 }
 .sideBarSwitcher > span {
   display: block;
-  margin-top: 15%;
-  width: 100%;
-  height: 13.33333333%;
+  margin-top: 13.33333333%;
+  width: 80%;
+  height: 8.88888889%;
   background-color: #ffffff;
 }
+.sideBarSwitcher > span:first-child {
+  margin-top: 20%;
+}
 .sidebar {
+  background: -moz-linear-gradient(left, #947caa, #614c74);
+  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#947caa), to(#614c74));
+  background: -webkit-linear-gradient(left, #947caa, #614c74);
+  background: -o-linear-gradient(left, #947caa, #614c74);
   position: fixed;
   z-index: 9;
   width: 100%;
-  height: 40px;
-  background-color: #7B6093;
+  height: 50px;
 }
 .sidebar > ul > li {
   -webkit-transition: background-color 0.5s;
@@ -126,8 +132,8 @@ a:hover {
   transition: background-color 0.5s;
   display: inline-block;
   padding: 0 12px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
 }
 .sidebar > ul > li:hover {
@@ -145,7 +151,7 @@ a:hover {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
-  padding-top: 40px;
+  padding-top: 50px;
   min-height: 100%;
 }
 .bgImg {
@@ -212,13 +218,24 @@ form {
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 42px;
   width: 80%;
+  max-width: 400px;
+  background-color: #ffffff;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+form > h1,
+form > h2,
+form > h3,
+form > h4,
+form > h5,
+form > h6 {
+  color: #7B6093;
 }
 form > input {
   -webkit-box-sizing: border-box;
@@ -297,15 +314,19 @@ button:hover {
   background-color: #614c74;
 }
 #books > section {
+  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
   margin: 14px;
   padding: 14px;
   min-height: 180px;
-  background-color: #ffffff;
 }
 #books > section > header .bookTitle {
   margin-right: 12px;
   font-size: 32px;
   color: #222222;
+  text-decoration: none;
 }
 #books > section > header .bookAuthor {
   font-size: 12px;
@@ -315,15 +336,29 @@ button:hover {
   float: right;
   margin: 0 14px;
 }
-#books > section > .book_tag {
+#books > section > header .bookBtn {
+  background: -moz-linear-gradient(top, #7B6093, #ae9bbe);
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#7B6093), to(#ae9bbe));
+  background: -webkit-linear-gradient(top, #7B6093, #ae9bbe);
+  background: -o-linear-gradient(top, #7B6093, #ae9bbe);
+  margin-left: 12px;
+  padding: 0 7px;
+}
+#books > section > header .bookBtn:hover {
+  background: -moz-linear-gradient(top, #7B6093, #7B6093);
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#7B6093), to(#7B6093));
+  background: -webkit-linear-gradient(top, #7B6093, #7B6093);
+  background: -o-linear-gradient(top, #7B6093, #7B6093);
+}
+#books > section .bookTag {
   width: auto;
   padding: 3px 7px;
   margin: 7px;
   line-height: 28px;
   border-radius: 0;
   font-size: 12px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #e6e6e6;
+  color: #222222;
   cursor: pointer;
 }
 .booksWrapper {
@@ -504,4 +539,45 @@ button:hover {
 }
 .icon-upload2:before {
   content: "\e9c6";
+}
+@media only all and (max-width: 640px) {
+  .sideBarSwitcher {
+    display: none;
+  }
+  .sidebar > ul {
+    width: 100%;
+  }
+  .sidebar > ul > li {
+    float: left;
+    padding: 0;
+    width: 25%;
+    font-size: 12px;
+  }
+  #books > section {
+    font-size: 12px;
+  }
+  #books > section > header .bookTitle {
+    display: block;
+    font-size: 18px;
+  }
+  #books > section > header .bookAuthor {
+    display: block;
+  }
+  #books > section > header .bookBtn {
+    margin-left: 0;
+  }
+  #books > section .bookTags {
+    margin-right: 50%;
+  }
+  #books > section .bookTag {
+    width: auto;
+    margin: 0 3px;
+    padding: 0 3px;
+    word-wrap: normal;
+    word-break: normal;
+  }
+  .book {
+    width: 80%;
+    margin: 12px 10%;
+  }
 }

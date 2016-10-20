@@ -5,15 +5,15 @@
 </div>
 <nav class="sidebar">
     <ul>
-        <li><a href="/"><span class="icon-home3"></span>&nbsp;主页</a></li>
+        <li><a href="/"><span class="icon-home3"></span>&nbsp;&nbsp;主页&nbsp;</a></li>
         <% if (user) { %>
-        <li><a href="/logout"><span class="icon-undo2"></span>&nbsp;注销</a></li>
-        <li><a href="/add_book"><span class="icon-upload2"></span>&nbsp;添加新书</a></li>
+        <li><a href="/logout"><span class="icon-undo2"></span>&nbsp;&nbsp;注销&nbsp;</a></li>
+        <li><a href="/add_book"><span class="icon-upload2"></span>&nbsp;书籍搜索</a></li>
         <% } else { %>
-        <li><a href="/register"><span class="icon-undo2"></span>&nbsp;注册</a></li>
-        <li><a href="/login"><span class="icon-upload2"></span>&nbsp;登录</a></li>
+        <li><a href="/register"><span class="icon-undo2"></span>&nbsp;&nbsp;注册&nbsp;</a></li>
+        <li><a href="/login"><span class="icon-upload2"></span>&nbsp;&nbsp;登录&nbsp;</a></li>
         <% } %>
-        <li><a href="/archive"><span class="icon-price-tags"></span>&nbsp;书目列表</a></li>
+        <li><a href="/archive"><span class="icon-price-tags"></span>&nbsp;&nbsp;列表&nbsp;</a></li>
     </ul>
     <% if (success) { %>
     <div class="success"><%= success %></div>
