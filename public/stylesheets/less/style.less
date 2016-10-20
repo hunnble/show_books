@@ -35,6 +35,9 @@ ol, ul {
 a {
   color: @lightBlue;
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .transitionMixin(@attr, @duration) {
@@ -70,9 +73,7 @@ a {
   text-align: center;
   cursor: pointer;
   &:hover {
-    -webkit-box-shadow: 0 0 14px @lightGrey;
-    -moz-box-shadow: 0 0 14px @lightGrey;
-    box-shadow: 0 0 14px @lightGrey;
+    background-color: darken(@mainColor, 10%);
   }
 }
 .borderBox() {
@@ -81,17 +82,18 @@ a {
 }
 
 .success {
-  background-color: @green;
+  color: @green;
 }
 .error {
-  background-color: @mainColor;
+  color: @red;
 }
 .success, .error {
-  display: inline-block;
-  margin: 7px;
+  display: none;
+  // display: block;
   padding: 7px;
-  border-radius: 7px;
-  color: @white;
+  width: 100%;
+  text-align: center;
+  background-color: @white;
   font-size: 16px;
 }
 
@@ -107,7 +109,7 @@ a {
     display: block;
     margin-top: 15%;
     width: 100%;
-    height: percentage(0.1);
+    height: percentage(0.4 / 3);
     background-color: @white;
   }
 }
@@ -207,28 +209,28 @@ form {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 80%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  // -webkit-box-shadow: 0 0 14px @lightGrey;
-  // -moz-box-shadow: 0 0 14px @lightGrey;
-  // box-shadow: 0 0 14px @lightGrey;
-  padding: 28px;
+  text-align: center;
   > input {
-    margin: 14px;
-    height: 24px;
-    line-height: 24px;
+    .borderBox();
+    margin: 14px auto;
+    height: 42px;
+    line-height: 42px;
     &[type=text], &[type=password], &[type=email] {
       display: block;
       border: 2px solid @sliver;
       border-radius: 7px;
       min-width: 200px;
+      width: 100%;
       text-indent: 7px;
       outline: none;
       &:focus {
-        border-color: @lightGrey;
+        // border-color: @lightGrey;
       }
     }
     &[type=submit], &[type=reset], &[type=button] {
@@ -244,7 +246,7 @@ form {
       vertical-align: middle;
     }
     &[type=submit] {
-      margin-left: 77px;
+      width: 100%;
     }
   }
   > span {
@@ -297,8 +299,7 @@ button {
 }
 
 .book {
-  margin-right: 50%;
-  margin-bottom: 6px;
+  margin: 12px;
   padding: 21px;
   background-color: @sliver;
 }
@@ -324,11 +325,9 @@ button {
   }
   .loopRemoveComment(6);
   .borderBox();
-  position: absolute;
-  top: 14px;
   right: 0;
-  padding: 2%;
-  width: 46%;
+  padding: 12px;
+  width: 100%;
   color: @mainColor;
   li {
     margin-bottom: 70px;
@@ -347,7 +346,7 @@ button {
   position: absolute;
   top: 48px;
   bottom: 50%;
-  margin: 21px;
+  padding: 21px;
   width: 100%;
   color: @mainColor;
   overflow-y: scroll;
@@ -356,9 +355,6 @@ button {
 
 .add_comment_form {
   .borderBox();
-  -webkit-box-shadow: 0 0 0 @white;
-  -moz-box-shadow: 0 0 0 @white;
-  box-shadow: 0 0 0 @white;
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -376,17 +372,17 @@ button {
     .borderBox();
     resize: none;
     border: none;
-    margin: 21px;
     padding: 21px;
     width: 100%;
     height: 80%;
     outline: none;
-    word-wrap:break-word;
+    word-wrap: break-word;
     background-color: @sliver;
   }
   >input[type=submit] {
     width: auto;
     height: auto;
+    padding: 3px 12px;
   }
 }
 

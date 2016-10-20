@@ -34,7 +34,8 @@ $(document).ready(function () {
             $.post('/archive', {
                 'isComment': false,
                 'name': $removeItem.find('.name').html(),
-                'author': $removeItem.find('.author').html()
+                'author': $removeItem.find('.author').html(),
+								'commentId': null
             });
             $removeItem.remove();
         }
@@ -59,9 +60,8 @@ $(document).ready(function () {
     $('.showCommentBtn').click(function () {
         var $comment = $(this).parent().find('.comment');
 
-        $('.curComment').hide(500).removeClass('curComment');
-
-        $comment.addClass('curComment').show(500);
+				$comment.show(500);
+				$('.curComment').hide(500).removeClass('curComment');
     });
 
     /**

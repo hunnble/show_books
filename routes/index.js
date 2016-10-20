@@ -129,17 +129,21 @@ router.get('/add_book', function (req, res) {
 
 router.post('/add_book', checkLogin);
 router.post('/add_book', function (req, res) {
-  book.get(req.body['name'], req.body['author'], req.session.user.name, function (err, _book) {
+  book.get({
+    name: req.body.name,
+    author: req.body.author,
+    username: req.session.user.name
+  }, function (err, _book) {
     if (_book) {
       req.flash('error', '书籍已存在');
       return res.redirect('/add_book');
     }
-    book.add(req.body['name'], req.body['author'], req.session.user.name, function (err) {
+    book.add(req.body.name, req.body.author, req.session.user.name, function (err) {
       if (err) {
         req.flash('error', '添加失败: ' + err);
         return res.redirect('/add_book');
       }
-      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/'+req.body['name']+'/'+req.body['author'], function (err) {
+      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
         if (err) {
           req.flash('error', '添加失败: ' + err);
           return res.redirect('/add_book');
@@ -185,7 +189,11 @@ router.post('/archive', function (req, res) {
 
 router.get('/book/:name/:author', checkLogin);
 router.get('/book/:name/:author', function (req, res) {
-  book.get(req.params.name, req.params.author, req.session.user.name, function (err, _book) {
+  book.get({
+    name: req.params.name,
+    author: req.params.author,
+    username: req.session.user.name
+  }, function (err, _book) {
     if (!_book) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
@@ -201,11 +209,21 @@ router.get('/book/:name/:author', function (req, res) {
 
 router.get('/add_comment/:name/:author', checkLogin);
 router.get('/add_comment/:name/:author', function (req, res) {
-  res.render('add_comment', {
-    title: '评论<<' + req.params.name + '>>',
-    user: req.session.user,
-    success: req.flash('success').toString(),
-    error: req.flash('error').toString()
+  book.get({
+    name: req.params.name,
+    author: req.params.author,
+    username: req.session.user.name
+  }, function (err, _book) {
+    if (!_book || err) {
+      req.flash('error', '获取书籍信息失败');
+      return res.redirect('/');
+    }
+    res.render('add_comment', {
+      title: '评论<<' + _book.name + '>>',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
   });
 });
 
@@ -214,12 +232,15 @@ router.post('/add_comment/:name/:author', function (req, res) {
   if (req.body.isAjax) {
     res.send(markdown.toHTML(req.body.comment));
   } else {
-    book.addComment(req.params.name, req.params.author, req.body.comment, req.session.user.name, function (err) {
+    book.addComment({
+      name: req.params.name,
+      author: req.params.author,
+    }, req.body.comment, req.session.user.name, function (err, _book) {
       if (err) {
         req.flash('error', err);
         return res.redirect('back');
       }
-      log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/'+req.params.name+'/'+req.params.author, function (err) {});
+      log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
       req.flash('success', '评论成功');
       res.redirect('/archive');
     });

@@ -13,7 +13,7 @@
         <% book.comments.forEach(function (comment) { %>
         <li>
             <div class="commentContent"><%- comment.comment %></div>
-            <button class="removeBtn removeComment">删除此评论</button>
+            <button class="removeBtn removeComment">删除此笔记</button>
             <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
         </li>
         <% }) %>
