@@ -23,7 +23,9 @@ function getSearch () {
  */
 function renderBook (bookJSON) {
   $.each(bookJSON.books, function (index, book) {
-    var $section = $('<section></section>'),
+    var $wrappers = $('#books>div'),
+      wrappersNum = 3,
+      $section = $('<section></section>'),
       $header = $('<header></header>'),
       $title = $('<a class="bookTitle" href="' + book.alt + '" target="_blank">' + book.title + '</a>'),
       $author = $('<span class="bookAuthor">作者: ' + (book.author[0] || '无') + '</span>');
@@ -57,7 +59,17 @@ function renderBook (bookJSON) {
     $header.append($title, $author, $image, $addBtn);
     $section.append($header, $tags, $p);
 
-    $('#books').append($section);
+    var $targetWrapper = $($wrappers[0]);
+    var targetWrapperHeight = parseInt($targetWrapper.css('height'), 10);
+    for (var i = 1; i < wrappersNum; ++i) {
+      var tempHeight = parseInt($($wrappers[i]).css('height'), 10);
+      if (tempHeight < targetWrapperHeight) {
+        $targetWrapper = $($wrappers[i]);
+        targetWrapperHeight = tempHeight;
+      }
+    }
+
+    $targetWrapper.append($section);
 
 
   });

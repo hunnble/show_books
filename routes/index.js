@@ -55,21 +55,21 @@ router.get('/register', function (req, res) {
 
 router.post('/register', checkNotLogin);
 router.post('/register', function (req, res) {
-  user.get(req.body['name'], function (err, _user) {
+  user.get(req.body.name, function (err, _user) {
     if (_user) {
       req.flash('error', '用户已存在');
       return res.redirect('/register');
     }
-    if (req.body['password'] != req.body['password2']) {
+    if (req.body.password != req.body.password2) {
       req.flash('error', '两次输入的密码不一致');
       return res.redirect('/register');
     }
-    var verification = validateRegister(req.body['name'], req.body['password'], req.body['password2']);
+    var verification = validateRegister(req.body.name, req.body.password, req.body.password2);
     if (!verification.success) {
       req.flash('error', verification.errMsg);
       return res.redirect('/register');
     } else {
-      user.add(req.body['name'], req.body['password'], req.body['email'], function (err) {
+      user.add(req.body.name, req.body.password, req.body.email, function (err) {
         if (err) {
           req.flash('error', '注册失败，请重试');
           return res.redirect('/register');
@@ -94,9 +94,9 @@ router.get('/login', function (req, res) {
 
 router.post('/login', checkNotLogin);
 router.post('/login', function (req, res) {
-  var password = crypto.createHash('md5').update(req.body['password']).digest('hex');
+  var password = crypto.createHash('md5').update(req.body.password).digest('hex');
 
-  user.get(req.body['name'], function (err, user) {
+  user.get(req.body.name, function (err, user) {
     if (!user) {
       req.flash('error', '用户不存在');
       return res.redirect('/login');
@@ -118,73 +118,19 @@ router.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/add_book', checkLogin);
-router.get('/add_book', function (req, res) {
-  res.render('add_book', {
-    title: '新增书籍',
+router.get('/search', checkLogin);
+router.get('/search', function (req, res) {
+  res.render('search', {
+    title: '搜索',
     user: req.session.user,
     success: req.flash('success').toString(),
     error: req.flash('error').toString()
   });
 });
 
-router.post('/add_book', checkLogin);
-router.post('/add_book', function (req, res) {
+router.post('/search', checkLogin);
+router.post('/search', function (req, res) {
   res.redirect('/book/' + encodeURI(req.body.name));
-  // async.waterfall([
-    // function (cb) {
-    //   book.get({
-    //     name: req.body.name,
-    //     username: req.session.user.name
-    //   }, function (err, _book) {
-    //     cb(err, _book);
-    //   });
-    // },
-    // function (_book, cb) {
-    //   if (_book) {
-    //     req.flash('error', '书籍已存在');
-    //     return res.redirect('/add_book');
-    //   }
-    //   cb();
-    // },
-    // function (cb) {
-    //   rqst
-    //     .get('https://api.douban.com/v2/book/search')
-    //     .query({
-    //       q: req.body.name,
-    //       count: 1
-    //     })
-    //     .end(function (err, res) {
-    //       cb(err, res);
-    //     });
-    // },
-    // function (res, cb) {
-    //   var op = {
-    //     name: req.body.name,
-    //     author: req.body.author,
-    //     username: req.session.user.name,
-    //     img: ''
-    //   };
-    //   if (res.status == 200 && res.body.books.length > 0 && res.body.books[0].image) {
-    //     op.img = res.body.books[0].images.large;
-    //   }
-    //   book.add(op, function (err) {
-    //     cb(err);
-    //   });
-    // },
-    // function (cb) {
-    //   log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
-    //     cb(err);
-    //   });
-    // }
-  // ], function (err) {
-    // if (err) {
-    //   req.flash('error', '添加失败: ' + err);
-    //   return res.redirect('/add_book');
-    // }
-    // req.flash('success', '添加成功');
-    // res.redirect('/');
-  // });
 });
 
 router.get('/archive', checkLogin);
@@ -196,7 +142,6 @@ router.get('/archive/:username', checkLogin);
 router.get('/archive/:username', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
-  // book.getAll(req.session.user.name, page, function (err, books, total) {
   book.getAll(req.params.username, page, function (err, books, total) {
     if (!books) {
       req.flash('error', '获取书籍信息失败');
@@ -234,22 +179,6 @@ router.post('/archive', function (req, res) {
 
 router.get('/book/:name', checkLogin);
 router.get('/book/:name', function (req, res) {
-  // book.get({
-  //   name: req.params.name,
-  //   author: req.params.author,
-  //   username: req.session.user.name
-  // }, function (err, _book) {
-  //   if (!_book) {
-  //     req.flash('error', '获取书籍信息失败');
-  //     return res.redirect('/');
-  //   }
-  //   res.render('book', {
-  //     title: _book.name,
-  //     user: req.session.user,
-  //     success: req.flash('success').toString(),
-  //     error: req.flash('error').toString()
-  //   });
-  // });
   res.render('book', {
     title: req.params.name,
     user: req.session.user,
@@ -271,7 +200,7 @@ router.post('/book', function (req, res) {
     },
     function (_book, cb) {
       if (_book) {
-        req.flash('error', '已收藏过此书籍');
+        req.flash('error', '已经收藏了此书籍');
         return res.send({
           success: false
         });

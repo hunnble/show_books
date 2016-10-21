@@ -1,0 +1,24 @@
+<div class="navSwitcher">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav class="nav">
+  <ul>
+    <li><a href="/"><span class="icon-home3"></span>&nbsp;&nbsp;主页&nbsp;</a></li>
+    <li><a href="/search"><span class="icon-upload2"></span>&nbsp;搜索图书</a></li>
+    <% if (user) { %>
+    <li><a href="/logout"><span class="icon-undo2"></span>&nbsp;&nbsp;注销&nbsp;</a></li>
+    <li><a href="/archive"><span class="icon-price-tags"></span>&nbsp;我的收藏</a></li>
+    <% } else { %>
+    <li><a href="/register"><span class="icon-undo2"></span>&nbsp;&nbsp;注册&nbsp;</a></li>
+    <li><a href="/login"><span class="icon-upload2"></span>&nbsp;&nbsp;登录&nbsp;</a></li>
+    <% } %>
+  </ul>
+  <% if (success) { %>
+  <div class="success"><%= success %></div>
+  <% } %>
+  <% if (error) { %>
+  <div class="error"><%= error %></div>
+  <% } %>
+</nav>

@@ -1,3 +1,22 @@
 <%- include header -%>
-<div class="indexImg"></div>
+<aside class="sidebar">
+  <div class="sidebarBlock">
+    <% if (user) { %>
+      <div class="avatar-sm"></div>
+      <a href="/profile"><h3><%= user.name %></h3></a>
+      <div></div>
+    <% } else { %>
+      <div>没有账号?先去<a href="/register">注册</a></div>
+    <% } %>
+  </div>
+  <% if (user) { %>
+    <div class="sidebarBlock">
+      <form action="/search" method="post">
+        <input name="name" type="text" placeholder="搜索图书" required />
+        <input type="submit" value="搜索" />
+      </form>
+    </div>
+  <% } %>
+</aside>
+<div class="container"></div>
 <%- include footer -%>

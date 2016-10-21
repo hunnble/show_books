@@ -95,7 +95,7 @@ a:hover {
   background-color: #ffffff;
   font-size: 16px;
 }
-.sideBarSwitcher {
+.navSwitcher {
   position: fixed;
   right: 12px;
   top: 0;
@@ -104,17 +104,17 @@ a:hover {
   height: 50px;
   cursor: pointer;
 }
-.sideBarSwitcher > span {
+.navSwitcher > span {
   display: block;
   margin-top: 13.33333333%;
   width: 80%;
   height: 8.88888889%;
   background-color: #ffffff;
 }
-.sideBarSwitcher > span:first-child {
+.navSwitcher > span:first-child {
   margin-top: 20%;
 }
-.sidebar {
+.nav {
   background: -moz-linear-gradient(left, #947caa, #614c74);
   background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#947caa), to(#614c74));
   background: -webkit-linear-gradient(left, #947caa, #614c74);
@@ -124,7 +124,13 @@ a:hover {
   width: 100%;
   height: 50px;
 }
-.sidebar > ul > li {
+.nav:hover {
+  background: -moz-linear-gradient(left, #947caa, #947caa);
+  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#947caa), to(#947caa));
+  background: -webkit-linear-gradient(left, #947caa, #947caa);
+  background: -o-linear-gradient(left, #947caa, #947caa);
+}
+.nav > ul > li {
   -webkit-transition: background-color 0.5s;
   -moz-transition: background-color 0.5s;
   -ms-transition: background-color 0.5s;
@@ -136,13 +142,13 @@ a:hover {
   line-height: 50px;
   text-align: center;
 }
-.sidebar > ul > li:hover {
+.nav > ul > li:hover {
   background-color: #ffffff;
 }
-.sidebar > ul > li:hover > a {
+.nav > ul > li:hover > a {
   color: #7B6093;
 }
-.sidebar > ul > li > a {
+.nav > ul > li > a {
   display: inline-block;
   width: 100%;
   color: #ffffff;
@@ -214,50 +220,52 @@ a:hover {
   background-color: #F2F2F2;
   color: #7B6093;
 }
-form {
+.center {
   position: absolute;
   top: 50%;
   left: 50%;
   padding: 42px;
   width: 80%;
-  max-width: 400px;
-  background-color: #ffffff;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+.form {
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
   text-align: center;
 }
-form > h1,
-form > h2,
-form > h3,
-form > h4,
-form > h5,
-form > h6 {
+.form > h1,
+.form > h2,
+.form > h3,
+.form > h4,
+.form > h5,
+.form > h6 {
   color: #7B6093;
 }
-form > input {
+.form > input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 14px auto;
   height: 42px;
   line-height: 42px;
 }
-form > input[type=text],
-form > input[type=password],
-form > input[type=email] {
+.form > input[type=text],
+.form > input[type=password],
+.form > input[type=email] {
   display: block;
   border: 2px solid #F2F2F2;
   border-radius: 7px;
-  min-width: 200px;
   width: 100%;
   text-indent: 7px;
   outline: none;
 }
-form > input[type=submit],
-form > input[type=reset],
-form > input[type=button] {
+.form > input[type=submit],
+.form > input[type=reset],
+.form > input[type=button] {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -272,27 +280,28 @@ form > input[type=button] {
   line-height: 30px;
   min-width: 64px;
 }
-form > input[type=submit]:hover,
-form > input[type=reset]:hover,
-form > input[type=button]:hover {
+.form > input[type=submit]:hover,
+.form > input[type=reset]:hover,
+.form > input[type=button]:hover {
   background-color: #614c74;
 }
-form > input[type=checkbox] {
+.form > input[type=checkbox] {
   display: inline-block;
   margin-right: 0;
   vertical-align: middle;
 }
-form > input[type=submit] {
-  width: 100%;
+.form > input[type=submit],
+.form > input[type=reset] {
+  width: 45%;
 }
-form > span {
+.form > span {
   display: inline-block;
   margin: 14px 0;
   height: 24px;
   vertical-align: middle;
   line-height: 24px;
 }
-form .form-footer {
+.form .form-footer {
   position: absolute;
   bottom: 14px;
   left: 0;
@@ -313,44 +322,53 @@ button {
 button:hover {
   background-color: #614c74;
 }
-#books > section {
+#books > div {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  margin: 0;
+  padding: 0 12px;
+  width: 33.33333333%;
+}
+#books > div > section {
   background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
   background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.5)));
   background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
   background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
-  margin: 14px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 12px 0;
   padding: 14px;
+  width: 100%;
   min-height: 180px;
+  font-size: 12px;
+  color: #a3afaa;
 }
-#books > section > header .bookTitle {
+#books > div > section:hover {
+  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.8)));
+  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
+  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
+}
+#books > div > section > header .bookTitle {
   margin-right: 12px;
   font-size: 32px;
   color: #222222;
   text-decoration: none;
 }
-#books > section > header .bookAuthor {
+#books > div > section > header .bookAuthor {
   font-size: 12px;
   color: #222222;
 }
-#books > section > header > img {
+#books > div > section > header > img {
   float: right;
-  margin: 0 14px;
+  margin: 3px 14px;
 }
-#books > section > header .bookBtn {
-  background: -moz-linear-gradient(top, #7B6093, #ae9bbe);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#7B6093), to(#ae9bbe));
-  background: -webkit-linear-gradient(top, #7B6093, #ae9bbe);
-  background: -o-linear-gradient(top, #7B6093, #ae9bbe);
+#books > div > section > header .bookBtn {
   margin-left: 12px;
-  padding: 0 7px;
+  padding: 0 3px;
 }
-#books > section > header .bookBtn:hover {
-  background: -moz-linear-gradient(top, #7B6093, #7B6093);
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#7B6093), to(#7B6093));
-  background: -webkit-linear-gradient(top, #7B6093, #7B6093);
-  background: -o-linear-gradient(top, #7B6093, #7B6093);
-}
-#books > section .bookTag {
+#books > div > section .bookTag {
   width: auto;
   padding: 3px 7px;
   margin: 7px;
@@ -378,12 +396,10 @@ button:hover {
   word-break: break-all;
 }
 .book:hover {
-  -webkit-filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  filter: grayscale(100%);
-  filter: gray;
+  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
 }
 .book > header {
   float: left;
@@ -507,6 +523,109 @@ button:hover {
   width: auto;
   height: auto;
 }
+.sidebar {
+  width: 30%;
+  min-width: 300px;
+  float: right;
+}
+.sidebar > .sidebarBlock {
+  margin: 12px;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+.sidebar > .sidebarBlock > form {
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+}
+.sidebar > .sidebarBlock > form > h1,
+.sidebar > .sidebarBlock > form > h2,
+.sidebar > .sidebarBlock > form > h3,
+.sidebar > .sidebarBlock > form > h4,
+.sidebar > .sidebarBlock > form > h5,
+.sidebar > .sidebarBlock > form > h6 {
+  color: #7B6093;
+}
+.sidebar > .sidebarBlock > form > input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 14px auto;
+  height: 42px;
+  line-height: 42px;
+}
+.sidebar > .sidebarBlock > form > input[type=text],
+.sidebar > .sidebarBlock > form > input[type=password],
+.sidebar > .sidebarBlock > form > input[type=email] {
+  display: block;
+  border: 2px solid #F2F2F2;
+  border-radius: 7px;
+  width: 100%;
+  text-indent: 7px;
+  outline: none;
+}
+.sidebar > .sidebarBlock > form > input[type=submit],
+.sidebar > .sidebarBlock > form > input[type=reset],
+.sidebar > .sidebarBlock > form > input[type=button] {
+  border: 0 solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #7B6093;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  line-height: 30px;
+  min-width: 64px;
+}
+.sidebar > .sidebarBlock > form > input[type=submit]:hover,
+.sidebar > .sidebarBlock > form > input[type=reset]:hover,
+.sidebar > .sidebarBlock > form > input[type=button]:hover {
+  background-color: #614c74;
+}
+.sidebar > .sidebarBlock > form > input[type=checkbox] {
+  display: inline-block;
+  margin-right: 0;
+  vertical-align: middle;
+}
+.sidebar > .sidebarBlock > form > input[type=submit],
+.sidebar > .sidebarBlock > form > input[type=reset] {
+  width: 45%;
+}
+.sidebar > .sidebarBlock > form > span {
+  display: inline-block;
+  margin: 14px 0;
+  height: 24px;
+  vertical-align: middle;
+  line-height: 24px;
+}
+.sidebar > .sidebarBlock > form .form-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.sidebar > .sidebarBlock > form > input[type=text],
+.sidebar > .sidebarBlock > form > input[type=submit] {
+  display: inline-block;
+  margin: 1%;
+}
+.sidebar > .sidebarBlock > form > input[type=text] {
+  width: 60%;
+  height: 32px;
+  line-height: 32px;
+}
+.sidebar > .sidebarBlock > form > input[type=submit] {
+  width: 20%;
+}
+.container {
+  margin-right: 30%;
+}
 @font-face {
   font-family: 'icomoon';
   src: url(../fonts/icomoon.eot?2umzxb);
@@ -541,43 +660,56 @@ button:hover {
   content: "\e9c6";
 }
 @media only all and (max-width: 640px) {
-  .sideBarSwitcher {
+  .form {
+    background-color: transparent;
+  }
+  .navSwitcher {
     display: none;
   }
-  .sidebar > ul {
+  .nav > ul {
     width: 100%;
   }
-  .sidebar > ul > li {
+  .nav > ul > li {
     float: left;
     padding: 0;
     width: 25%;
     font-size: 12px;
   }
-  #books > section {
+  #books > div {
+    width: 100%;
+  }
+  #books > div > section {
     font-size: 12px;
   }
-  #books > section > header .bookTitle {
+  #books > div > section > header .bookTitle {
     display: block;
     font-size: 18px;
   }
-  #books > section > header .bookAuthor {
+  #books > div > section > header .bookAuthor {
     display: block;
   }
-  #books > section > header .bookBtn {
+  #books > div > section > header .bookBtn {
     margin-left: 0;
   }
-  #books > section .bookTags {
+  #books > div > section .bookTags {
     margin-right: 50%;
   }
-  #books > section .bookTag {
+  #books > div > section .bookTag {
     width: auto;
     margin: 0 3px;
     padding: 0 3px;
     word-wrap: normal;
     word-break: normal;
   }
+  .booksWrapper {
+    padding: 0;
+  }
   .book {
-    width: 80%;
-    margin: 12px 10%;
+    border-bottom: 1px solid #222222;
+    margin: 0;
+    width: 100%;
+  }
+  .sidebar {
+    width: 100%;
   }
 }
