@@ -31,7 +31,6 @@ $(document).ready(function () {
     if (confirm('确认删除这本书')) {
 			$.post('/book', {
 				'_method': 'delete',
-				'isComment': false,
 				'username': window.location.href.split('/').reverse()[0],
 				'bookId': $(this).parent().find('.bookId').val(),
         'name': $removeItem.find('.name').html(),
@@ -50,14 +49,9 @@ $(document).ready(function () {
     var $removeItem = $(this).parent();
 
     if (confirm('确认删除这条笔记?')) {
-      var $bookBlock = $removeItem.parent().parent();
-
 			$.post('/comment', {
 				'_method': 'delete',
-        'isComment': true,
-				'username': window.location.href.split('/').reverse()[0],
-        'name': $bookBlock.find('.name').html(),
-        'author': $bookBlock.find('.author').html(),
+        'name': decodeURI(window.location.href.split('/').reverse()[0]),
         'commentId': $removeItem.find('.commentId').val()
       }, function (data) {
 				data.success && $removeItem.remove();

@@ -184,7 +184,7 @@ Book.prototype.addComment = function (op, comment, callback) {
   });
 };
 
-Book.prototype.removeComment = function (name, author, commentId, username, callback) {
+Book.prototype.removeComment = function (op, callback) {
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -198,13 +198,12 @@ Book.prototype.removeComment = function (name, author, commentId, username, call
     },
     function (collection, db, cb) {
       collection.update({
-        'name': name,
-        'author': author,
-        'username': username
+        'name': op.name,
+        'username': op.username
       }, {
         $pull: {
           'comments': {
-            '_id': Number(commentId)
+            '_id': Number(op.commentId)
           }
         }
       }, function (err) {

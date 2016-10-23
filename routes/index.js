@@ -64,7 +64,9 @@ router.post('/register', function (req, res) {
       req.flash('error', '两次输入的密码不一致');
       return res.redirect('/register');
     }
+    
     var verification = validateRegister(req.body.name, req.body.password, req.body.password2);
+
     if (!verification.success) {
       req.flash('error', verification.errMsg);
       return res.redirect('/register');
@@ -174,6 +176,7 @@ router.get('/book/:name', function (req, res) {
 router.post('/book', checkLogin);
 router.post('/book', function (req, res) {
   var body = req.body;
+
   if (body._method && body._method === 'delete') {
     if (body.username !== req.session.user.name) {
       return;
@@ -217,6 +220,7 @@ router.post('/book', function (req, res) {
           username: req.session.user.name,
           img: body.img || ''
         };
+
         book.add(op, function (err) {
           cb(err);
         });
@@ -255,16 +259,6 @@ router.post('/book', function (req, res) {
 //   }
 // });
 
-router.post('/comment', checkLogin);
-router.post('/comment', function (req, res) {
-  var body = req.body;
-  if (body.username !== req.session.user.name) {
-    return;
-  } else if (body._method && body._method === 'delete') {
-    book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
-  }
-});
-
 router.get('/comment/:name', checkLogin);
 router.get('/comment/:name', function (req, res) {
   book.get({
@@ -283,6 +277,29 @@ router.get('/comment/:name', function (req, res) {
       error: req.flash('error').toString()
     });
   });
+});
+
+router.post('/comment', checkLogin);
+router.post('/comment', function (req, res) {
+  var body = req.body;
+
+  if (body._method && body._method === 'delete') {
+    book.removeComment({
+      name: body.name,
+      commentId: body.commentId,
+      username: req.session.user.name
+    }, function (err) {
+      if (err) {
+        res.send({
+          success: false
+        });
+      } else {
+        res.send({
+          success: true
+        });
+      }
+    });
+  }
 });
 
 router.get('/editcomment/:name', checkLogin);
