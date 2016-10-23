@@ -1,10 +1,15 @@
 <%- include header -%>
-<form method="post" class="add_comment_form">
+<form method="post" class="newcommentForm">
     <textarea name="comment" placeholder="书评" required></textarea>
-    <input type="submit" value="发布笔记" />
+    <div>
+      <input type="submit" value="发布笔记" />
+    </div>
 </form>
 <p class="wordHint">
     预览(支持markdown格式文本,已输入<span class="wordNumber">0</span>字)
 </p>
 <div class="preview markdown-body"></div>
+<script>
+<%- include ../node_modules/markdown/lib/markdown.js %>
+</script>
 <%- include footer -%>

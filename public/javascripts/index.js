@@ -1,70 +1,69 @@
 $(document).ready(function () {
 
 	/**
-	 * sidebar
+	 * nav
 	 */
+	$('.navSwitcher').click(function () {
+		var $navSwitcher = $('.navSwitcher');
+		var $nav = $('.nav');
+		var curTop = $nav.css('top');
 
-	$('.sideBarSwitcher').click(function () {
-		var $sideBarSwitcher = $('.sideBarSwitcher');
-		var $sidebar = $('.sidebar');
-		var curTop = $sidebar.css('top');
-
-		$sidebar.stop(true, true);
+		$nav.stop(true, true);
 		if (curTop === 0 || curTop === '0px') {
-			$sidebar.animate({
-				'top': '-' + $sidebar.css('height')
+			$nav.animate({
+				'top': '-' + $nav.css('height')
 			}, 300);
-			$sideBarSwitcher.find('span').css('backgroundColor', '#7B6093');
+			$navSwitcher.find('span').css('backgroundColor', '#6699CC');
 		} else {
-			$sidebar.animate({
+			$nav.animate({
 				'top': 0
 			}, 300);
-			$sideBarSwitcher.find('span').css('backgroundColor', '#ffffff');
+			$navSwitcher.find('span').css('backgroundColor', '#FFFFFF');
 		}
 	});
 
 	/**
 	 * archive
 	 */
-
 	$('.removeBook').click(function () {
     var $removeItem = $(this).parent().parent();
 
     if (confirm('确认删除这本书')) {
-      $.post('/archive', {
-        'isComment': false,
+			$.post('/book', {
+				'_method': 'delete',
+				'isComment': false,
 				'username': window.location.href.split('/').reverse()[0],
 				'bookId': $(this).parent().find('.bookId').val(),
         'name': $removeItem.find('.name').html(),
         'author': $removeItem.find('.author').html(),
 								'commentId': null
-      });
-      $removeItem.remove();
+			}, function (data) {
+				data.success && $removeItem.remove();
+			});
     }
   });
 
+	/**
+	 * comment
+	 */
   $('.removeComment').click(function () {
     var $removeItem = $(this).parent();
 
     if (confirm('确认删除这条笔记?')) {
       var $bookBlock = $removeItem.parent().parent();
 
-      $.post('/archive', {
+			$.post('/comment', {
+				'_method': 'delete',
         'isComment': true,
 				'username': window.location.href.split('/').reverse()[0],
         'name': $bookBlock.find('.name').html(),
         'author': $bookBlock.find('.author').html(),
         'commentId': $removeItem.find('.commentId').val()
-      });
-      $removeItem.remove();
+      }, function (data) {
+				data.success && $removeItem.remove();
+			});
+
     }
-  });
-
-  $('.showCommentBtn').click(function () {
-    var $comment = $(this).parent().find('.comment');
-
-				$comment.show(500);
-				$('.curComment').hide(500).removeClass('curComment');
   });
 
 	// $('.book')
@@ -76,18 +75,18 @@ $(document).ready(function () {
 	// 	});
 
   /**
-   * add_comment
+   * editcomment
    */
-
   $('textarea[name=comment]').bind('paste cut keydown keyup focus blur', function () {
     $('.wordNumber').html($(this).val().replace(/\n|\r|\r\n/g, '').length);
+		$('.preview').html(markdown.toHTML($(this).val().replace(/\n|\r|\r\n/g, '\n\n')));
 
-    $.post(window.location.href, {
-      'isAjax': true,
-      'comment': $(this).val().replace(/\n|\r|\r\n/g, '\n\n')
-    }, function (resTxt) {
-      $('.preview').html(resTxt);
-    });
+    // $.post(window.location.href, {
+    //   'isAjax': true,
+    //   'comment': $(this).val().replace(/\n|\r|\r\n/g, '\n\n')
+    // }, function (resTxt) {
+    //   $('.preview').html(resTxt);
+    // });
   });
 
 });

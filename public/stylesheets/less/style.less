@@ -1,11 +1,11 @@
-@mainColor: #7B6093;
+@mainColor: #6699CC;
 @black: #000000;
-@white: #ffffff;
-@lightGrey: rgb(163, 175, 170);
+@white: #FFFFFF;
+@lightGrey: #CCCCCC;
 @darkGrey: #222222;
-@lightBlue: #00B7FF;
-@green: #6dea67;
-@red: #f44336;
+@lightBlue: #99CCFF;
+@green: #99FF66;
+@red: #FF0033;
 @sliver: #F2F2F2;
 @navHeight: 50px;
 @bookWidth: 106px;
@@ -38,9 +38,6 @@ ol, ul {
 a {
   color: @lightBlue;
   text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .transitionMixin(@attr, @duration) {
@@ -49,6 +46,12 @@ a {
   -ms-transition: @attr @duration;
   -o-transition: @attr @duration;
   transition: @attr @duration;
+}
+.animationMixin(@frame, @duration: 1s) {
+  -webkit-animation: @frame @duration;
+  -moz-animation: @frame @duration;
+  -o-animation: @frame @duration;
+  animation: @frame @duration;
 }
 .topLinearBgColorMixin(@startBg, @endBg) {
   background: -moz-linear-gradient(top, @startBg, @endBg);
@@ -61,13 +64,6 @@ a {
   background: -webkit-gradient(linear, 0 50%, 100% 50%, from(@startBg), to(@endBg));
   background: -webkit-linear-gradient(left, @startBg, @endBg);
   background: -o-linear-gradient(left, @startBg, @endBg);
-}
-.backgroundImage(@url) {
-  height: 100%;
-  width: 100%;
-  background: url(@url) no-repeat;
-  -webkit-background-size: 100%, 100%;
-  background-size: 100% 100%;
 }
 .blur(@c) {
   -webkit-filter: blur(@c); /* Chrome, Opera */
@@ -130,7 +126,7 @@ a {
 
 .navSwitcher {
   position: fixed;
-  right: 12px;
+  left: 12px;
   top: 0;
   z-index: @level1;
   width: @navHeight;
@@ -153,10 +149,8 @@ a {
   z-index: @level2;
   width: 100%;
   height: @navHeight;
-  &:hover {
-    .leftLinearBgColorMixin(lighten(@mainColor, 10%), lighten(@mainColor, 10%));
-  }
   >ul {
+    float: right;
     >li {
       .transitionMixin(background-color, 0.5s);
       display: inline-block;
@@ -174,6 +168,7 @@ a {
         display: inline-block;
         width: 100%;
         color: @white;
+        cursor: pointer;
       }
     }
   }
@@ -190,6 +185,7 @@ a {
   top: 0;
   height: 100%;
   width: 100%;
+  background-color: @sliver;
   background-image: url('../../images/lowpoly.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -305,6 +301,40 @@ a {
     text-align: center;
   }
 }
+.panel {
+  margin: 12px;
+  border-radius: 5px;
+  background-color: @white;
+  >header {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 32px;
+    background-color: @mainColor;
+    line-height: 32px;
+    text-indent: 12px;
+    color: @white;
+  }
+  >div {
+    padding: 12px;
+    >form {
+      .form();
+      >input {
+        &[type=text], &[type=submit] {
+          display: inline-block;
+          margin: 1%;
+        }
+        &[type=text] {
+          width: 60%;
+          height: 32px;
+          line-height: 32px;
+        }
+        &[type=submit] {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
 
 button {
   .btn();
@@ -321,10 +351,11 @@ button {
     .borderBox();
     margin: 12px 0;
     padding: 14px;
+    border-radius: 7px;
     width: 100%;
     min-height: 180px;
     font-size: 12px;
-    color: @lightGrey;
+    color: darken(@lightGrey, 10%);
     &:hover {
       .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.8));
     }
@@ -368,9 +399,13 @@ button {
 }
 .book {
   .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.2));
+  .animationMixin(float);
   display: inline-block;
-  margin: 6px 12px;
+  border-right: 4px solid @mainColor;
+  margin: 0 0 6px 1%;
   height: @bookHeight;
+  width: percentage(0.94 / 3);
+  min-width: 250px;
   vertical-align: top;
   word-wrap: break-word;
   word-break: break-all;
@@ -460,6 +495,8 @@ button {
   bottom: 0;
   padding: 21px;
   width: 50%;
+  background-color: @white;
+  opacity: 0.7;
   overflow-y: scroll;
   word-wrap: break-word;
   ol, ul {
@@ -467,7 +504,7 @@ button {
   }
 }
 
-.add_comment_form {
+.newcommentForm {
   .borderBox();
   -webkit-transform: translate(0, 0);
   -moz-transform: translate(0, 0);
@@ -489,17 +526,25 @@ button {
     resize: none;
     border: none;
     padding: 21px;
+    margin-bottom: 21px;
     width: 100%;
-    height: 80%;
+    height: 100%;
     outline: none;
     word-wrap: break-word;
     background-color: @sliver;
   }
-  >input[type=submit] {
-    margin-right: 12px;
-    padding: 3px 12px;
-    width: auto;
-    height: auto;
+  >div {
+    .borderBox();
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    text-align: right;
+    padding: 0 21px 5px;
+    >input[type=submit] {
+      .btn();
+      width: auto;
+      height: auto;
+    }
   }
 }
 
@@ -507,29 +552,6 @@ button {
   width: 30%;
   min-width: 300px;
   float: right;
-  >.sidebarBlock {
-    margin: 12px;
-    padding: 12px;
-    border-radius: 5px;
-    background-color: @white;
-    >form {
-      .form();
-      >input {
-        &[type=text], &[type=submit] {
-          display: inline-block;
-          margin: 1%;
-        }
-        &[type=text] {
-          width: 60%;
-          height: 32px;
-          line-height: 32px;
-        }
-        &[type=submit] {
-          width: 20%;
-        }
-      }
-    }
-  }
 }
 .container {
   margin-right: 30%;
@@ -624,11 +646,51 @@ button {
     padding: 0;
   }
   .book {
-    border-bottom: 1px solid @darkGrey;
     margin: 0;
     width: 100%;
   }
   .sidebar {
     width: 100%;
+  }
+}
+
+@-webkit-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@-moz-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@-o-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
   }
 }

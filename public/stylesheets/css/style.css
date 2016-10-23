@@ -60,11 +60,8 @@ h6 {
   font-weight: normal;
 }
 a {
-  color: #00B7FF;
+  color: #99CCFF;
   text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
 }
 .btn {
   border: 0 solid transparent;
@@ -72,19 +69,19 @@ a:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #6699CC;
+  color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 .btn:hover {
-  background-color: #614c74;
+  background-color: #407fbf;
 }
 .success {
-  color: #6dea67;
+  color: #99FF66;
 }
 .error {
-  color: #f44336;
+  color: #FF0033;
 }
 .success,
 .error {
@@ -92,12 +89,12 @@ a:hover {
   padding: 7px;
   width: 100%;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   font-size: 16px;
 }
 .navSwitcher {
   position: fixed;
-  right: 12px;
+  left: 12px;
   top: 0;
   z-index: 10;
   width: 50px;
@@ -109,26 +106,23 @@ a:hover {
   margin-top: 13.33333333%;
   width: 80%;
   height: 8.88888889%;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
 }
 .navSwitcher > span:first-child {
   margin-top: 20%;
 }
 .nav {
-  background: -moz-linear-gradient(left, #947caa, #614c74);
-  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#947caa), to(#614c74));
-  background: -webkit-linear-gradient(left, #947caa, #614c74);
-  background: -o-linear-gradient(left, #947caa, #614c74);
+  background: -moz-linear-gradient(left, #8cb3d9, #407fbf);
+  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#8cb3d9), to(#407fbf));
+  background: -webkit-linear-gradient(left, #8cb3d9, #407fbf);
+  background: -o-linear-gradient(left, #8cb3d9, #407fbf);
   position: fixed;
   z-index: 9;
   width: 100%;
   height: 50px;
 }
-.nav:hover {
-  background: -moz-linear-gradient(left, #947caa, #947caa);
-  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#947caa), to(#947caa));
-  background: -webkit-linear-gradient(left, #947caa, #947caa);
-  background: -o-linear-gradient(left, #947caa, #947caa);
+.nav > ul {
+  float: right;
 }
 .nav > ul > li {
   -webkit-transition: background-color 0.5s;
@@ -143,15 +137,16 @@ a:hover {
   text-align: center;
 }
 .nav > ul > li:hover {
-  background-color: #ffffff;
+  background-color: #FFFFFF;
 }
 .nav > ul > li:hover > a {
-  color: #7B6093;
+  color: #6699CC;
 }
 .nav > ul > li > a {
   display: inline-block;
   width: 100%;
-  color: #ffffff;
+  color: #FFFFFF;
+  cursor: pointer;
 }
 .main {
   -webkit-box-sizing: border-box;
@@ -165,6 +160,7 @@ a:hover {
   top: 0;
   height: 100%;
   width: 100%;
+  background-color: #F2F2F2;
   background-image: url('../../images/lowpoly.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -197,7 +193,7 @@ a:hover {
   padding: 4px 7px;
   border-radius: 7px;
   background-color: #F2F2F2;
-  color: #7B6093;
+  color: #6699CC;
 }
 .page {
   padding: 14px;
@@ -212,13 +208,13 @@ a:hover {
   transition: background-color 0.5s;
   display: inline-block;
   padding: 7px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #6699CC;
+  color: #FFFFFF;
 }
 .prepage > a:hover,
 .nextpage > a:hover {
   background-color: #F2F2F2;
-  color: #7B6093;
+  color: #6699CC;
 }
 .center {
   position: absolute;
@@ -234,7 +230,7 @@ a:hover {
 }
 .form {
   max-width: 400px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   border-radius: 5px;
   text-align: center;
 }
@@ -244,7 +240,7 @@ a:hover {
 .form > h4,
 .form > h5,
 .form > h6 {
-  color: #7B6093;
+  color: #6699CC;
 }
 .form > input {
   -webkit-box-sizing: border-box;
@@ -271,8 +267,8 @@ a:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #6699CC;
+  color: #FFFFFF;
   text-align: center;
   cursor: pointer;
   padding: 0;
@@ -283,7 +279,7 @@ a:hover {
 .form > input[type=submit]:hover,
 .form > input[type=reset]:hover,
 .form > input[type=button]:hover {
-  background-color: #614c74;
+  background-color: #407fbf;
 }
 .form > input[type=checkbox] {
   display: inline-block;
@@ -308,19 +304,125 @@ a:hover {
   width: 100%;
   text-align: center;
 }
+.panel {
+  margin: 12px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+.panel > header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  height: 32px;
+  background-color: #6699CC;
+  line-height: 32px;
+  text-indent: 12px;
+  color: #FFFFFF;
+}
+.panel > div {
+  padding: 12px;
+}
+.panel > div > form {
+  max-width: 400px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  text-align: center;
+}
+.panel > div > form > h1,
+.panel > div > form > h2,
+.panel > div > form > h3,
+.panel > div > form > h4,
+.panel > div > form > h5,
+.panel > div > form > h6 {
+  color: #6699CC;
+}
+.panel > div > form > input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 14px auto;
+  height: 42px;
+  line-height: 42px;
+}
+.panel > div > form > input[type=text],
+.panel > div > form > input[type=password],
+.panel > div > form > input[type=email] {
+  display: block;
+  border: 2px solid #F2F2F2;
+  border-radius: 7px;
+  width: 100%;
+  text-indent: 7px;
+  outline: none;
+}
+.panel > div > form > input[type=submit],
+.panel > div > form > input[type=reset],
+.panel > div > form > input[type=button] {
+  border: 0 solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #6699CC;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  line-height: 30px;
+  min-width: 64px;
+}
+.panel > div > form > input[type=submit]:hover,
+.panel > div > form > input[type=reset]:hover,
+.panel > div > form > input[type=button]:hover {
+  background-color: #407fbf;
+}
+.panel > div > form > input[type=checkbox] {
+  display: inline-block;
+  margin-right: 0;
+  vertical-align: middle;
+}
+.panel > div > form > input[type=submit],
+.panel > div > form > input[type=reset] {
+  width: 45%;
+}
+.panel > div > form > span {
+  display: inline-block;
+  margin: 14px 0;
+  height: 24px;
+  vertical-align: middle;
+  line-height: 24px;
+}
+.panel > div > form .form-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.panel > div > form > input[type=text],
+.panel > div > form > input[type=submit] {
+  display: inline-block;
+  margin: 1%;
+}
+.panel > div > form > input[type=text] {
+  width: 60%;
+  height: 32px;
+  line-height: 32px;
+}
+.panel > div > form > input[type=submit] {
+  width: 20%;
+}
 button {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #6699CC;
+  color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 button:hover {
-  background-color: #614c74;
+  background-color: #407fbf;
 }
 #books > div {
   -webkit-box-sizing: border-box;
@@ -331,24 +433,25 @@ button:hover {
   width: 33.33333333%;
 }
 #books > div > section {
-  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.5)));
-  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
-  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 12px 0;
   padding: 14px;
+  border-radius: 7px;
   width: 100%;
   min-height: 180px;
   font-size: 12px;
-  color: #a3afaa;
+  color: #b3b3b3;
 }
 #books > div > section:hover {
-  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.8)));
-  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
-  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.8));
+  background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.8)));
+  background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
+  background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
 }
 #books > div > section > header .bookTitle {
   margin-right: 12px;
@@ -384,22 +487,29 @@ button:hover {
   overflow-x: scroll;
 }
 .book {
-  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.2));
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.2)));
-  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.2));
-  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.2));
+  background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.2));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.2)));
+  background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.2));
+  background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.2));
+  -webkit-animation: float 1s;
+  -moz-animation: float 1s;
+  -o-animation: float 1s;
+  animation: float 1s;
   display: inline-block;
-  margin: 6px 12px;
+  border-right: 4px solid #6699CC;
+  margin: 0 0 6px 1%;
   height: 136px;
+  width: 31.33333333%;
+  min-width: 250px;
   vertical-align: top;
   word-wrap: break-word;
   word-break: break-all;
 }
 .book:hover {
-  background: -moz-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
-  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#ffffff), to(rgba(255, 255, 255, 0.5)));
-  background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
-  background: -o-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0.5));
+  background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
 }
 .book > header {
   float: left;
@@ -454,7 +564,7 @@ button:hover {
   right: 0;
   padding: 12px;
   width: 48%;
-  color: #7B6093;
+  color: #6699CC;
 }
 .comment li {
   margin-bottom: 70px;
@@ -463,7 +573,7 @@ button:hover {
   display: block;
   float: right;
   margin: 14px;
-  background-color: #7B6093;
+  background-color: #6699CC;
 }
 .wordHint {
   float: right;
@@ -479,6 +589,8 @@ button:hover {
   bottom: 0;
   padding: 21px;
   width: 50%;
+  background-color: #FFFFFF;
+  opacity: 0.7;
   overflow-y: scroll;
   word-wrap: break-word;
 }
@@ -486,7 +598,7 @@ button:hover {
 .preview ul {
   list-style: auto;
 }
-.add_comment_form {
+.newcommentForm {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-transform: translate(0, 0);
@@ -505,123 +617,48 @@ button:hover {
   opacity: 0.8;
   text-align: right;
 }
-.add_comment_form > textarea {
+.newcommentForm > textarea {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   resize: none;
   border: none;
   padding: 21px;
+  margin-bottom: 21px;
   width: 100%;
-  height: 80%;
+  height: 100%;
   outline: none;
   word-wrap: break-word;
   background-color: #F2F2F2;
 }
-.add_comment_form > input[type=submit] {
-  margin-right: 12px;
-  padding: 3px 12px;
-  width: auto;
-  height: auto;
-}
-.sidebar {
-  width: 30%;
-  min-width: 300px;
-  float: right;
-}
-.sidebar > .sidebarBlock {
-  margin: 12px;
-  padding: 12px;
-  border-radius: 5px;
-  background-color: #ffffff;
-}
-.sidebar > .sidebarBlock > form {
-  max-width: 400px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  text-align: center;
-}
-.sidebar > .sidebarBlock > form > h1,
-.sidebar > .sidebarBlock > form > h2,
-.sidebar > .sidebarBlock > form > h3,
-.sidebar > .sidebarBlock > form > h4,
-.sidebar > .sidebarBlock > form > h5,
-.sidebar > .sidebarBlock > form > h6 {
-  color: #7B6093;
-}
-.sidebar > .sidebarBlock > form > input {
+.newcommentForm > div {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 14px auto;
-  height: 42px;
-  line-height: 42px;
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+  text-align: right;
+  padding: 0 21px 5px;
 }
-.sidebar > .sidebarBlock > form > input[type=text],
-.sidebar > .sidebarBlock > form > input[type=password],
-.sidebar > .sidebarBlock > form > input[type=email] {
-  display: block;
-  border: 2px solid #F2F2F2;
-  border-radius: 7px;
-  width: 100%;
-  text-indent: 7px;
-  outline: none;
-}
-.sidebar > .sidebarBlock > form > input[type=submit],
-.sidebar > .sidebarBlock > form > input[type=reset],
-.sidebar > .sidebarBlock > form > input[type=button] {
+.newcommentForm > div > input[type=submit] {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #7B6093;
-  color: #ffffff;
+  background-color: #6699CC;
+  color: #FFFFFF;
   text-align: center;
   cursor: pointer;
-  padding: 0;
-  height: 30px;
-  line-height: 30px;
-  min-width: 64px;
+  width: auto;
+  height: auto;
 }
-.sidebar > .sidebarBlock > form > input[type=submit]:hover,
-.sidebar > .sidebarBlock > form > input[type=reset]:hover,
-.sidebar > .sidebarBlock > form > input[type=button]:hover {
-  background-color: #614c74;
+.newcommentForm > div > input[type=submit]:hover {
+  background-color: #407fbf;
 }
-.sidebar > .sidebarBlock > form > input[type=checkbox] {
-  display: inline-block;
-  margin-right: 0;
-  vertical-align: middle;
-}
-.sidebar > .sidebarBlock > form > input[type=submit],
-.sidebar > .sidebarBlock > form > input[type=reset] {
-  width: 45%;
-}
-.sidebar > .sidebarBlock > form > span {
-  display: inline-block;
-  margin: 14px 0;
-  height: 24px;
-  vertical-align: middle;
-  line-height: 24px;
-}
-.sidebar > .sidebarBlock > form .form-footer {
-  position: absolute;
-  bottom: 14px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-.sidebar > .sidebarBlock > form > input[type=text],
-.sidebar > .sidebarBlock > form > input[type=submit] {
-  display: inline-block;
-  margin: 1%;
-}
-.sidebar > .sidebarBlock > form > input[type=text] {
-  width: 60%;
-  height: 32px;
-  line-height: 32px;
-}
-.sidebar > .sidebarBlock > form > input[type=submit] {
-  width: 20%;
+.sidebar {
+  width: 30%;
+  min-width: 300px;
+  float: right;
 }
 .container {
   margin-right: 30%;
@@ -705,11 +742,50 @@ button:hover {
     padding: 0;
   }
   .book {
-    border-bottom: 1px solid #222222;
     margin: 0;
     width: 100%;
   }
   .sidebar {
     width: 100%;
+  }
+}
+@-webkit-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@-moz-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@-o-keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+@keyframes float {
+  from {
+    margin-top: 14px;
+    opacity: 0.5;
+  }
+  to {
+    margin-top: 0;
+    opacity: 1;
   }
 }

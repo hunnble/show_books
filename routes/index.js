@@ -161,22 +161,6 @@ router.get('/archive/:username', function (req, res) {
   });
 });
 
-router.post('/archive', checkLogin);
-router.post('/archive', function (req, res) {
-  if (req.body.username !== req.session.user.name) {
-    return;
-  } else if(req.body.commentId) {
-    book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
-  } else {
-    book.remove({
-      name: req.body.name,
-      bookId: req.body.bookId,
-      username: req.session.user.name
-    }, function (err) {});
-    log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
-  }
-});
-
 router.get('/book/:name', checkLogin);
 router.get('/book/:name', function (req, res) {
   res.render('book', {
@@ -189,96 +173,154 @@ router.get('/book/:name', function (req, res) {
 
 router.post('/book', checkLogin);
 router.post('/book', function (req, res) {
-  async.waterfall([
-    function (cb) {
-      book.get({
-        bookId: req.body.bookId,
-        username: req.session.user.name
-      }, function (err, _book) {
-        cb(err, _book);
+  var body = req.body;
+  if (body._method && body._method === 'delete') {
+    if (body.username !== req.session.user.name) {
+      return;
+    }
+    book.remove({
+      name: body.name,
+      bookId: body.bookId,
+      username: req.session.user.name
+    }, function (err) {});
+    log.add(req.session.user.name, new Date(), 'remove', body.name, '', function (err) {
+      return res.send({
+        success: true
       });
-    },
-    function (_book, cb) {
-      if (_book) {
-        req.flash('error', '已经收藏了此书籍');
+    });
+  } else {
+    async.waterfall([
+      function (cb) {
+        book.get({
+          bookId: body.bookId,
+          username: req.session.user.name
+        }, function (err, _book) {
+          cb(err, _book);
+        });
+      },
+      function (_book, cb) {
+        if (_book) {
+          req.flash('error', '已经收藏了此书籍');
+          return res.send({
+            success: false
+          });
+        }
+        cb(null);
+      },
+      function (cb) {
+        var op = {
+          name: body.name,
+          author: body.author || '',
+          bookId: body.bookId,
+          isbn10: body.isbn10,
+          isbn13: body.isbn13,
+          username: req.session.user.name,
+          img: body.img || ''
+        };
+        book.add(op, function (err) {
+          cb(err);
+        });
+      },
+      function (cb) {
+        log.add(req.session.user.name, new Date(), 'add', body.name, '/book/' + body.name + '/' + body.author, function (err) {
+          cb(err);
+        });
+      }
+    ], function (err) {
+      if (err) {
+        req.flash('error', '添加失败: ' + err);
         return res.send({
           success: false
         });
       }
-      cb(null);
-    },
-    function (cb) {
-      var op = {
-        name: req.body.name,
-        author: req.body.author || '',
-        bookId: req.body.bookId,
-        isbn10: req.body.isbn10,
-        isbn13: req.body.isbn13,
-        username: req.session.user.name,
-        img: req.body.img || ''
-      };
-      book.add(op, function (err) {
-        cb(err);
-      });
-    },
-    function (cb) {
-      log.add(req.session.user.name, new Date(), 'add', req.body.name, '/book/' + req.body.name + '/' + req.body.author, function (err) {
-        cb(err);
-      });
-    }
-  ], function (err) {
-    if (err) {
-      req.flash('error', '添加失败: ' + err);
-      // return;
+      req.flash('success', '添加成功');
       res.send({
-        success: false
+        success: true
       });
-    }
-    req.flash('success', '添加成功');
-    res.send({
-      success: true
     });
-  });
+  }
 });
 
-router.get('/add_comment/:name/:author', checkLogin);
-router.get('/add_comment/:name/:author', function (req, res) {
+// router.delete('/book', checkLogin);
+// router.delete('/book', function (req, res) {
+//   if (req.body.username !== req.session.user.name) {
+//     return;
+//   } else {
+//     book.remove({
+//       name: req.body.name,
+//       bookId: req.body.bookId,
+//       username: req.session.user.name
+//     }, function (err) {});
+//     log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
+//   }
+// });
+
+router.post('/comment', checkLogin);
+router.post('/comment', function (req, res) {
+  var body = req.body;
+  if (body.username !== req.session.user.name) {
+    return;
+  } else if (body._method && body._method === 'delete') {
+    book.removeComment(req.body.name, req.body.author, req.body.commentId, req.session.user.name, function (err) {});
+  }
+});
+
+router.get('/comment/:name', checkLogin);
+router.get('/comment/:name', function (req, res) {
   book.get({
     name: req.params.name,
-    author: req.params.author,
     username: req.session.user.name
   }, function (err, _book) {
     if (!_book || err) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
     }
-    res.render('add_comment', {
-      title: '评论<<' + _book.name + '>>',
+    res.render('comment', {
+      title: '笔记',
       user: req.session.user,
+      book: _book,
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
   });
 });
 
-router.post('/add_comment/:name/:author', checkLogin);
-router.post('/add_comment/:name/:author', function (req, res) {
-  if (req.body.isAjax) {
-    res.send(markdown.toHTML(req.body.comment));
-  } else {
-    book.addComment({
-      name: req.params.name,
-      author: req.params.author,
-    }, req.body.comment, req.session.user.name, function (err, _book) {
-      if (err) {
-        req.flash('error', err);
-        return res.redirect('back');
-      }
-      log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
-      req.flash('success', '评论成功');
-      res.redirect('/archive');
+router.get('/editcomment/:name', checkLogin);
+router.get('/editcomment/:name', function (req, res) {
+  book.get({
+    name: req.params.name,
+    username: req.session.user.name
+  }, function (err, _book) {
+    if (!_book || err) {
+      req.flash('error', '获取书籍信息失败');
+      return res.redirect('back');
+    }
+    // var lastComment = req.query.i ? _book.comments[parseInt(i, 10)] : '';
+    res.render('editcomment', {
+      title: '笔记',
+      user: req.session.user,
+      book: _book,
+      comments: _book.comments || [],
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
     });
-  }
+  });
+});
+
+router.post('/editcomment/:name', checkLogin);
+router.post('/editcomment/:name', function (req, res) {
+  book.addComment({
+    name: req.params.name,
+    username: req.session.user.name,
+  }, req.body.comment, function (err, _book) {
+    if (err) {
+      req.flash('error', '提交失败');
+      return res.redirect('back');
+    }
+    log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
+    req.flash('success', '提交成功');
+    res.redirect('/comment/' + encodeURI(req.params.name));
+  });
 });
 
 function checkLogin(req, res, next) {

@@ -48,7 +48,7 @@ Book.prototype.add = function (op, callback) {
     'time': new Date()
   };
 
-  if (!book['name'] || !book['author']) {
+  if (!book.name || !book.author) {
     return callback(new Error('无效的书名或作者名'));
   }
 
@@ -151,7 +151,7 @@ Book.prototype.remove = function (op, callback) {
   });
 };
 
-Book.prototype.addComment = function (op, comment, username, callback) {
+Book.prototype.addComment = function (op, comment, callback) {
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -164,7 +164,6 @@ Book.prototype.addComment = function (op, comment, username, callback) {
       });
     },
     function (collection, db, cb) {
-      op.username = username;
       collection.update(op, {
         $push: {
           'comments': {

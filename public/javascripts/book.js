@@ -22,6 +22,8 @@ function getSearch () {
  * @param bookJSON
  */
 function renderBook (bookJSON) {
+  var counter = 0;
+  var perBookDelay = 200;
   $.each(bookJSON.books, function (index, book) {
     var $wrappers = $('#books>div'),
       wrappersNum = 3,
@@ -56,7 +58,7 @@ function renderBook (bookJSON) {
       });
     });
 
-    $header.append($title, $author, $image, $addBtn);
+    $header.append($image, $title, $author, $addBtn);
     $section.append($header, $tags, $p);
 
     var $targetWrapper = $($wrappers[0]);
@@ -69,9 +71,8 @@ function renderBook (bookJSON) {
       }
     }
 
-    $targetWrapper.append($section);
-
-
+    $targetWrapper.append($section).hide().delay(counter).fadeIn(500);
+    counter += perBookDelay;
   });
 }
 
