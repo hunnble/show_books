@@ -35,6 +35,25 @@ ol,
 ul {
   list-style: none;
 }
+label input {
+  display: none;
+}
+label > input[type=checkbox]:checked + span:before {
+  content: '\2714';
+  position: absolute;
+  left: 0;
+  font-size: 21px;
+}
+label > span {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #000000;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  background-color: #F2F2F2;
+  text-align: center;
+}
 h1 {
   font-size: 225%;
   font-weight: normal;
@@ -59,11 +78,19 @@ h6 {
   font-size: 100%;
   font-weight: normal;
 }
+.text-center {
+  text-align: center;
+}
 a {
   color: #99CCFF;
   text-decoration: none;
 }
 .btn {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -162,8 +189,6 @@ a {
   width: 100%;
   background-color: #F2F2F2;
   background-image: url('../../images/lowpoly.png');
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .logs {
   font-size: 18px;
@@ -262,6 +287,11 @@ a {
 .form > input[type=submit],
 .form > input[type=reset],
 .form > input[type=button] {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -355,6 +385,11 @@ a {
 .panel > div > form > input[type=submit],
 .panel > div > form > input[type=reset],
 .panel > div > form > input[type=button] {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -411,6 +446,11 @@ a {
   width: 20%;
 }
 button {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -550,7 +590,8 @@ button:hover {
   color: #222222;
 }
 .author {
-  margin-left: 7px;
+  color: #808080;
+  text-indent: 7px;
 }
 .removeBtn {
   width: auto;
@@ -562,18 +603,48 @@ button:hover {
   position: fixed;
   top: 42px;
   right: 0;
-  padding: 12px;
-  width: 48%;
-  color: #6699CC;
 }
 .comment li {
-  margin-bottom: 70px;
+  background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
+  margin: 12px;
+  padding: 12px;
 }
-.removeComment {
+.comment .removeComment {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
+  border: 0 solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
   display: block;
-  float: right;
-  margin: 14px;
+  margin: 12px 12px 0 auto;
+  font-size: 12px;
   background-color: #6699CC;
+}
+.comment .removeComment:hover {
+  background-color: #407fbf;
+}
+.nocomment {
+  text-align: center;
+}
+.nocomment > h1,
+.nocomment > h2,
+.nocomment > h3,
+.nocomment > h4,
+.nocomment > h5,
+.nocomment > h6 {
+  color: #FFFFFF;
+  margin: 12px;
 }
 .wordHint {
   float: right;
@@ -640,6 +711,11 @@ button:hover {
   padding: 0 21px 5px;
 }
 .newcommentForm > div > input[type=submit] {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -746,6 +822,12 @@ button:hover {
     width: 100%;
   }
   .sidebar {
+    width: 100%;
+  }
+  .preview {
+    display: none;
+  }
+  .newcommentForm {
     width: 100%;
   }
 }

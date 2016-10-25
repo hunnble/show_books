@@ -26,6 +26,27 @@ form,fieldset,input,textarea,p,blockquote,th,td, button {
 ol, ul {
   list-style: none;
 }
+label {
+  input {
+    display: none;
+  }
+  >input[type=checkbox]:checked + span:before {
+    content: '\2714';
+    position: absolute;
+    left: 0;
+    font-size: 21px;
+  }
+  >span {
+    position: relative;
+    display: inline-block;
+    border: 1px solid @black;
+    height: 21px;
+    width: 21px;
+    line-height: 21px;
+    background-color: @sliver;
+    text-align: center;
+  }
+}
 
 .generate-h(6);
 .generate-h(@n, @i: 1) when (@i <= @n) {
@@ -35,6 +56,11 @@ ol, ul {
   }
   .generate-h(@n, (@i + 1));
 }
+
+.text-center {
+  text-align: center;
+}
+
 a {
   color: @lightBlue;
   text-decoration: none;
@@ -90,6 +116,11 @@ a {
   filter: none;
 }
 .btn {
+  -webkit-transform: translate(0, -7px);
+  -moz-transform: translate(0, -7px);
+  -ms-transform: translate(0, -7px);
+  -o-transform: translate(0, -7px);
+  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -187,8 +218,6 @@ a {
   width: 100%;
   background-color: @sliver;
   background-image: url('../../images/lowpoly.png');
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .logs {
@@ -256,7 +285,7 @@ a {
   >h1, >h2, >h3, >h4, >h5, >h6 {
     color: @mainColor;
   }
-  > input {
+  >input {
     .borderBox();
     margin: 14px auto;
     height: 42px;
@@ -265,7 +294,6 @@ a {
       display: block;
       border: 2px solid @sliver;
       border-radius: 7px;
-      // min-width: 200px;
       width: 100%;
       text-indent: 7px;
       outline: none;
@@ -286,7 +314,7 @@ a {
       width: 45%;
     }
   }
-  > span {
+  >span {
     display: inline-block;
     margin: 14px 0;
     height: 24px;
@@ -450,7 +478,8 @@ button {
 }
 
 .author {
-  margin-left: 7px;
+  color: lighten(@black, 50%);
+  text-indent: 7px;
 }
 
 .removeBtn {
@@ -467,19 +496,26 @@ button {
   position: fixed;
   top: 42px;
   right: 0;
-  padding: 12px;
-  width: 48%;
-  color: @mainColor;
   li {
-    margin-bottom: 70px;
+    .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.5));
+    margin: 12px;
+    padding: 12px;
+  }
+  .removeComment {
+    .btn();
+    display: block;
+    margin: 12px 12px 0 auto;
+    font-size: 12px;
+    background-color: @mainColor;
   }
 }
 
-.removeComment {
-  display: block;
-  float: right;
-  margin: 14px;
-  background-color: @mainColor;
+.nocomment {
+  .text-center();
+  >h1, >h2, >h3, >h4, >h5, >h6 {
+    color: @white;
+    margin: 12px;
+  }
 }
 
 .wordHint {
@@ -650,6 +686,12 @@ button {
     width: 100%;
   }
   .sidebar {
+    width: 100%;
+  }
+  .preview {
+    display: none;
+  }
+  .newcommentForm {
     width: 100%;
   }
 }

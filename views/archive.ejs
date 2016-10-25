@@ -4,11 +4,13 @@
     <% if (book.bookId) { %>
       <section class="book">
         <header>
-          <% if (book.img) { %>
-            <a class="btn" href="/book/<%= book.name %>">
+          <a class="btn" href="/book/<%= book.name %>">
+            <% if (book.img) { %>
               <img class="bookImg" src="<%= book.img %>" alt="">
-            </a>
-          <% } %>
+            <% } else { %>
+              <img class="bookImg" src="../images/nobook.png" alt="">
+            <% } %>
+          </a>
         </header>
         <div class="bookBtns">
           <a class="btn" href="/book/<%= book.name %>">

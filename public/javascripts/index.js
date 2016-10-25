@@ -45,6 +45,10 @@ $(document).ready(function () {
 	/**
 	 * comment
 	 */
+	$('.commentContent').each(function () {
+		$(this).html(markdown.toHTML($(this).html().replace(/\n|\r|\r\n/g, '\n\n')));
+	});
+
   $('.removeComment').click(function () {
     var $removeItem = $(this).parent();
 
@@ -60,13 +64,11 @@ $(document).ready(function () {
     }
   });
 
-	// $('.book')
-	// 	.mouseenter(function () {
-	// 		$(this).find('.bookBtns').stop(true, true).fadeIn(300);
-	// 	})
-	// 	.mouseleave(function () {
-	// 		$(this).find('.bookBtns').stop(true, true).fadeOut(300);
-	// 	});
+	$('.createCommentBtn').click(function () {
+		var href = window.location.href;
+
+		window.location.href = href.replace('comment', 'editcomment');
+	});
 
   /**
    * editcomment
@@ -74,13 +76,6 @@ $(document).ready(function () {
   $('textarea[name=comment]').bind('paste cut keydown keyup focus blur', function () {
     $('.wordNumber').html($(this).val().replace(/\n|\r|\r\n/g, '').length);
 		$('.preview').html(markdown.toHTML($(this).val().replace(/\n|\r|\r\n/g, '\n\n')));
-
-    // $.post(window.location.href, {
-    //   'isAjax': true,
-    //   'comment': $(this).val().replace(/\n|\r|\r\n/g, '\n\n')
-    // }, function (resTxt) {
-    //   $('.preview').html(resTxt);
-    // });
   });
 
 });

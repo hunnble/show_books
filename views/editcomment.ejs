@@ -1,12 +1,17 @@
 <%- include header -%>
 <form method="post" class="newcommentForm">
-    <textarea name="comment" placeholder="书评" required></textarea>
-    <div>
-      <input type="submit" value="发布笔记" />
-    </div>
+  <textarea name="comment" placeholder="此处输入" required></textarea>
+  <div>
+    <label>
+      <input type="checkbox" name="isPrivate" />
+      <span></span>
+    </label>
+    <label for="isPrivate">不公开</label>
+    <input type="submit" value="发布笔记" />
+  </div>
 </form>
 <p class="wordHint">
-    预览(支持markdown格式文本,已输入<span class="wordNumber">0</span>字)
+  预览(支持markdown格式文本,已输入<span class="wordNumber">0</span>字)
 </p>
 <div class="preview markdown-body"></div>
 <script>

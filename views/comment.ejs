@@ -1,13 +1,23 @@
 <%- include header -%>
-<ul class="comment">
-  <% book.comments.forEach(function (comment) { %>
-  <li>
-    <div class="commentContent"><%- comment.comment %></div>
-    <% if (book.username === user.name) { %>
-      <button class="removeBtn removeComment">删除此笔记</button>
-      <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
-    <% } %>
-  </li>
-  <% }) %>
-</ul>
+  <% if (book.comments.length > 0) { %>
+    <% book.comments.forEach(function (comment) { %>
+      <ul class="comment">
+        <li>
+          <div class="commentContent"><%- comment.comment %></div>
+          <% if (book.username === user.name) { %>
+            <button class="removeBtn removeComment">删除笔记</button>
+            <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
+          <% } %>
+        </li>
+      </ul>
+    <% }) %>
+    <script>
+      <%- include ../node_modules/markdown/lib/markdown.js %>
+    </script>
+  <% } else { %>
+    <div class="center nocomment">
+      <h4>你还没有写过这本书的笔记</h4>
+      <button type="button" class="createCommentBtn">创建笔记</button>
+    </div>
+  <% } %>
 <%- include footer -%>
