@@ -21,7 +21,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
 form,fieldset,input,textarea,p,blockquote,th,td, button {
   padding: 0;
   margin: 0;
-  font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 ol, ul {
   list-style: none;
@@ -34,15 +34,20 @@ label {
     content: '\2714';
     position: absolute;
     left: 0;
-    font-size: 21px;
+    font-size: 16px;
   }
   >span {
+    -webkit-transform: translate(0, 3px);
+    -moz-transform: translate(0, 3px);
+    -ms-transform: translate(0, 3px);
+    -o-transform: translate(0, 3px);
+    transform: translate(0, 3px);
     position: relative;
     display: inline-block;
     border: 1px solid @black;
-    height: 21px;
-    width: 21px;
-    line-height: 21px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
     background-color: @sliver;
     text-align: center;
   }
@@ -116,11 +121,11 @@ a {
   filter: none;
 }
 .btn {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
+  // -webkit-transform: translate(0, -7px);
+  // -moz-transform: translate(0, -7px);
+  // -ms-transform: translate(0, -7px);
+  // -o-transform: translate(0, -7px);
+  // transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -389,12 +394,14 @@ button {
     }
     >header {
       .bookTitle {
+        display: block;
         margin-right: 12px;
-        font-size: 32px;
+        font-size: 21px;
         color: @darkGrey;
         text-decoration: none;
       }
       .bookAuthor {
+        display: block;
         font-size: 12px;
         color: @darkGrey;
       }
@@ -402,19 +409,34 @@ button {
         float: right;
         margin: 3px 14px;
       }
-      .bookBtn {
-        margin-left: 12px;
-        padding: 0 3px;
+      .bookBtn, .addBtn {
+        .btn();
+        border: 1px solid @mainColor;
+        margin: 6px 0 6px 6px;
+        padding: 3px;
+        min-width: 42px;
+        height: 16px;
+        line-height: 16px;
+        font-size: 12px;
+        background-color: transparent;
+        color: @mainColor;
+        &:hover {
+          color: @white;
+        }
       }
     }
+    .bookTags {
+      // margin-right: 110px;
+      overflow: hidden;
+    }
     .bookTag {
+      float: left;
+      border: 1px solid @darkGrey;
       width: auto;
-      padding: 3px 7px;
-      margin: 7px;
-      line-height: 28px;
+      padding: 3px;
+      margin: 3px;
       border-radius: 0;
       font-size: 12px;
-      background-color: darken(@white, 10%);
       color: @darkGrey;
       cursor: pointer;
     }
@@ -665,16 +687,6 @@ button {
         .bookBtn {
           margin-left: 0;
         }
-      }
-      .bookTags {
-        margin-right: 50%;
-      }
-      .bookTag {
-        width: auto;
-        margin: 0 3px;
-        padding: 0 3px;
-        word-wrap: normal;
-        word-break: normal;
       }
     }
   }

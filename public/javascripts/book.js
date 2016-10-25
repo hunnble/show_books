@@ -29,13 +29,13 @@ function renderBook (bookJSON) {
       wrappersNum = 3,
       $section = $('<section></section>'),
       $header = $('<header></header>'),
-      $title = $('<a class="bookTitle" href="' + book.alt + '" target="_blank">' + book.title + '</a>'),
+      $title = $('<p class="bookTitle">' + book.title + '</a>'),
       $author = $('<span class="bookAuthor">作者: ' + (book.author[0] || '无') + '</span>');
       $image = $('<img src="' + book.image + '" />'),
-      $p = $('<p>' + book.summary + '</p>'),
+      $p = $('<p>' + book.summary.replace(/\n/g, '<br />') + '</p>'),
       $tags = $('<div class="bookTags"></div>'),
-      $doubanBtn = $('<button type="button" class="bookBtn doubanBtn">前往豆瓣</button>'),
-      $addBtn = $('<button type="button" class="bookBtn addBtn">收藏本书</button>');
+      $doubanBtn = $('<a class="bookBtn" href="' + book.alt + '" target="_blank><button type="button" class="doubanBtn">豆瓣</button></a>'),
+      $addBtn = $('<a href="#" class="addBtn">收藏</a>');
 
     $.each(book.tags, function (index, tag) {
       $tags.append('<span class="bookTag">' + tag.name + '</span>');
@@ -58,7 +58,7 @@ function renderBook (bookJSON) {
       });
     });
 
-    $header.append($image, $title, $author, $addBtn);
+    $header.append($image, $title, $author, $doubanBtn, $addBtn);
     $section.append($header, $tags, $p);
 
     var $targetWrapper = $($wrappers[0]);

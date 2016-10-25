@@ -1,6 +1,5 @@
 var async = require('async');
 var crypto = require('crypto');
-
 var mongodb = require('./db');
 var url = require('../settings').url;
 var USERNAME = require('../settings').USERNAME;
@@ -35,15 +34,11 @@ User.prototype.get = function (name, callback) {
   });
 };
 
-User.prototype.add = function (name, password, email, callback) {
-  var email_md5 = crypto.createHash('md5').update(email.toLowerCase()).digest('hex'),
-    head = 'http://www.gravatar.com/avatar/' + email_md5 + '?s=80',
-    user = {
-      'name': name.trim(),
-      'password': crypto.createHash('md5').update(password).digest('hex'),
-      'email': email_md5,
-      'head': head
-    };
+User.prototype.add = function (op, callback) {
+  var email_md5 = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+
+  op.img = 'http://www.gravatar.com/avatar/' + email_md5 + '?s=80';
+  op.password = crypto.createHash('md5').update(op.password).digest('hex');
 
   async.waterfall([
     function (cb) {
@@ -57,7 +52,7 @@ User.prototype.add = function (name, password, email, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.insert(user, {
+      collection.insert(op, {
         safe: true
       }, function (err, user) {
         cb(err, user, db);
@@ -72,7 +67,9 @@ User.prototype.add = function (name, password, email, callback) {
   });
 };
 
-User.prototype.remove = function (name, password, email, callback) {
+User.prototype.remove = function (op, callback) {
+  op.password = crypto.createHash('md5').update(op.password).digest('hex');
+
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -85,11 +82,7 @@ User.prototype.remove = function (name, password, email, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.remove({
-        'name': name,
-        'password': crypto.createHash('md5').update(password).digest('hex'),
-        'email': email
-      }, {
+      collection.remove(op, {
         w: 1
       }, function (err) {
         cb(err, db);
@@ -104,7 +97,9 @@ User.prototype.remove = function (name, password, email, callback) {
   });
 };
 
-User.prototype.update = function (name, password, email, callback) {
+User.prototype.update = function (op, callback) {
+  op.password = crypto.createHash('md5').update(op.password).digest('hex');
+
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -118,12 +113,9 @@ User.prototype.update = function (name, password, email, callback) {
     },
     function (collection, db, cb) {
       collection.update({
-        'name': name,
-        'email': email
+        'name': op.name
       }, {
-        $set: {
-          'password': crypto.createHash('md5').update(password).digest('hex')
-        }
+        $set: op
       }, function (err) {
         cb(err, db);
       });

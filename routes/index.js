@@ -8,11 +8,13 @@ var markdown = require('markdown').markdown;
 
 var Book = require('../models/book.js');
 var User = require('../models/user.js');
-var Log  = require('../models/log.js');
+var Log = require('../models/log.js');
+var BooksRank = require('../models/booksRank.js');
 
 var book = new Book();
 var user = new User();
 var log  = new Log();
+var booksRank = new BooksRank();
 
 router.get('/', function (req, res) {
   res.render('index', {
@@ -64,14 +66,14 @@ router.post('/register', function (req, res) {
       req.flash('error', '两次输入的密码不一致');
       return res.redirect('/register');
     }
-    
+
     var verification = validateRegister(req.body.name, req.body.password, req.body.password2);
 
     if (!verification.success) {
       req.flash('error', verification.errMsg);
       return res.redirect('/register');
     } else {
-      user.add(req.body.name, req.body.password, req.body.email, function (err) {
+      user.add(req.body, function (err) {
         if (err) {
           req.flash('error', '注册失败，请重试');
           return res.redirect('/register');
@@ -132,7 +134,16 @@ router.get('/search', function (req, res) {
 
 router.post('/search', checkLogin);
 router.post('/search', function (req, res) {
-  res.redirect('/book/' + encodeURI(req.body.name));
+  var body = req.body;
+
+  booksRank.update({
+    'name': body.name,
+    'searchTimes': true
+  }, function (err) {
+    if (!err) {
+      res.redirect('/book/' + encodeURI(req.body.name));
+    }
+  });
 });
 
 router.get('/archive', checkLogin);
@@ -145,7 +156,7 @@ router.get('/archive/:username', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
   book.getAll(req.params.username, page, function (err, books, total) {
-    if (!books) {
+    if (!books || err) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
     }
@@ -185,12 +196,24 @@ router.post('/book', function (req, res) {
       name: body.name,
       bookId: body.bookId,
       username: req.session.user.name
-    }, function (err) {});
-    log.add(req.session.user.name, new Date(), 'remove', body.name, '', function (err) {
-      return res.send({
-        success: true
-      });
+    }, function (err) {
+      if (err) {
+        return res.send({
+          success: false
+        });
+      }
     });
+    // log.add(req.session.user.name, new Date(), 'remove', body.name, '', function (err) {
+    //   if (!err) {
+    //     return res.send({
+    //       success: true
+    //     });
+    //   } else {
+    //     return res.send({
+    //       success: false
+    //     });
+    //   }
+    // });
   } else {
     async.waterfall([
       function (cb) {
@@ -226,7 +249,13 @@ router.post('/book', function (req, res) {
         });
       },
       function (cb) {
-        log.add(req.session.user.name, new Date(), 'add', body.name, '/book/' + body.name + '/' + body.author, function (err) {
+        // log.add(req.session.user.name, new Date(), 'add', body.name, '/book/' + body.name + '/' + body.author, function (err) {
+        //   cb(err);
+        // });
+        booksRank.update({
+          'name': body.name,
+          'collectTimes': true
+        }, function (err) {
           cb(err);
         });
       }
@@ -255,7 +284,7 @@ router.post('/book', function (req, res) {
 //       bookId: req.body.bookId,
 //       username: req.session.user.name
 //     }, function (err) {});
-//     log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
+    // log.add(req.session.user.name, new Date(), 'remove', req.body.name, '', function (err) {});
 //   }
 // });
 
@@ -334,7 +363,7 @@ router.post('/editcomment/:name', function (req, res) {
       req.flash('error', '提交失败');
       return res.redirect('back');
     }
-    log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
+    // log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
     req.flash('success', '提交成功');
     res.redirect('/comment/' + encodeURI(req.params.name));
   });

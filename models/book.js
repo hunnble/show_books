@@ -168,7 +168,8 @@ Book.prototype.addComment = function (op, comment, callback) {
         $push: {
           'comments': {
             '_id': (new Date()).getTime(),
-            'comment': comment
+            'comment': comment,
+            'isPrivate': op.isPrivate || false
           }
         }
       }, function (err, result) {

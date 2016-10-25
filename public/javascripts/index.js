@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	/**
-	 * nav
+	 * all
 	 */
 	$('.navSwitcher').click(function () {
 		var $navSwitcher = $('.navSwitcher');
@@ -28,7 +28,7 @@ $(document).ready(function () {
 	$('.removeBook').click(function () {
     var $removeItem = $(this).parent().parent();
 
-    if (confirm('确认删除这本书')) {
+    if (confirm('确认删除?')) {
 			$.post('/book', {
 				'_method': 'delete',
 				'username': window.location.href.split('/').reverse()[0],
@@ -52,7 +52,7 @@ $(document).ready(function () {
   $('.removeComment').click(function () {
     var $removeItem = $(this).parent();
 
-    if (confirm('确认删除这条笔记?')) {
+    if (confirm('确认删除?')) {
 			$.post('/comment', {
 				'_method': 'delete',
         'name': decodeURI(window.location.href.split('/').reverse()[0]),

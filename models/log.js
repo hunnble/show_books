@@ -1,5 +1,4 @@
 var async = require('async');
-
 var mongodb = require('./db');
 var url = require('../settings').url;
 var LOGNAME = require('../settings').LOGNAME;

@@ -29,7 +29,7 @@ td,
 button {
   padding: 0;
   margin: 0;
-  font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 ol,
 ul {
@@ -42,15 +42,20 @@ label > input[type=checkbox]:checked + span:before {
   content: '\2714';
   position: absolute;
   left: 0;
-  font-size: 21px;
+  font-size: 16px;
 }
 label > span {
+  -webkit-transform: translate(0, 3px);
+  -moz-transform: translate(0, 3px);
+  -ms-transform: translate(0, 3px);
+  -o-transform: translate(0, 3px);
+  transform: translate(0, 3px);
   position: relative;
   display: inline-block;
   border: 1px solid #000000;
-  height: 21px;
-  width: 21px;
-  line-height: 21px;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
   background-color: #F2F2F2;
   text-align: center;
 }
@@ -86,11 +91,6 @@ a {
   text-decoration: none;
 }
 .btn {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -287,11 +287,6 @@ a {
 .form > input[type=submit],
 .form > input[type=reset],
 .form > input[type=button] {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -385,11 +380,6 @@ a {
 .panel > div > form > input[type=submit],
 .panel > div > form > input[type=reset],
 .panel > div > form > input[type=button] {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -446,11 +436,6 @@ a {
   width: 20%;
 }
 button {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -494,12 +479,14 @@ button:hover {
   background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
 }
 #books > div > section > header .bookTitle {
+  display: block;
   margin-right: 12px;
-  font-size: 32px;
+  font-size: 21px;
   color: #222222;
   text-decoration: none;
 }
 #books > div > section > header .bookAuthor {
+  display: block;
   font-size: 12px;
   color: #222222;
 }
@@ -507,18 +494,46 @@ button:hover {
   float: right;
   margin: 3px 14px;
 }
-#books > div > section > header .bookBtn {
-  margin-left: 12px;
-  padding: 0 3px;
+#books > div > section > header .bookBtn,
+#books > div > section > header .addBtn {
+  border: 0 solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #6699CC;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #6699CC;
+  margin: 6px 0 6px 6px;
+  padding: 3px;
+  min-width: 42px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 12px;
+  background-color: transparent;
+  color: #6699CC;
+}
+#books > div > section > header .bookBtn:hover,
+#books > div > section > header .addBtn:hover {
+  background-color: #407fbf;
+}
+#books > div > section > header .bookBtn:hover,
+#books > div > section > header .addBtn:hover {
+  color: #FFFFFF;
+}
+#books > div > section .bookTags {
+  overflow: hidden;
 }
 #books > div > section .bookTag {
+  float: left;
+  border: 1px solid #222222;
   width: auto;
-  padding: 3px 7px;
-  margin: 7px;
-  line-height: 28px;
+  padding: 3px;
+  margin: 3px;
   border-radius: 0;
   font-size: 12px;
-  background-color: #e6e6e6;
   color: #222222;
   cursor: pointer;
 }
@@ -613,11 +628,6 @@ button:hover {
   padding: 12px;
 }
 .comment .removeComment {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -711,11 +721,6 @@ button:hover {
   padding: 0 21px 5px;
 }
 .newcommentForm > div > input[type=submit] {
-  -webkit-transform: translate(0, -7px);
-  -moz-transform: translate(0, -7px);
-  -ms-transform: translate(0, -7px);
-  -o-transform: translate(0, -7px);
-  transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -803,16 +808,6 @@ button:hover {
   }
   #books > div > section > header .bookBtn {
     margin-left: 0;
-  }
-  #books > div > section .bookTags {
-    margin-right: 50%;
-  }
-  #books > div > section .bookTag {
-    width: auto;
-    margin: 0 3px;
-    padding: 0 3px;
-    word-wrap: normal;
-    word-break: normal;
   }
   .booksWrapper {
     padding: 0;
