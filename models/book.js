@@ -79,8 +79,14 @@ Book.prototype.add = function (op, callback) {
   });
 };
 
-Book.prototype.getAll = function (username, page, callback) {
+Book.prototype.getAll = function (op, page, callback) {
   var self = this;
+  var username = op.username;
+  var con = {};
+  con.skip = op.limit ? 0 : self.perPage * (page - 1);
+  if (op.limit) {
+    con.limit = op.limit;
+  }
 
   async.waterfall([
     function (cb) {
@@ -99,16 +105,16 @@ Book.prototype.getAll = function (username, page, callback) {
       }, function (err, total) {
         collection.find({
           'username': username
-        },{
-          'skip': (page - 1) * self.perPage,
-          'limit': self.perPage
-        }).sort({
+        }, con).sort({
           'time': -1
         }).toArray(function (err, books) {
           books.forEach(function (book) {
-            book.comments.forEach(function (comment, index) {
+            book.comments && book.comments.forEach(function (comment, index) {
               book.comments[index].comment = markdown.toHTML(comment.comment);
             });
+            if (!book.img) {
+              delete book.img;
+            }
           });
           cb(err, [books, total], db);
         });

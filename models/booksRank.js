@@ -6,6 +6,7 @@ var BOOKSRANK = require('../settings').BOOKSRANK;
 function BooksRank () {}
 
 BooksRank.prototype.getAll = function (op, callback) {
+  op.key = op.key || 'collectTimes';
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -18,19 +19,30 @@ BooksRank.prototype.getAll = function (op, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.find({}, function (err, result) {
-        cb(err, result, db);
+      collection.find({}, {
+        'limit': 10
+      }).toArray(function (err, books) {
+        cb(err, books, db);
       });
+    },
+    function (books, db, cb) {
+      books = books.map(function (book) {
+        if (!book[op.key]) {
+          book[op.key] = 0;
+        }
+        return book;
+      }).sort(function (book1, book2) {
+        return book2[op.key] - book1[op.key];
+      });
+      cb(null, books, db);
     }
-  ], function (err, result, db) {
+  ], function (err, books, db) {
     db && db.close();
     if (err) {
       return callback(err);
     }
-    result = result.sort(function (v1, v2) {
-      return v2[op.key] - v1[op.key];
-    });
-    callback(err, result);
+
+    callback(err, books);
   });
 };
 
@@ -64,7 +76,6 @@ BooksRank.prototype.update = function (op, callback) {
         upsert: true,
         safe: false
       }, function (err) {
-        console.log(err);
         cb(err, db);
       });
     }

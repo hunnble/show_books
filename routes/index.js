@@ -1,28 +1,73 @@
 var express = require('express');
-var router = express.Router();
-
 var async = require('async');
 var rqst = require('superagent');
 var crypto = require('crypto');
 var markdown = require('markdown').markdown;
-
 var Book = require('../models/book.js');
 var User = require('../models/user.js');
 var Log = require('../models/log.js');
 var BooksRank = require('../models/booksRank.js');
 
+var router = express.Router();
 var book = new Book();
 var user = new User();
 var log  = new Log();
 var booksRank = new BooksRank();
 
 router.get('/', function (req, res) {
-  res.render('index', {
-    title: '主页',
-    user: req.session.user,
-    success: req.flash('success').toString(),
-    error: req.flash('error').toString()
+  async.parallel([
+    function (cb) {
+      booksRank.getAll({
+        'key': 'collectTimes'
+      }, function (err, books) {
+        cb(err, books);
+      });
+    },
+    function (cb) {
+      booksRank.getAll({
+        'key': 'searchTimes'
+      }, function (err, books) {
+        cb(err, books);
+      });
+    },
+    function (cb) {
+      if (!req.session.user) {
+        return cb(null, []);
+      }
+      book.getAll({
+        username: req.session.user.name,
+        limit: 40
+      }, 1, function (err, books) {
+        var books = books.map(function (book) {
+          return {
+            name: book.name,
+            img: book.img
+          };
+        });
+
+        if (books.length > 20) {
+          books = books.slice(0, 20);
+        }
+        cb(null, books);
+      });
+    }
+  ], function (err, books) {
+    if (err) {
+      return res.send({
+        success: false
+      });
+    }
+    res.render('index', {
+      title: '主页',
+      user: req.session.user,
+      mostCollectedBooks: books[0],
+      mostSearchedBooks: books[1],
+      bookImgs: books[2],
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
   });
+
 });
 
 // router.get('/logs', function(req, res) {
@@ -155,7 +200,9 @@ router.get('/archive/:username', checkLogin);
 router.get('/archive/:username', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
-  book.getAll(req.params.username, page, function (err, books, total) {
+  book.getAll({
+    username: req.params.username
+  }, page, function (err, books, total) {
     if (!books || err) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
@@ -202,18 +249,10 @@ router.post('/book', function (req, res) {
           success: false
         });
       }
+      return res.send({
+        success: true
+      });
     });
-    // log.add(req.session.user.name, new Date(), 'remove', body.name, '', function (err) {
-    //   if (!err) {
-    //     return res.send({
-    //       success: true
-    //     });
-    //   } else {
-    //     return res.send({
-    //       success: false
-    //     });
-    //   }
-    // });
   } else {
     async.waterfall([
       function (cb) {
