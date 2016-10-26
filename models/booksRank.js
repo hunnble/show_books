@@ -19,9 +19,7 @@ BooksRank.prototype.getAll = function (op, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.find({}, {
-        'limit': 10
-      }).toArray(function (err, books) {
+      collection.find({}).toArray(function (err, books) {
         cb(err, books, db);
       });
     },
@@ -33,7 +31,7 @@ BooksRank.prototype.getAll = function (op, callback) {
         return book;
       }).sort(function (book1, book2) {
         return book2[op.key] - book1[op.key];
-      });
+      }).slice(0, Math.min(10, books.length));
       cb(null, books, db);
     }
   ], function (err, books, db) {

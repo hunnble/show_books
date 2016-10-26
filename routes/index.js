@@ -37,6 +37,11 @@ router.get('/', function (req, res) {
       }, function (err, books) {
         cb(err, books);
       });
+    },
+    function (cb) {
+      book.getAll({}, function (err, books) {
+        cb(err, books);
+      });
     }
   ], function (err, books) {
     if (err) {
@@ -49,6 +54,7 @@ router.get('/', function (req, res) {
       user: req.session.user,
       mostCollectedBooks: books[0],
       mostSearchedBooks: books[1],
+      books: books[2],
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
@@ -186,7 +192,7 @@ router.get('/archive/:username', checkLogin);
 router.get('/archive/:username', function (req, res) {
   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
 
-  book.getAll({
+  book.getUserAll({
     username: req.params.username
   }, page, function (err, books, total) {
     if (!books || err) {
@@ -259,14 +265,21 @@ router.post('/book', function (req, res) {
         cb(null);
       },
       function (cb) {
+        user.get(req.session.user.name, function (err, _user) {
+          cb(err, _user);
+        });
+      },
+      function (_user, cb) {
         var op = {
           name: body.name,
           author: body.author || '',
           bookId: body.bookId,
           isbn10: body.isbn10,
           isbn13: body.isbn13,
-          username: req.session.user.name,
-          img: body.img || ''
+          summary: body.summary,
+          username: _user.name,
+          img: body.img || '',
+          userhead: _user.head
         };
 
         book.add(op, function (err) {
@@ -310,11 +323,11 @@ router.post('/book', function (req, res) {
 //   }
 // });
 
-router.get('/comment/:name', checkLogin);
-router.get('/comment/:name', function (req, res) {
+router.get('/comment/:username/:name', checkLogin);
+router.get('/comment/:username/:name', function (req, res) {
   book.get({
     name: req.params.name,
-    username: req.session.user.name
+    username: req.params.username
   }, function (err, _book) {
     if (!_book || err) {
       req.flash('error', '获取书籍信息失败');
@@ -353,8 +366,11 @@ router.post('/comment', function (req, res) {
   }
 });
 
-router.get('/editcomment/:name', checkLogin);
-router.get('/editcomment/:name', function (req, res) {
+router.get('/editcomment/:username/:name', checkLogin);
+router.get('/editcomment/:username/:name', function (req, res) {
+  if (req.params.username !== req.session.user.name) {
+    return res.redirect('/editcomment/' + req.session.user.name + '/' + req.params.name);
+  }
   book.get({
     name: req.params.name,
     username: req.session.user.name
@@ -374,10 +390,10 @@ router.get('/editcomment/:name', function (req, res) {
   });
 });
 
-router.post('/editcomment/:name', checkLogin);
-router.post('/editcomment/:name', function (req, res) {
+router.post('/editcomment/:username/:name', checkLogin);
+router.post('/editcomment/:username/:name', function (req, res) {
   var body = req.body;
-  
+
   book.addComment({
     name: req.params.name,
     username: req.session.user.name,
@@ -390,7 +406,7 @@ router.post('/editcomment/:name', function (req, res) {
       return res.redirect('back');
     }
     req.flash('success', '提交成功');
-    res.redirect('/comment/' + encodeURI(req.params.name));
+    res.redirect('/comment/' + req.session.user.name + '/' + encodeURI(req.params.name));
   });
 });
 

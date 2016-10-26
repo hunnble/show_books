@@ -23,28 +23,49 @@
       </div>
     </section>
   <% } %>
+  <section class="panel">
+    <header>最多收藏图书top10</header>
+    <div>
+      <ul class="booksRankCollect booksRank">
+        <% mostCollectedBooks.forEach(function (book) { %>
+          <li>
+            <a href="/book/<%= book.name %>">
+              <%= book.name %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </section>
+  <section class="panel">
+    <header>最热关键词top10</header>
+    <div>
+      <ul class="booksRankCollect booksRank">
+        <% mostSearchedBooks.forEach(function (book) { %>
+          <li>
+            <a href="/book/<%= book.name %>">
+              <%= book.name %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </section>
 </aside>
 <div class="container">
-
-  <ul class="booksRankCollect booksRank">
-    <h4>最多收藏图书top10</h4>
-    <% mostCollectedBooks.forEach(function (book) { %>
+  <ul>
+    <% books.forEach(function (book) { %>
       <li>
-        <a href="/book/<%= book.name %>"><%= book.name %></a>
-        <span class="rankValue">
-          <%= book.collectTimes %>
-        </span>
-      </li>
-    <% }) %>
-  </ul>
-  <ul class="booksRankSearch booksRank">
-    <h4>最热关键词top10</h4>
-    <% mostSearchedBooks.forEach(function (book) { %>
-      <li>
-        <a href="/book/<%= book.name %>"><%= book.name %></a>
-        <span class="rankValue">
-          <%= book.searchTimes %>
-        </span>
+        <a href="/profile/<%= book.username %>">
+          <img class="avatar" src="<%= book.userhead %>" alt="" title="<%= book.username %>" />
+        </a>
+        <section>
+          <header>
+            <a href="/comment/<%= book.username %>/<%= book.name %>"><h4 class="bookTitle"><%= book.name %></h4></a>
+            <span class="bookAuthor"><%= book.author %></span>
+          </header>
+          <div><%= book.summary %></div>
+        </section>
       </li>
     <% }) %>
   </ul>

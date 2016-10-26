@@ -24,10 +24,19 @@ function getSearch () {
 function renderBook (bookJSON) {
   var counter = 0;
   var perBookDelay = 200;
+  var $wrappers = $('#books>div');
+  var wrappersNum = Math.min($wrappers.length, bookJSON.books.length);
+
+  if (bookJSON.books.length < $wrappers.length) {
+    var $wrapper = $('#books>div:eq(0)');
+    $wrapper.css('width', '100%');
+    $wrappers = [$wrapper];
+  }
+
   $.each(bookJSON.books, function (index, book) {
-    var $wrappers = $('#books>div'),
-      wrappersNum = 3,
-      $section = $('<section></section>'),
+    // var $wrappers = $('#books>div'),
+    //   wrappersNum = 3,
+    var $section = $('<section></section>'),
       $header = $('<header></header>'),
       $title = $('<p class="bookTitle">' + book.title + '</a>'),
       $author = $('<span class="bookAuthor">作者: ' + (book.author[0] || '无') + '</span>');
@@ -44,11 +53,12 @@ function renderBook (bookJSON) {
     $addBtn.click(function () {
       $.post('/book', {
         bookId: book.id,
-        isbn10: book.isbn10,
-        isbn13: book.isbn13,
+        isbn10: book.isbn10 || '',
+        isbn13: book.isbn13 || '',
         name: book.title,
         author: book.author[0] || '',
-        img: book.image || ''
+        img: book.image || '',
+        summary: book.summary || ''
       }, function (result) {
         if (result.success) {
           window.location.replace('/archive');

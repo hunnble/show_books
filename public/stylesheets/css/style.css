@@ -90,19 +90,30 @@ a {
   color: #000000;
   text-decoration: none;
 }
-.btn {
+.btn-sm {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
-  text-align: center;
   cursor: pointer;
+  border: 1px solid #3399CC;
+  margin: 6px 0 6px 6px;
+  padding: 3px;
+  min-width: 42px;
+  line-height: 16px;
+  font-size: 12px;
+  background-color: #FFFFFF;
+  text-align: center;
+  color: #3399CC;
 }
-.btn:hover {
-  background-color: #0f87e9;
+.btn-sm:hover {
+  background-color: #297aa3;
+}
+.btn-sm:hover {
+  background-color: #add6eb;
 }
 .success {
   color: #99FF66;
@@ -143,7 +154,7 @@ a {
   z-index: 9;
   width: 100%;
   height: 50px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   opacity: 1;
 }
 .nav > ul {
@@ -165,7 +176,7 @@ a {
   background-color: #FFFFFF;
 }
 .nav > ul > li:hover > a {
-  color: #399ff2;
+  color: #3399CC;
 }
 .nav > ul > li > a {
   display: inline-block;
@@ -211,7 +222,7 @@ a {
 .form > h4,
 .form > h5,
 .form > h6 {
-  color: #399ff2;
+  color: #3399CC;
 }
 .form > input {
   -webkit-box-sizing: border-box;
@@ -238,7 +249,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -250,7 +261,7 @@ a {
 .form > input[type=submit]:hover,
 .form > input[type=reset]:hover,
 .form > input[type=button]:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 .form > input[type=checkbox] {
   display: inline-block;
@@ -277,14 +288,11 @@ a {
 }
 .panel {
   margin: 12px;
-  border-radius: 5px;
   background-color: #FFFFFF;
 }
 .panel > header {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
   height: 32px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   line-height: 32px;
   text-indent: 12px;
   color: #FFFFFF;
@@ -304,7 +312,7 @@ a {
 .panel > div > form > h4,
 .panel > div > form > h5,
 .panel > div > form > h6 {
-  color: #399ff2;
+  color: #3399CC;
 }
 .panel > div > form > input {
   -webkit-box-sizing: border-box;
@@ -331,7 +339,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -343,7 +351,7 @@ a {
 .panel > div > form > input[type=submit]:hover,
 .panel > div > form > input[type=reset]:hover,
 .panel > div > form > input[type=button]:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 .panel > div > form > input[type=checkbox] {
   display: inline-block;
@@ -381,19 +389,23 @@ a {
 .panel > div > form > input[type=submit] {
   width: 20%;
 }
+.panel a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 button {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 button:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 .userBooks {
   border-radius: 5px;
@@ -406,8 +418,6 @@ button:hover {
 }
 .booksRank {
   border-radius: 5px;
-  margin: 12px;
-  padding: 12px;
   background-color: #FFFFFF;
 }
 .booksRank > li {
@@ -421,14 +431,26 @@ button:hover {
   -ms-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
-  margin: 6px;
-  padding: 6px;
+  margin: 3px;
+  padding: 3px;
+}
+.booksRank > li > span {
+  margin-right: 6px;
 }
 .booksRank > li > a:hover {
   text-decoration: underline;
 }
-.booksRank > li > .rankValue {
-  float: right;
+.bookTitle {
+  display: block;
+  margin-right: 12px;
+  font-size: 21px;
+  color: #222222;
+  text-decoration: none;
+}
+.bookAuthor {
+  display: block;
+  font-size: 12px;
+  color: #222222;
 }
 #books > div {
   -webkit-box-sizing: border-box;
@@ -459,18 +481,6 @@ button:hover {
   background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
   background: -o-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
 }
-#books > div > section > header .bookTitle {
-  display: block;
-  margin-right: 12px;
-  font-size: 21px;
-  color: #222222;
-  text-decoration: none;
-}
-#books > div > section > header .bookAuthor {
-  display: block;
-  font-size: 12px;
-  color: #222222;
-}
 #books > div > section > header > img {
   float: right;
   margin: 3px 14px;
@@ -482,27 +492,26 @@ button:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
-  text-align: center;
   cursor: pointer;
-  border: 1px solid #399ff2;
+  border: 1px solid #3399CC;
   margin: 6px 0 6px 6px;
   padding: 3px;
   min-width: 42px;
-  height: 16px;
   line-height: 16px;
   font-size: 12px;
-  background-color: transparent;
-  color: #399ff2;
+  background-color: #FFFFFF;
+  text-align: center;
+  color: #3399CC;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
-  color: #FFFFFF;
+  background-color: #add6eb;
 }
 #books > div > section .bookTags {
   overflow: hidden;
@@ -532,7 +541,7 @@ button:hover {
   -o-animation: float 1s;
   animation: float 1s;
   display: inline-block;
-  border-right: 4px solid #399ff2;
+  border-right: 4px solid #3399CC;
   margin: 0 0 6px 1%;
   height: 136px;
   width: 31.33333333%;
@@ -566,14 +575,7 @@ button:hover {
 }
 .book a,
 .book button {
-  padding: 0;
-  background-color: transparent;
-  color: #222222;
-}
-.book a:hover,
-.book button:hover {
-  background-color: transparent;
-  text-decoration: underline;
+  text-align: center;
 }
 .book .bookBtns {
   margin-left: 106px;
@@ -588,10 +590,6 @@ button:hover {
 .author {
   color: #808080;
   text-indent: 7px;
-}
-.removeBtn {
-  width: auto;
-  padding: 3px 7px;
 }
 .comments {
   -webkit-box-sizing: border-box;
@@ -620,10 +618,10 @@ button:hover {
   display: block;
   margin: 12px 12px 0 auto;
   font-size: 12px;
-  background-color: #399ff2;
+  background-color: #3399CC;
 }
 .comments .removeComment:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 .nocomment {
   text-align: center;
@@ -706,7 +704,7 @@ button:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #399ff2;
+  background-color: #3399CC;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -714,7 +712,7 @@ button:hover {
   height: auto;
 }
 .newcommentForm > div > input[type=submit]:hover {
-  background-color: #0f87e9;
+  background-color: #297aa3;
 }
 .sidebar {
   width: 30%;
@@ -723,6 +721,28 @@ button:hover {
 }
 .container {
   margin-right: 30%;
+}
+.container > ul {
+  margin: 12px;
+  padding: 12px;
+  background-color: #FFFFFF;
+}
+.container > ul > li {
+  padding: 6px 0;
+}
+.container > ul > li:not(:last-child) {
+  border-bottom: 1px solid #f0eaea;
+}
+.container > ul > li .avatar {
+  float: left;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.container > ul > li > section {
+  margin-left: 92px;
+  min-height: 80px;
+  font-size: 12px;
 }
 @font-face {
   font-family: 'icomoon';
@@ -756,6 +776,11 @@ button:hover {
 }
 .icon-upload2:before {
   content: "\e9c6";
+}
+@media only all and (max-width: 900px) {
+  .container {
+    margin-right: 300px;
+  }
 }
 @media only all and (max-width: 640px) {
   .form {

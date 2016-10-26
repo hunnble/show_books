@@ -1,4 +1,4 @@
-@mainColor: #399ff2;
+@mainColor: #3399CC;
 @black: #000000;
 @white: #FFFFFF;
 @lightGrey: #f0eaea;
@@ -10,6 +10,7 @@
 @navHeight: 50px;
 @bookWidth: 106px;
 @bookHeight: 136px;
+@avatarSize: 80px;
 @level1: 10;
 @level2: 9;
 
@@ -123,7 +124,7 @@ a {
   filter: grayscale(0);
   filter: none;
 }
-.btn {
+.btn() {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -135,6 +136,21 @@ a {
   cursor: pointer;
   &:hover {
     background-color: darken(@mainColor, 10%);
+  }
+}
+.btn-sm {
+  .btn();
+  border: 1px solid @mainColor;
+  margin: 6px 0 6px 6px;
+  padding: 3px;
+  min-width: 42px;
+  line-height: 16px;
+  font-size: 12px;
+  background-color: @white;
+  text-align: center;
+  color: @mainColor;
+  &:hover {
+    background-color: lighten(@mainColor, 30%);
   }
 }
 .borderBox() {
@@ -336,11 +352,8 @@ a {
 }
 .panel {
   margin: 12px;
-  border-radius: 5px;
   background-color: @white;
   >header {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
     height: 32px;
     background-color: @mainColor;
     line-height: 32px;
@@ -367,6 +380,10 @@ a {
       }
     }
   }
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
 
 button {
@@ -385,26 +402,36 @@ button {
 
 .booksRank {
   .borderRadius(5px);
-  margin: 12px;
-  padding: 12px;
   background-color: @white;
   >li {
     .transitionMixin(color, 0.3s);
     .transitionMixin(background-color, 0.3s);
-    margin: 12px / 2;
-    padding: 12px / 2;
+    margin: 12px / 4;
+    padding: 12px / 4;
+    >span {
+      margin-right: 6px;
+    }
     >a {
       &:hover {
         text-decoration: underline;
       }
     }
-    >.rankValue {
-      float: right;
-    }
   }
 }
 
-#books >div {
+.bookTitle {
+  display: block;
+  margin-right: 12px;
+  font-size: 21px;
+  color: @darkGrey;
+  text-decoration: none;
+}
+.bookAuthor {
+  display: block;
+  font-size: 12px;
+  color: @darkGrey;
+}
+#books>div {
   .borderBox();
   float: left;
   margin: 0;
@@ -424,40 +451,15 @@ button {
       .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.8));
     }
     >header {
-      .bookTitle {
-        display: block;
-        margin-right: 12px;
-        font-size: 21px;
-        color: @darkGrey;
-        text-decoration: none;
-      }
-      .bookAuthor {
-        display: block;
-        font-size: 12px;
-        color: @darkGrey;
-      }
       >img {
         float: right;
         margin: 3px 14px;
       }
       .bookBtn, .addBtn {
-        .btn();
-        border: 1px solid @mainColor;
-        margin: 6px 0 6px 6px;
-        padding: 3px;
-        min-width: 42px;
-        height: 16px;
-        line-height: 16px;
-        font-size: 12px;
-        background-color: transparent;
-        color: @mainColor;
-        &:hover {
-          color: @white;
-        }
+        .btn-sm();
       }
     }
     .bookTags {
-      // margin-right: 110px;
       overflow: hidden;
     }
     .bookTag {
@@ -510,13 +512,7 @@ button {
     display: block;
   }
   a, button {
-    padding: 0;
-    background-color: transparent;
-    color: @darkGrey;
-    &:hover {
-      background-color: transparent;
-      text-decoration: underline;
-    }
+    text-align: center;
   }
   .bookBtns {
     margin-left: @bookWidth;
@@ -533,11 +529,6 @@ button {
 .author {
   color: lighten(@black, 50%);
   text-indent: 7px;
-}
-
-.removeBtn {
-  width: auto;
-  padding: 3px 7px;
 }
 
 .comments {
@@ -643,6 +634,28 @@ button {
 }
 .container {
   margin-right: 30%;
+  >ul {
+    margin: 12px;
+    padding: 12px;
+    background-color: @white;
+    >li {
+      &:not(:last-child) {
+        border-bottom: 1px solid @lightGrey;
+      }
+      .avatar {
+        float: left;
+        border-radius: 50%;
+        width: @avatarSize;
+        height: @avatarSize;
+      }
+      >section {
+        margin-left: @avatarSize + 12px;
+        min-height: @avatarSize;
+        font-size: 12px;
+      }
+      padding: 6px 0;
+    }
+  }
 }
 
 @font-face {
@@ -682,6 +695,12 @@ button {
 }
 .icon-upload2:before {
   content: "\e9c6";
+}
+
+@media only all and (max-width: 900px) {
+  .container {
+    margin-right: 300px;
+  }
 }
 
 @media only all and (max-width: 640px) {

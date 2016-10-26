@@ -35,21 +35,50 @@ Book.prototype.get = function (op, callback) {
   });
 };
 
+Book.prototype.getAll = function (op, callback) {
+  async.waterfall([
+    function (cb) {
+      mongodb.connect(url, function (err, db) {
+        cb(err, db);
+      });
+    },
+    function (db, cb) {
+      db.collection(BOOKNAME, function (err, collection) {
+        cb(err, collection, db);
+      });
+    },
+    function (collection, db, cb) {
+      collection.find(op).sort({
+        'time': -1
+      }).toArray(function (err, books) {
+        books.forEach(function (book) {
+          book.comments && book.comments.forEach(function (comment, index) {
+            book.comments[index].comment = markdown.toHTML(comment.comment);
+          });
+          if (!book.img) {
+            delete book.img;
+          }
+        });
+        cb(err, books);
+      });
+    }
+  ], function (err, result, db) {
+    db && db.close();
+    if(err) {
+      return callback(err);
+    }
+    callback(null, result);
+  });
+};
+
 Book.prototype.add = function (op, callback) {
-  var book = {
-    'bookId': op.bookId,
-    'isbn10': op.isbn10,
-    'isbn13': op.isbn13,
-    'name': op.name.trim().split(/\s+/).join(''),
-    'author': op.author.trim().split(/\s+/).join(''),
-    'username': op.username,
-    'img': op.img,
-    'comments': [],
-    'time': new Date()
-  };
+  var book = op;
+
+  book.time = new Date();
+  book.comments = [];
 
   if (!book.name || !book.author) {
-    return callback(new Error('无效的书名或作者名'));
+    return callback(new Error('无效的书名'));
   }
 
   async.waterfall([
@@ -79,7 +108,7 @@ Book.prototype.add = function (op, callback) {
   });
 };
 
-Book.prototype.getAll = function (op, page, callback) {
+Book.prototype.getUserAll = function (op, page, callback) {
   var self = this;
   var username = op.username;
   var con = {};
