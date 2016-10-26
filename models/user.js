@@ -35,7 +35,7 @@ User.prototype.get = function (name, callback) {
 };
 
 User.prototype.add = function (op, callback) {
-  var email_md5 = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+  var email_md5 = crypto.createHash('md5').update(op.email.toLowerCase()).digest('hex');
 
   op.img = 'http://www.gravatar.com/avatar/' + email_md5 + '?s=80';
   op.password = crypto.createHash('md5').update(op.password).digest('hex');

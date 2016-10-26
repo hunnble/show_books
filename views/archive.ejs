@@ -19,10 +19,10 @@
           <span class="author"><%= book.author %></span>
           <% if (username === user.name) { %>
             <button class="btn-sm removeBtn removeBook">删除本书</button>
-            <a class="btn-sm" href="/editcomment/<%= book.username %>/<%= book.name %>">写笔记</a>
+            <a class="btn-sm" href="/editcomment/<%= book.username %>/<%= book.bookId%>">写笔记</a>
             <input type="text" disabled class="bookId" value=<%- book.bookId %> style="display: none;" %> />
           <% } %>
-          <a class="btn-sm" href="/comment/<%= book.username %>/<%= book.name %>">查看笔记</a>
+          <a class="btn-sm" href="/comment/<%= book.username %>/<%= book.bookId %>">查看笔记</a>
         </div>
       </section>
     <% } %>

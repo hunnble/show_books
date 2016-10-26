@@ -502,7 +502,7 @@ button:hover {
   width: 100%;
   min-height: 180px;
   font-size: 12px;
-  color: #dbcccc;
+  color: #222222;
 }
 #books > div > section:hover {
   background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
@@ -760,7 +760,7 @@ button:hover {
   padding: 6px 0;
 }
 .container > ul > li:not(:last-child) {
-  border-bottom: 1px solid #f0eaea;
+  border-bottom: 1px solid #d7cfcf;
 }
 .container > ul > li .avatar {
   float: left;
