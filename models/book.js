@@ -6,7 +6,7 @@ var url = require('../settings').url;
 var BOOKNAME = require('../settings').BOOKNAME;
 
 function Book () {
-  this.perPage = 100;
+  this.perPage = 3;
 }
 
 Book.prototype.get = function (op, callback) {
@@ -35,7 +35,9 @@ Book.prototype.get = function (op, callback) {
   });
 };
 
-Book.prototype.getAll = function (op, callback) {
+Book.prototype.getAll = function (op, con, callback) {
+  var self = this;
+
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -48,7 +50,15 @@ Book.prototype.getAll = function (op, callback) {
       });
     },
     function (collection, db, cb) {
-      collection.find(op).sort({
+      collection.count(op, function (err, total) {
+        cb(err, collection, db, total);
+      });
+    },
+    function (collection, db, total, cb) {
+      collection.find(op, {
+        'skip': self.perPage * (con.page - 1),
+        'limit': self.perPage
+      }).sort({
         'time': -1
       }).toArray(function (err, books) {
         books.forEach(function (book) {
@@ -59,15 +69,15 @@ Book.prototype.getAll = function (op, callback) {
             delete book.img;
           }
         });
-        cb(err, books);
+        cb(err, books, total, db);
       });
     }
-  ], function (err, result, db) {
+  ], function (err, result, total, db) {
     db && db.close();
     if(err) {
       return callback(err);
     }
-    callback(null, result);
+    callback(null, result, total);
   });
 };
 

@@ -1,4 +1,4 @@
-@mainColor: #3399CC;
+@mainColor: #394347;
 @black: #000000;
 @white: #FFFFFF;
 @lightGrey: #f0eaea;
@@ -173,6 +173,9 @@ a {
   background-color: @white;
   font-size: 16px;
 }
+.link {
+  color: @lightBlue;
+}
 
 .navSwitcher {
   position: fixed;
@@ -267,24 +270,25 @@ a {
 //   }
 // }
 
-// .page {
-//   padding: 14px;
-//   text-align: right;
-// }
+.page {
+  padding: 14px;
+  text-align: right;
+}
 
-// .prepage, .nextpage {
-//   >a {
-//     .transitionMixin(background-color, 0.5s);
-//     display: inline-block;
-//     padding: 7px;
-//     background-color: @mainColor;
-//     color: @white;
-//     &:hover {
-//       background-color: @sliver;
-//       color: @mainColor;
-//     }
-//   }
-// }
+.prepage, .nextpage {
+  >a {
+    .transitionMixin(color, 0.3s);
+    .transitionMixin(background-color, 0.3s);
+    display: inline-block;
+    padding: 7px;
+    background-color: @mainColor;
+    color: @white;
+    &:hover {
+      background-color: @sliver;
+      color: @mainColor;
+    }
+  }
+}
 
 .center {
   position: absolute;

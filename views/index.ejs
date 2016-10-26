@@ -8,7 +8,7 @@
         <a href="/profile"><%= user.name %></a>
         <div></div>
       <% } else { %>
-        <div>没有账号?先去<a href="/register">注册</a></div>
+        <div>没有账号?先去<a class="link" href="/register">注册</a></div>
       <% } %>
     </div>
   </section>
@@ -69,5 +69,17 @@
       </li>
     <% }) %>
   </ul>
+  <div class="page">
+    <% if (!isFirstPage) { %>
+      <span class="prepage">
+        <a href="/?page=<%- page - 1 %>">上一页</a>
+      </span>
+    <% } %>
+    <% if (!isLastPage) { %>
+      <span class="nextpage">
+        <a href="/?page=<%- page + 1 %>">下一页</a>
+      </span>
+    <% } %>
+  </div>
 </div>
 <%- include footer -%>

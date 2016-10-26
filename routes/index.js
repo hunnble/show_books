@@ -15,6 +15,8 @@ var log  = new Log();
 var booksRank = new BooksRank();
 
 router.get('/', function (req, res) {
+  var page = req.query.page ? req.query.page : 1;
+
   async.parallel([
     function (cb) {
       booksRank.getAll({
@@ -39,11 +41,13 @@ router.get('/', function (req, res) {
       });
     },
     function (cb) {
-      book.getAll({}, function (err, books) {
-        cb(err, books);
+      book.getAll({}, {
+        'page': page
+      }, function (err, books, total) {
+        cb(err, [books, total]);
       });
     }
-  ], function (err, books) {
+  ], function (err, result) {
     if (err) {
       return res.send({
         success: false
@@ -52,9 +56,12 @@ router.get('/', function (req, res) {
     res.render('index', {
       title: '主页',
       user: req.session.user,
-      mostCollectedBooks: books[0],
-      mostSearchedBooks: books[1],
-      books: books[2],
+      mostCollectedBooks: result[0],
+      mostSearchedBooks: result[1],
+      books: result[2][0],
+      page: parseInt(page, 10),
+      isFirstPage: page == 1,
+      isLastPage: ((page - 1) * book.perPage + result[2][0].length >= result[2][1]),
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
