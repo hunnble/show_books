@@ -29,7 +29,7 @@ td,
 button {
   padding: 0;
   margin: 0;
-  font: 14px "Open Sans", "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 ol,
 ul {
@@ -87,7 +87,7 @@ h6 {
   text-align: center;
 }
 a {
-  color: #99CCFF;
+  color: #000000;
   text-decoration: none;
 }
 .btn {
@@ -96,13 +96,13 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 .btn:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 .success {
   color: #99FF66;
@@ -139,14 +139,12 @@ a {
   margin-top: 20%;
 }
 .nav {
-  background: -moz-linear-gradient(left, #8cb3d9, #407fbf);
-  background: -webkit-gradient(linear, 0 50%, 100% 50%, from(#8cb3d9), to(#407fbf));
-  background: -webkit-linear-gradient(left, #8cb3d9, #407fbf);
-  background: -o-linear-gradient(left, #8cb3d9, #407fbf);
   position: fixed;
   z-index: 9;
   width: 100%;
   height: 50px;
+  background-color: #399ff2;
+  opacity: 1;
 }
 .nav > ul {
   float: right;
@@ -167,7 +165,7 @@ a {
   background-color: #FFFFFF;
 }
 .nav > ul > li:hover > a {
-  color: #6699CC;
+  color: #399ff2;
 }
 .nav > ul > li > a {
   display: inline-block;
@@ -188,58 +186,6 @@ a {
   height: 100%;
   width: 100%;
   background-color: #F2F2F2;
-  background-image: url('../../images/lowpoly.png');
-}
-.logs {
-  font-size: 18px;
-  padding: 14px;
-  text-align: right;
-}
-.logs > h3 {
-  padding-bottom: 7px;
-  border-bottom: 1px solid #F2F2F2;
-}
-.logs > .add {
-  -webkit-transition: padding 1s;
-  -moz-transition: padding 1s;
-  -ms-transition: padding 1s;
-  -o-transition: padding 1s;
-  transition: padding 1s;
-  margin: 14px 0;
-}
-.logs > .add:hover {
-  padding-left: 14px;
-}
-.logs .log {
-  display: inline-block;
-  margin: 7px 0;
-}
-.logs .time {
-  padding: 4px 7px;
-  border-radius: 7px;
-  background-color: #F2F2F2;
-  color: #6699CC;
-}
-.page {
-  padding: 14px;
-  text-align: right;
-}
-.prepage > a,
-.nextpage > a {
-  -webkit-transition: background-color 0.5s;
-  -moz-transition: background-color 0.5s;
-  -ms-transition: background-color 0.5s;
-  -o-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-  display: inline-block;
-  padding: 7px;
-  background-color: #6699CC;
-  color: #FFFFFF;
-}
-.prepage > a:hover,
-.nextpage > a:hover {
-  background-color: #F2F2F2;
-  color: #6699CC;
 }
 .center {
   position: absolute;
@@ -265,7 +211,7 @@ a {
 .form > h4,
 .form > h5,
 .form > h6 {
-  color: #6699CC;
+  color: #399ff2;
 }
 .form > input {
   -webkit-box-sizing: border-box;
@@ -292,7 +238,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -304,7 +250,7 @@ a {
 .form > input[type=submit]:hover,
 .form > input[type=reset]:hover,
 .form > input[type=button]:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 .form > input[type=checkbox] {
   display: inline-block;
@@ -338,7 +284,7 @@ a {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   height: 32px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   line-height: 32px;
   text-indent: 12px;
   color: #FFFFFF;
@@ -358,7 +304,7 @@ a {
 .panel > div > form > h4,
 .panel > div > form > h5,
 .panel > div > form > h6 {
-  color: #6699CC;
+  color: #399ff2;
 }
 .panel > div > form > input {
   -webkit-box-sizing: border-box;
@@ -385,7 +331,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -397,7 +343,7 @@ a {
 .panel > div > form > input[type=submit]:hover,
 .panel > div > form > input[type=reset]:hover,
 .panel > div > form > input[type=button]:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 .panel > div > form > input[type=checkbox] {
   display: inline-block;
@@ -441,28 +387,27 @@ button {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 button:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 .userBooks {
+  border-radius: 5px;
+  position: relative;
   margin: 12px;
   padding: 12px;
   background-color: #FFFFFF;
-  overflow: hidden;
-}
-.userBooks > .userBook {
-  float: left;
-  margin-right: 6px;
+  height: 136px;
+  overflow: show;
 }
 .booksRank {
+  border-radius: 5px;
   margin: 12px;
   padding: 12px;
-  border-radius: 5px;
   background-color: #FFFFFF;
 }
 .booksRank > li {
@@ -478,11 +423,9 @@ button:hover {
   transition: background-color 0.3s;
   margin: 6px;
   padding: 6px;
-  cursor: pointer;
 }
-.booksRank > li:hover {
-  background-color: #6699CC;
-  color: #FFFFFF;
+.booksRank > li > a:hover {
+  text-decoration: underline;
 }
 .booksRank > li > .rankValue {
   float: right;
@@ -508,7 +451,7 @@ button:hover {
   width: 100%;
   min-height: 180px;
   font-size: 12px;
-  color: #b3b3b3;
+  color: #dbcccc;
 }
 #books > div > section:hover {
   background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.8));
@@ -539,11 +482,11 @@ button:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
-  border: 1px solid #6699CC;
+  border: 1px solid #399ff2;
   margin: 6px 0 6px 6px;
   padding: 3px;
   min-width: 42px;
@@ -551,11 +494,11 @@ button:hover {
   line-height: 16px;
   font-size: 12px;
   background-color: transparent;
-  color: #6699CC;
+  color: #399ff2;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
@@ -589,7 +532,7 @@ button:hover {
   -o-animation: float 1s;
   animation: float 1s;
   display: inline-block;
-  border-right: 4px solid #6699CC;
+  border-right: 4px solid #399ff2;
   margin: 0 0 6px 1%;
   height: 136px;
   width: 31.33333333%;
@@ -650,14 +593,14 @@ button:hover {
   width: auto;
   padding: 3px 7px;
 }
-.comment {
+.comments {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   position: fixed;
   top: 42px;
-  right: 0;
+  width: 100%;
 }
-.comment li {
+.comments .comment {
   background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
   background: -webkit-gradient(linear, 50% 0, 50% 100%, from(#FFFFFF), to(rgba(255, 255, 255, 0.5)));
   background: -webkit-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
@@ -665,7 +608,7 @@ button:hover {
   margin: 12px;
   padding: 12px;
 }
-.comment .removeComment {
+.comments .removeComment {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -677,10 +620,10 @@ button:hover {
   display: block;
   margin: 12px 12px 0 auto;
   font-size: 12px;
-  background-color: #6699CC;
+  background-color: #399ff2;
 }
-.comment .removeComment:hover {
-  background-color: #407fbf;
+.comments .removeComment:hover {
+  background-color: #0f87e9;
 }
 .nocomment {
   text-align: center;
@@ -691,7 +634,6 @@ button:hover {
 .nocomment > h4,
 .nocomment > h5,
 .nocomment > h6 {
-  color: #FFFFFF;
   margin: 12px;
 }
 .wordHint {
@@ -764,7 +706,7 @@ button:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #6699CC;
+  background-color: #399ff2;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -772,7 +714,7 @@ button:hover {
   height: auto;
 }
 .newcommentForm > div > input[type=submit]:hover {
-  background-color: #407fbf;
+  background-color: #0f87e9;
 }
 .sidebar {
   width: 30%;
@@ -855,6 +797,10 @@ button:hover {
     width: 100%;
   }
   .sidebar {
+    float: none;
+    width: 100%;
+  }
+  .container {
     width: 100%;
   }
   .preview {

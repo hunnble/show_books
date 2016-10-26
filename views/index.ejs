@@ -25,18 +25,12 @@
   <% } %>
 </aside>
 <div class="container">
-  <div class="userBooks">
-    <% bookImgs.forEach(function (book) { %>
-      <div class="userBook">
-        <img src=<%= book.img %> alt="" />
-      </div>
-    <% }) %>
-  </div>
+
   <ul class="booksRankCollect booksRank">
-    <h4>最多收藏量top10</h4>
+    <h4>最多收藏图书top10</h4>
     <% mostCollectedBooks.forEach(function (book) { %>
       <li>
-        <%= book.name %>
+        <a href="/book/<%= book.name %>"><%= book.name %></a>
         <span class="rankValue">
           <%= book.collectTimes %>
         </span>
@@ -44,10 +38,10 @@
     <% }) %>
   </ul>
   <ul class="booksRankSearch booksRank">
-    <h4>最多搜索量top10</h4>
+    <h4>最热关键词top10</h4>
     <% mostSearchedBooks.forEach(function (book) { %>
       <li>
-        <%= book.name %>
+        <a href="/book/<%= book.name %>"><%= book.name %></a>
         <span class="rankValue">
           <%= book.searchTimes %>
         </span>

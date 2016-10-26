@@ -157,7 +157,7 @@ Book.prototype.remove = function (op, callback) {
   });
 };
 
-Book.prototype.addComment = function (op, comment, callback) {
+Book.prototype.addComment = function (op, data, callback) {
   async.waterfall([
     function (cb) {
       mongodb.connect(url, function (err, db) {
@@ -174,8 +174,8 @@ Book.prototype.addComment = function (op, comment, callback) {
         $push: {
           'comments': {
             '_id': (new Date()).getTime(),
-            'comment': comment,
-            'isPrivate': op.isPrivate || false
+            'comment': data.comment,
+            'isPrivate': data.isPrivate || false
           }
         }
       }, function (err, result) {

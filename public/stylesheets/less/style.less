@@ -1,7 +1,7 @@
-@mainColor: #6699CC;
+@mainColor: #399ff2;
 @black: #000000;
 @white: #FFFFFF;
-@lightGrey: #CCCCCC;
+@lightGrey: #f0eaea;
 @darkGrey: #222222;
 @lightBlue: #99CCFF;
 @green: #99FF66;
@@ -21,7 +21,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
 form,fieldset,input,textarea,p,blockquote,th,td, button {
   padding: 0;
   margin: 0;
-  font: 14px "Open Sans", "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font: 14px "Segoe UI", "Lucida Grande", "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 ol, ul {
   list-style: none;
@@ -67,7 +67,7 @@ label {
 }
 
 a {
-  color: @lightBlue;
+  color: @black;
   text-decoration: none;
 }
 
@@ -96,6 +96,9 @@ a {
   background: -webkit-linear-gradient(left, @startBg, @endBg);
   background: -o-linear-gradient(left, @startBg, @endBg);
 }
+.borderRadius(@radius) {
+  border-radius: @radius;
+}
 .blur(@c) {
   -webkit-filter: blur(@c); /* Chrome, Opera */
   -moz-filter: blur(@c);
@@ -121,11 +124,6 @@ a {
   filter: none;
 }
 .btn {
-  // -webkit-transform: translate(0, -7px);
-  // -moz-transform: translate(0, -7px);
-  // -ms-transform: translate(0, -7px);
-  // -o-transform: translate(0, -7px);
-  // transform: translate(0, -7px);
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -180,11 +178,13 @@ a {
   }
 }
 .nav {
-  .leftLinearBgColorMixin(lighten(@mainColor, 10%), darken(@mainColor, 10%));
+  // .leftLinearBgColorMixin(lighten(@mainColor, 10%), darken(@mainColor, 10%));
   position: fixed;
   z-index: @level2;
   width: 100%;
   height: @navHeight;
+  background-color: @mainColor;
+  opacity: 1;
   >ul {
     float: right;
     >li {
@@ -222,53 +222,53 @@ a {
   height: 100%;
   width: 100%;
   background-color: @sliver;
-  background-image: url('../../images/lowpoly.png');
+  // background-image: url('../../images/lowpoly.png');
 }
 
-.logs {
-  font-size: 18px;
-  .page;
-  >h3 {
-    padding-bottom: 7px;
-    border-bottom: 1px solid @sliver;
-  }
-  >.add {
-    .transitionMixin(padding, 1s);
-    margin: 14px 0;
-    &:hover {
-      padding-left: 14px;
-    }
-  }
-  .log {
-    display: inline-block;
-    margin: 7px 0;
-  }
-  .time {
-    padding: 4px 7px;
-    border-radius: 7px;
-    background-color: @sliver;
-    color: @mainColor;
-  }
-}
+// .logs {
+//   font-size: 18px;
+//   .page;
+//   >h3 {
+//     padding-bottom: 7px;
+//     border-bottom: 1px solid @sliver;
+//   }
+//   >.add {
+//     .transitionMixin(padding, 1s);
+//     margin: 14px 0;
+//     &:hover {
+//       padding-left: 14px;
+//     }
+//   }
+//   .log {
+//     display: inline-block;
+//     margin: 7px 0;
+//   }
+//   .time {
+//     padding: 4px 7px;
+//     border-radius: 7px;
+//     background-color: @sliver;
+//     color: @mainColor;
+//   }
+// }
 
-.page {
-  padding: 14px;
-  text-align: right;
-}
+// .page {
+//   padding: 14px;
+//   text-align: right;
+// }
 
-.prepage, .nextpage {
-  >a {
-    .transitionMixin(background-color, 0.5s);
-    display: inline-block;
-    padding: 7px;
-    background-color: @mainColor;
-    color: @white;
-    &:hover {
-      background-color: @sliver;
-      color: @mainColor;
-    }
-  }
-}
+// .prepage, .nextpage {
+//   >a {
+//     .transitionMixin(background-color, 0.5s);
+//     display: inline-block;
+//     padding: 7px;
+//     background-color: @mainColor;
+//     color: @white;
+//     &:hover {
+//       background-color: @sliver;
+//       color: @mainColor;
+//     }
+//   }
+// }
 
 .center {
   position: absolute;
@@ -374,30 +374,29 @@ button {
 }
 
 .userBooks {
+  .borderRadius(5px);
+  position: relative;
   margin: 12px;
   padding: 12px;
   background-color: @white;
-  overflow: hidden;
-  >.userBook {
-    float: left;
-    margin-right: 6px;
-  }
+  height: @bookHeight;
+  overflow: show;
 }
 
 .booksRank {
+  .borderRadius(5px);
   margin: 12px;
   padding: 12px;
-  border-radius: 5px;
   background-color: @white;
   >li {
     .transitionMixin(color, 0.3s);
     .transitionMixin(background-color, 0.3s);
     margin: 12px / 2;
     padding: 12px / 2;
-    cursor: pointer;
-    &:hover {
-      background-color: @mainColor;
-      color: @white;
+    >a {
+      &:hover {
+        text-decoration: underline;
+      }
     }
     >.rankValue {
       float: right;
@@ -541,7 +540,7 @@ button {
   padding: 3px 7px;
 }
 
-.comment {
+.comments {
   .loopRemoveComment (@num) when (@num > 0) {
     .loopRemoveComment(@num - 1);
   }
@@ -549,8 +548,8 @@ button {
   .borderBox();
   position: fixed;
   top: 42px;
-  right: 0;
-  li {
+  width: 100%;
+  .comment {
     .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.5));
     margin: 12px;
     padding: 12px;
@@ -567,7 +566,6 @@ button {
 .nocomment {
   .text-center();
   >h1, >h2, >h3, >h4, >h5, >h6 {
-    color: @white;
     margin: 12px;
   }
 }
@@ -730,6 +728,10 @@ button {
     width: 100%;
   }
   .sidebar {
+    float: none;
+    width: 100%;
+  }
+  .container {
     width: 100%;
   }
   .preview {

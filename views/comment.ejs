@@ -1,16 +1,18 @@
 <%- include header -%>
   <% if (book.comments.length > 0) { %>
-    <% book.comments.forEach(function (comment) { %>
-      <ul class="comment">
-        <li>
-          <div class="commentContent"><%- comment.comment %></div>
-          <% if (book.username === user.name) { %>
-            <button class="removeBtn removeComment">删除笔记</button>
-            <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
-          <% } %>
-        </li>
-      </ul>
-    <% }) %>
+    <ul class="comments">
+      <% book.comments.forEach(function (comment) { %>
+        <% if (!comment.isPrivate || book.username === user.name) { %>
+          <li class="comment">
+            <div class="commentContent"><%- comment.comment %></div>
+            <% if (book.username === user.name) { %>
+              <button class="removeBtn removeComment">删除笔记</button>
+              <input type="text" disabled class="commentId" value=<%- comment._id %> style="display: none;" %> />
+            <% } %>
+          </li>
+        <% } %>
+      <% }) %>
+    </ul>
     <script>
       <%- include ../node_modules/markdown/lib/markdown.js %>
     </script>

@@ -20,6 +20,14 @@ router.get('/', function (req, res) {
       booksRank.getAll({
         'key': 'collectTimes'
       }, function (err, books) {
+        if (books) {
+          var index = books.findIndex(function (book) {
+            return book.collectTimes < 1;
+          });
+          if (index > -1) {
+            books = books.slice(0, index);
+          }
+        }
         cb(err, books);
       });
     },
@@ -28,27 +36,6 @@ router.get('/', function (req, res) {
         'key': 'searchTimes'
       }, function (err, books) {
         cb(err, books);
-      });
-    },
-    function (cb) {
-      if (!req.session.user) {
-        return cb(null, []);
-      }
-      book.getAll({
-        username: req.session.user.name,
-        limit: 40
-      }, 1, function (err, books) {
-        var books = books.map(function (book) {
-          return {
-            name: book.name,
-            img: book.img
-          };
-        });
-
-        if (books.length > 20) {
-          books = books.slice(0, 20);
-        }
-        cb(null, books);
       });
     }
   ], function (err, books) {
@@ -62,7 +49,6 @@ router.get('/', function (req, res) {
       user: req.session.user,
       mostCollectedBooks: books[0],
       mostSearchedBooks: books[1],
-      bookImgs: books[2],
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
     });
@@ -288,9 +274,6 @@ router.post('/book', function (req, res) {
         });
       },
       function (cb) {
-        // log.add(req.session.user.name, new Date(), 'add', body.name, '/book/' + body.name + '/' + body.author, function (err) {
-        //   cb(err);
-        // });
         booksRank.update({
           'name': body.name,
           'collectTimes': true
@@ -380,7 +363,6 @@ router.get('/editcomment/:name', function (req, res) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('back');
     }
-    // var lastComment = req.query.i ? _book.comments[parseInt(i, 10)] : '';
     res.render('editcomment', {
       title: '笔记',
       user: req.session.user,
@@ -394,15 +376,19 @@ router.get('/editcomment/:name', function (req, res) {
 
 router.post('/editcomment/:name', checkLogin);
 router.post('/editcomment/:name', function (req, res) {
+  var body = req.body;
+  
   book.addComment({
     name: req.params.name,
     username: req.session.user.name,
-  }, req.body.comment, function (err, _book) {
+  }, {
+    comment: body.comment,
+    isPrivate: body.isPrivate ? true : false
+  }, function (err, _book) {
     if (err) {
       req.flash('error', '提交失败');
       return res.redirect('back');
     }
-    // log.add(req.session.user.name, new Date(), 'comment', req.body.name, '/comment/' + _book.name + '/' + _book.author, function (err) {});
     req.flash('success', '提交成功');
     res.redirect('/comment/' + encodeURI(req.params.name));
   });
@@ -431,10 +417,10 @@ function validateRegister(name, password, password2) {
       errMsg: '用户名长度不符合规范，应当是6-16位英文或数字的组合'
     };
   }
-  if (password.length < 6 || password > 20 || password2.length < 6 || password2 > 20) {
+  if (password.length < 6 || password > 20 || password2.length < 6 || password2 > 20 || /^a-zA-Z0-9/.test(name)) {
     return {
       success: false,
-      errMsg: '密码长度不符合规范，应当是6-20位'
+      errMsg: '密码长度不符合规范，应当是6-20位英文或数字的组合'
     };
   }
   return {
