@@ -3,6 +3,8 @@ $(document).ready(function () {
 	/**
 	 * all
 	 */
+	$('.ratyli').ratyli();
+
 	$('.navSwitcher').click(function () {
 		var $navSwitcher = $('.navSwitcher');
 		var $nav = $('.nav');

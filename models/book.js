@@ -6,7 +6,7 @@ var url = require('../settings').url;
 var BOOKNAME = require('../settings').BOOKNAME;
 
 function Book () {
-  this.perPage = 3;
+  this.perPage = 30;
 }
 
 Book.prototype.get = function (op, callback) {

@@ -20,14 +20,14 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
   secret: settings.cookieSecret,
   key: settings.db,
-  cookie: {maxAge: 1000 * 60 * 60 * 24 * 2},
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 2 },
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
@@ -45,7 +45,12 @@ app.use('/users', users);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render('error', {
+    title: '出错了',
+    message: err.message,
+    error: {}
+  });
+  // next(err);
 });
 
 // error handlers
@@ -67,6 +72,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
+    title: '出错了',
     message: err.message,
     error: {}
   });

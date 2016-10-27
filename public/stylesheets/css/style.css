@@ -115,6 +115,13 @@ a {
 .btn-sm:hover {
   background-color: #809299;
 }
+.ratyli {
+  color: #99CCFF;
+}
+.ratyli .rate {
+  color: #99CCFF;
+  font-size: 21px;
+}
 .success {
   color: #99FF66;
 }
@@ -469,10 +476,25 @@ button:hover {
 .booksRank > li > a:hover {
   text-decoration: underline;
 }
+.bookList {
+  min-height: 48px;
+  line-height: 48px;
+}
+.bookList .bookAuthor {
+  display: inline-block;
+}
+a.bookTitle {
+  display: inline-block;
+}
+a.bookTitle:hover {
+  color: #99CCFF;
+}
 .bookTitle {
   display: block;
   margin-right: 12px;
-  font-size: 21px;
+  height: 21px;
+  line-height: 21px;
+  font-size: 16px;
   color: #222222;
   text-decoration: none;
 }
@@ -765,12 +787,12 @@ button:hover {
 .container > ul > li .avatar {
   float: left;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 48px;
+  height: 48px;
 }
 .container > ul > li > section {
-  margin-left: 92px;
-  min-height: 80px;
+  margin-left: 60px;
+  min-height: 48px;
   font-size: 12px;
 }
 @font-face {
@@ -807,11 +829,17 @@ button:hover {
   content: "\e9c6";
 }
 @media only all and (max-width: 900px) {
+  .ratyli .rate {
+    font-size: 16px;
+  }
   .container {
     margin-right: 300px;
   }
 }
 @media only all and (max-width: 640px) {
+  .ratyli .rate {
+    font-size: 14px;
+  }
   .form {
     background-color: transparent;
   }

@@ -60,6 +60,7 @@ router.get('/', function (req, res) {
       mostSearchedBooks: result[1],
       books: result[2][0],
       page: parseInt(page, 10),
+      pageNum: Math.ceil(result[2][1] / book.perPage),
       isFirstPage: page == 1,
       isLastPage: ((page - 1) * book.perPage + result[2][0].length >= result[2][1]),
       success: req.flash('success').toString(),
@@ -67,6 +68,56 @@ router.get('/', function (req, res) {
     });
   });
 
+});
+
+router.get('/profile', checkLogin);
+router.get('/profile', function (req, res) {
+  if (!req.session.user) {
+    return res.redirect('/');
+  }
+  return res.redirect('/profile/' + req.session.user.name);
+});
+
+router.get('/profile/:username', function(req, res, next) {
+  var page = req.query.page ? req.query.page : 1;
+  var username = '';
+
+  if (req.session.user) {
+    username = req.session.user.name;
+  }
+
+  async.parallel([
+    function (cb) {
+      book.getAll({
+        username: req.params.username
+      }, {
+        'page': page
+      }, function (err, books, total) {
+        cb(err, [books, total]);
+      });
+    },
+    function (cb) {
+      user.get(req.params.username, function (err, _user) {
+        cb(err, _user);
+      });
+    }
+  ], function (err, result) {
+    if (err) {
+      return res.redirect('/');
+    }
+    res.render('profile', {
+      title: '用户资料',
+      user: req.session.user,
+      userInfo: result[1],
+      books: result[0][0],
+      page: parseInt(page, 10),
+      pageNum: Math.ceil(result[0][1] / book.perPage),
+      isFirstPage: page == 1,
+      isLastPage: ((page - 1) * book.perPage + result[0][0].length >= result[0][1]),
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
+    });
+  });
 });
 
 // router.get('/logs', function(req, res) {
@@ -144,16 +195,16 @@ router.post('/login', checkNotLogin);
 router.post('/login', function (req, res) {
   var password = crypto.createHash('md5').update(req.body.password).digest('hex');
 
-  user.get(req.body.name, function (err, user) {
-    if (!user) {
+  user.get(req.body.name, function (err, _user) {
+    if (!_user) {
       req.flash('error', '用户不存在');
       return res.redirect('/login');
     }
-    if (user.password != password) {
+    if (_user.password != password) {
       req.flash('error', '密码错误');
       return res.redirect('/login');
     }
-    req.session.user = user;
+    req.session.user = _user;
     req.flash('success', '登录成功');
     res.redirect('/');
   });

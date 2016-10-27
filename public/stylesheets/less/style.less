@@ -6,11 +6,14 @@
 @lightBlue: #99CCFF;
 @green: #99FF66;
 @red: #FF0033;
+@lightYellow: #FFFF66;
 @sliver: #F2F2F2;
 @navHeight: 50px;
 @bookWidth: 106px;
 @bookHeight: 136px;
+@avatarSizeBg: 128px;
 @avatarSize: 80px;
+@avatarSizeSm: 48px;
 @level1: 10;
 @level2: 9;
 
@@ -156,6 +159,14 @@ a {
 .borderBox() {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.ratyli {
+  color: @lightBlue;
+}
+.ratyli .rate{
+  color: @lightBlue;
+  font-size: 21px;
 }
 
 .success {
@@ -423,10 +434,25 @@ button {
   }
 }
 
+.bookList {
+  min-height: @avatarSizeSm;
+  line-height: @avatarSizeSm;
+  .bookAuthor {
+    display: inline-block;
+  }
+}
+a.bookTitle {
+  display: inline-block;
+  &:hover {
+    color: @lightBlue;
+  }
+}
 .bookTitle {
   display: block;
   margin-right: 12px;
-  font-size: 21px;
+  height: 21px;
+  line-height: 21px;
+  font-size: 16px;
   color: @darkGrey;
   text-decoration: none;
 }
@@ -649,12 +675,12 @@ button {
       .avatar {
         float: left;
         border-radius: 50%;
-        width: @avatarSize;
-        height: @avatarSize;
+        width: @avatarSizeSm;
+        height: @avatarSizeSm;
       }
       >section {
-        margin-left: @avatarSize + 12px;
-        min-height: @avatarSize;
+        margin-left: @avatarSizeSm + 12px;
+        min-height: @avatarSizeSm;
         font-size: 12px;
       }
       padding: 6px 0;
@@ -702,12 +728,18 @@ button {
 }
 
 @media only all and (max-width: 900px) {
+  .ratyli .rate{
+    font-size: 16px;
+  }
   .container {
     margin-right: 300px;
   }
 }
 
 @media only all and (max-width: 640px) {
+  .ratyli .rate{
+    font-size: 14px;
+  }
   .form {
     background-color: transparent;
   }
