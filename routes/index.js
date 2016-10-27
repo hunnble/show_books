@@ -257,6 +257,7 @@ router.get('/archive/:username', function (req, res) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
     }
+    console.log(total);
     res.render('archive', {
       title: '目录',
       books: books,

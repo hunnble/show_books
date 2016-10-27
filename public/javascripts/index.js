@@ -80,4 +80,11 @@ $(document).ready(function () {
 		$('.preview').html(markdown.toHTML($(this).val().replace(/\n|\r|\r\n/g, '\n\n')));
   });
 
+	/**
+	 * profile
+	 */
+	$('.changeUserInfoBtn').click(function () {
+		$('.changeUserInfoForm').fadeIn(300);
+	});
+
 });

@@ -1,15 +1,19 @@
 <%- include header %>
-<div class="user">
-  <img src="<%= userInfo.head %>" alt="">
-  <p><%= userInfo.name %></p>
-  <p><%= userInfo.email %></p>
-  <% if (userInfo.name === user.name) { %>
-    <button class="changeUserInfoBtn" type="button">修改信息</button>
-  <% } %>
-  <p></p>
-  <p></p>
-  <p></p>
-  <div>
+<div class="userInfo">
+  <div class="userInfoDetail">
+    <div class="user-head">
+      <img src="<%= userInfo.head %>" alt="">
+    </div>
+    <span class="user-text user-name"><%= userInfo.name %></span>
+    <span class="user-text user-summary">“<%= userInfo.summary %>”</span>
+    <% if (userInfo.name === user.name) { %>
+      <button class="changeUserInfoBtn" type="button">修改信息</button>
+    <% } %>
+    <form class="changeUserInfoForm" method="post">
+
+    </form>
+  </div>
+  <div class="user">
     <ul>
       <% books.forEach(function (book) { %>
         <li>

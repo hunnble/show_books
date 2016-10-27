@@ -142,21 +142,24 @@ Book.prototype.getUserAll = function (op, page, callback) {
       collection.count({
         'username': username
       }, function (err, total) {
-        collection.find({
-          'username': username
-        }, con).sort({
-          'time': -1
-        }).toArray(function (err, books) {
-          books.forEach(function (book) {
-            book.comments && book.comments.forEach(function (comment, index) {
-              book.comments[index].comment = markdown.toHTML(comment.comment);
-            });
-            if (!book.img) {
-              delete book.img;
-            }
+        cb(err, collection, db, total);
+      });
+    },
+    function (collection, db, total, cb) {
+      collection.find({
+        'username': username
+      }, con).sort({
+        'time': -1
+      }).toArray(function (err, books) {
+        books.forEach(function (book) {
+          book.comments && book.comments.forEach(function (comment, index) {
+            book.comments[index].comment = markdown.toHTML(comment.comment);
           });
-          cb(err, [books, total], db);
+          if (!book.img) {
+            delete book.img;
+          }
         });
+        cb(err, [books, total], db);
       });
     }
   ], function (err, result, db) {

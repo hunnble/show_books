@@ -662,8 +662,31 @@ a.bookTitle {
   min-width: 300px;
   float: right;
 }
-.container {
-  margin-right: 30%;
+.userInfoDetail {
+  margin: @avatarSizeBg / 2 + 12px 12px 12px;
+  padding: 0 12px 12px;
+  background-color: @white;
+  text-align: center;
+  >.user-head {
+    .borderRadius(50%);
+    display: inline-block;
+    margin-top: -1 * @avatarSizeBg / 2;
+    width: @avatarSizeBg;
+    height: @avatarSizeBg;
+    background-color: @mainColor;
+    >img {
+      .borderRadius(50%);
+      height: 100%;
+      width: 100%;
+    }
+  }
+  >.user-text {
+    display: block;
+    height: 21px;
+    line-height: 21px;
+  }
+}
+.container, .user {
   >ul {
     margin: 12px;
     padding: 12px;
@@ -685,6 +708,18 @@ a.bookTitle {
       }
       padding: 6px 0;
     }
+  }
+}
+.container {
+  margin-right: 30%;
+}
+.user {
+  ul {
+    overflow: hidden;
+  }
+  li {
+    float: left;
+    width: 50%;
   }
 }
 
@@ -733,6 +768,10 @@ a.bookTitle {
   }
   .container {
     margin-right: 300px;
+  }
+  .user li {
+    float: none;
+    width: 100%;
   }
 }
 

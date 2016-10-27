@@ -770,30 +770,66 @@ a.bookTitle:hover {
   min-width: 300px;
   float: right;
 }
-.container {
-  margin-right: 30%;
+.userInfoDetail {
+  margin: 76px 12px 12px;
+  padding: 0 12px 12px;
+  background-color: #FFFFFF;
+  text-align: center;
 }
-.container > ul {
+.userInfoDetail > .user-head {
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: -64px;
+  width: 128px;
+  height: 128px;
+  background-color: #394347;
+}
+.userInfoDetail > .user-head > img {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+.userInfoDetail > .user-text {
+  display: block;
+  height: 21px;
+  line-height: 21px;
+}
+.container > ul,
+.user > ul {
   margin: 12px;
   padding: 12px;
   background-color: #FFFFFF;
 }
-.container > ul > li {
+.container > ul > li,
+.user > ul > li {
   padding: 6px 0;
 }
-.container > ul > li:not(:last-child) {
+.container > ul > li:not(:last-child),
+.user > ul > li:not(:last-child) {
   border-bottom: 1px solid #d7cfcf;
 }
-.container > ul > li .avatar {
+.container > ul > li .avatar,
+.user > ul > li .avatar {
   float: left;
   border-radius: 50%;
   width: 48px;
   height: 48px;
 }
-.container > ul > li > section {
+.container > ul > li > section,
+.user > ul > li > section {
   margin-left: 60px;
   min-height: 48px;
   font-size: 12px;
+}
+.container {
+  margin-right: 30%;
+}
+.user ul {
+  overflow: hidden;
+}
+.user li {
+  float: left;
+  width: 50%;
 }
 @font-face {
   font-family: 'icomoon';
@@ -834,6 +870,10 @@ a.bookTitle:hover {
   }
   .container {
     margin-right: 300px;
+  }
+  .user li {
+    float: none;
+    width: 100%;
   }
 }
 @media only all and (max-width: 640px) {
