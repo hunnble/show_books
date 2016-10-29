@@ -264,6 +264,7 @@ router.get('/archive/:username', function (req, res) {
       user: req.session.user,
       username: req.params.username,
       page: page,
+      pageNum: Math.ceil(total / book.perPage),
       isFirstPage: page <= 1,
       isLastPage: ((page - 1) * book.perPage + books.length) >= total,
       success: req.flash('success').toString(),

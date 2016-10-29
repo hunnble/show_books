@@ -328,7 +328,7 @@ a {
 }
 .panel > header {
   height: 32px;
-  background-color: #394347;
+  background-color: #CCCCCC;
   line-height: 32px;
   text-indent: 12px;
   color: #FFFFFF;
@@ -492,7 +492,6 @@ a.bookTitle:hover {
 .bookTitle {
   display: block;
   margin-right: 12px;
-  height: 21px;
   line-height: 21px;
   font-size: 16px;
   color: #222222;
@@ -510,6 +509,7 @@ a.bookTitle:hover {
   margin: 0;
   padding: 0 12px;
   width: 33.33333333%;
+  word-wrap: break-word;
 }
 #books > div > section {
   background: -moz-linear-gradient(top, #FFFFFF, rgba(255, 255, 255, 0.5));
@@ -806,7 +806,7 @@ a.bookTitle:hover {
 }
 .container > ul > li:not(:last-child),
 .user > ul > li:not(:last-child) {
-  border-bottom: 1px solid #d7cfcf;
+  border-bottom: 1px solid #BBBBBB;
 }
 .container > ul > li .avatar,
 .user > ul > li .avatar {

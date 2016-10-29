@@ -32,6 +32,8 @@
   <% if (!isFirstPage) { %>
     <span class="prepage"><a href="?p=<%= page-1 %>">上一页</a></span>
   <% } %>
+  <span>第<%= page %>页</span>
+  <span>共<%= pageNum %>页<span>
   <% if (!isLastPage) { %>
     <span class="nextpage"><a href="?p=<%= page+1 %>">下一页</a></span>
   <% } %>

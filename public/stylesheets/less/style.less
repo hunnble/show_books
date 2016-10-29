@@ -1,7 +1,8 @@
 @mainColor: #394347;
+@subMainColor: #CCCCCC;
 @black: #000000;
 @white: #FFFFFF;
-@lightGrey: #d7cfcf;
+@lightGrey: #BBBBBB;
 @darkGrey: #222222;
 @lightBlue: #99CCFF;
 @green: #99FF66;
@@ -370,7 +371,7 @@ a {
   background-color: @white;
   >header {
     height: 32px;
-    background-color: @mainColor;
+    background-color: @subMainColor;
     line-height: 32px;
     text-indent: 12px;
     color: @white;
@@ -450,7 +451,7 @@ a.bookTitle {
 .bookTitle {
   display: block;
   margin-right: 12px;
-  height: 21px;
+  // height: 21px;
   line-height: 21px;
   font-size: 16px;
   color: @darkGrey;
@@ -467,6 +468,7 @@ a.bookTitle {
   margin: 0;
   padding: 0 12px;
   width: percentage(1 / 3);
+  word-wrap: break-word;
   >section {
     .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.5));
     .borderBox();
