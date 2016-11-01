@@ -798,6 +798,12 @@ a.bookTitle:hover {
   height: 21px;
   line-height: 21px;
 }
+.user-head-file {
+  display: none;
+}
+.user-head-img {
+  cursor: pointer;
+}
 .container > ul,
 .user > ul {
   margin: 12px;

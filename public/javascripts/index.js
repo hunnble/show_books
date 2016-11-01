@@ -87,6 +87,10 @@ $(document).ready(function () {
 		$('.changeUserInfoForm').fadeIn(300);
 	});
 
+	$('.user-head-img').click(function () {
+		$('.user-head-file').click();
+	});
+
 	$('.user-head-file').on('change', function (e) {
 		var reader = new FileReader();
 		var file = e.target.files[0];
@@ -97,9 +101,12 @@ $(document).ready(function () {
 		reader.readAsDataURL(file);
 
 		reader.onload = function (e) {
+			var result = e.target.result;
+
 			$.post('/profile', {
-				head: e.target.result
+				head: result
 			});
+			$('.user-head-img').attr('src', result);
 		};
 	});
 
