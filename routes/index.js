@@ -53,19 +53,44 @@ router.get('/', function (req, res) {
         success: false
       });
     }
-    res.render('index', {
-      title: '主页',
-      user: req.session.user,
-      mostCollectedBooks: result[0],
-      mostSearchedBooks: result[1],
-      books: result[2][0],
-      page: parseInt(page, 10),
-      pageNum: Math.ceil(result[2][1] / book.perPage),
-      isFirstPage: page == 1,
-      isLastPage: ((page - 1) * book.perPage + result[2][0].length >= result[2][1]),
-      success: req.flash('success').toString(),
-      error: req.flash('error').toString()
+
+    var userheads = {};
+    var books = result[2][0];
+    for (var key in books) {
+      var _book = books[key];
+      if (!userheads[_book.username]) {
+        userheads[_book.username] = true;
+      }
+    }
+
+    var userheadsArr = Object.keys(userheads);
+    async.each(userheadsArr, function (username, cb) {
+      user.get(username, function (err, result) {
+        if (result && result.head) {
+          userheads[username] = result.head;
+        }
+        cb(err);
+      });
+    }, function (err) {
+      for (var key in books) {
+        var _book = books[key];
+        _book.userhead = userheads[_book.username];
+      }
+      res.render('index', {
+        title: '主页',
+        user: req.session.user,
+        mostCollectedBooks: result[0],
+        mostSearchedBooks: result[1],
+        books: books,
+        page: parseInt(page, 10),
+        pageNum: Math.ceil(result[2][1] / book.perPage),
+        isFirstPage: page == 1,
+        isLastPage: ((page - 1) * book.perPage + result[2][0].length >= result[2][1]),
+        success: req.flash('success').toString(),
+        error: req.flash('error').toString()
+      });
     });
+
   });
 
 });
@@ -338,8 +363,8 @@ router.post('/book', function (req, res) {
           isbn13: body.isbn13,
           summary: body.summary,
           username: _user.name,
-          img: body.img || '',
-          userhead: _user.head
+          img: body.img || ''
+          // userhead: _user.head
         };
 
         book.add(op, function (err) {
@@ -454,6 +479,19 @@ router.post('/editcomment/:username/:bookId', function (req, res) {
     req.flash('success', '提交成功');
     res.redirect('/comment/' + req.session.user.name + '/' + req.params.bookId);
   });
+});
+
+router.post('/profile', checkLogin);
+router.post('/profile', function (req, res) {
+  var body = req.body;
+
+  body.name = req.session.user.name;
+  user.update(body, function (err) {
+    if (err) {
+      console.error(err);
+    }
+  });
+
 });
 
 function checkLogin(req, res, next) {

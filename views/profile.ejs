@@ -3,6 +3,7 @@
   <div class="userInfoDetail">
     <div class="user-head">
       <img src="<%= userInfo.head %>" alt="">
+      <input type="file" class="user-head-file">
     </div>
     <span class="user-text user-name"><%= userInfo.name %></span>
     <span class="user-text user-summary">“<%= userInfo.summary %>”</span>
@@ -42,7 +43,11 @@
       <span>共<%= pageNum %>页<span>
     </div>
   </div>
-
-
 </div>
+<script>
+  <%- include ../public/javascripts/qiniu.min.js %>
+</script>
+<script>
+  <%- include ../public/javascripts/plupload.min.js %>
+</script>
 <%- include footer %>

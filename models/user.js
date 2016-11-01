@@ -98,7 +98,9 @@ User.prototype.remove = function (op, callback) {
 };
 
 User.prototype.update = function (op, callback) {
-  op.password = crypto.createHash('md5').update(op.password).digest('hex');
+  if (op.password) {
+    op.password = crypto.createHash('md5').update(op.password).digest('hex');
+  }
 
   async.waterfall([
     function (cb) {

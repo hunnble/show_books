@@ -87,4 +87,20 @@ $(document).ready(function () {
 		$('.changeUserInfoForm').fadeIn(300);
 	});
 
+	$('.user-head-file').on('change', function (e) {
+		var reader = new FileReader();
+		var file = e.target.files[0];
+
+		if (!(file.type.indexOf('image') === 0 && file.type && /\.(?:jpg|png|gif)$/.test(file.name))) {
+			return false;
+		}
+		reader.readAsDataURL(file);
+
+		reader.onload = function (e) {
+			$.post('/profile', {
+				head: e.target.result
+			});
+		};
+	});
+
 });
