@@ -25,12 +25,12 @@ User.prototype.get = function (name, callback) {
         cb(err, user, db);
       });
     }
-  ], function (err, result, db) {
+  ], function (err, user, db) {
     db && db.close();
     if (err) {
       return callback(err);
     }
-    callback(err, result);
+    callback(err, user);
   });
 };
 

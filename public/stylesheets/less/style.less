@@ -282,6 +282,10 @@ a {
 //   }
 // }
 
+.hide {
+  display: none;
+}
+
 .page {
   padding: 14px;
   text-align: right;
@@ -302,6 +306,12 @@ a {
   }
 }
 
+.avatar-sm {
+  .borderRadius(50%);
+  width: @avatarSizeSm;
+  height: @avatarSizeSm;
+  vertical-align: middle;
+}
 .center {
   position: absolute;
   top: 50%;
@@ -319,10 +329,10 @@ a {
   background-color: @white;
   border-radius: 5px;
   text-align: center;
-  >h1, >h2, >h3, >h4, >h5, >h6 {
+  h1, h2, h3, h4, h5, h6 {
     color: @mainColor;
   }
-  >input {
+  input {
     .borderBox();
     margin: 14px auto;
     height: 42px;
@@ -697,6 +707,15 @@ a.bookTitle {
 }
 .user-head-img {
   cursor: pointer;
+}
+.changeUserInfoForm {
+  .form();
+  margin: 0 auto;
+  input[type=text], input[type=password], input[type=email] {
+    display: inline-block;
+    height: 28px;
+    width: 50%;
+  }
 }
 .container, .user {
   >ul {

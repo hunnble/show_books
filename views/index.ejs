@@ -4,9 +4,11 @@
     <header>个人信息</header>
     <div>
       <% if (user) { %>
-        <div class="avatar-sm"></div>
-        <a href="/profile"><%= user.name %></a>
-        <div></div>
+        <img class="avatar-sm" src="<%= user.head %>" alt="">
+        <span>
+          <a class="link" href="/profile"><%= user.name %></a>
+          <span>“<%= user.summary %>”</span>
+        </span>
       <% } else { %>
         <div>没有账号?先去<a class="link" href="/register">注册</a></div>
       <% } %>

@@ -208,6 +208,9 @@ a {
   width: 100%;
   background-color: #F2F2F2;
 }
+.hide {
+  display: none;
+}
 .page {
   padding: 14px;
   text-align: right;
@@ -234,6 +237,12 @@ a {
   background-color: #F2F2F2;
   color: #394347;
 }
+.avatar-sm {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  vertical-align: middle;
+}
 .center {
   position: absolute;
   top: 50%;
@@ -252,24 +261,24 @@ a {
   border-radius: 5px;
   text-align: center;
 }
-.form > h1,
-.form > h2,
-.form > h3,
-.form > h4,
-.form > h5,
-.form > h6 {
+.form h1,
+.form h2,
+.form h3,
+.form h4,
+.form h5,
+.form h6 {
   color: #394347;
 }
-.form > input {
+.form input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 14px auto;
   height: 42px;
   line-height: 42px;
 }
-.form > input[type=text],
-.form > input[type=password],
-.form > input[type=email] {
+.form input[type=text],
+.form input[type=password],
+.form input[type=email] {
   display: block;
   border: 2px solid #F2F2F2;
   border-radius: 7px;
@@ -277,9 +286,9 @@ a {
   text-indent: 7px;
   outline: none;
 }
-.form > input[type=submit],
-.form > input[type=reset],
-.form > input[type=button] {
+.form input[type=submit],
+.form input[type=reset],
+.form input[type=button] {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -294,18 +303,18 @@ a {
   line-height: 30px;
   min-width: 64px;
 }
-.form > input[type=submit]:hover,
-.form > input[type=reset]:hover,
-.form > input[type=button]:hover {
+.form input[type=submit]:hover,
+.form input[type=reset]:hover,
+.form input[type=button]:hover {
   background-color: #22282b;
 }
-.form > input[type=checkbox] {
+.form input[type=checkbox] {
   display: inline-block;
   margin-right: 0;
   vertical-align: middle;
 }
-.form > input[type=submit],
-.form > input[type=reset] {
+.form input[type=submit],
+.form input[type=reset] {
   width: 45%;
 }
 .form > span {
@@ -342,24 +351,24 @@ a {
   border-radius: 5px;
   text-align: center;
 }
-.panel > div > form > h1,
-.panel > div > form > h2,
-.panel > div > form > h3,
-.panel > div > form > h4,
-.panel > div > form > h5,
-.panel > div > form > h6 {
+.panel > div > form h1,
+.panel > div > form h2,
+.panel > div > form h3,
+.panel > div > form h4,
+.panel > div > form h5,
+.panel > div > form h6 {
   color: #394347;
 }
-.panel > div > form > input {
+.panel > div > form input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 14px auto;
   height: 42px;
   line-height: 42px;
 }
-.panel > div > form > input[type=text],
-.panel > div > form > input[type=password],
-.panel > div > form > input[type=email] {
+.panel > div > form input[type=text],
+.panel > div > form input[type=password],
+.panel > div > form input[type=email] {
   display: block;
   border: 2px solid #F2F2F2;
   border-radius: 7px;
@@ -367,9 +376,9 @@ a {
   text-indent: 7px;
   outline: none;
 }
-.panel > div > form > input[type=submit],
-.panel > div > form > input[type=reset],
-.panel > div > form > input[type=button] {
+.panel > div > form input[type=submit],
+.panel > div > form input[type=reset],
+.panel > div > form input[type=button] {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -384,18 +393,18 @@ a {
   line-height: 30px;
   min-width: 64px;
 }
-.panel > div > form > input[type=submit]:hover,
-.panel > div > form > input[type=reset]:hover,
-.panel > div > form > input[type=button]:hover {
+.panel > div > form input[type=submit]:hover,
+.panel > div > form input[type=reset]:hover,
+.panel > div > form input[type=button]:hover {
   background-color: #22282b;
 }
-.panel > div > form > input[type=checkbox] {
+.panel > div > form input[type=checkbox] {
   display: inline-block;
   margin-right: 0;
   vertical-align: middle;
 }
-.panel > div > form > input[type=submit],
-.panel > div > form > input[type=reset] {
+.panel > div > form input[type=submit],
+.panel > div > form input[type=reset] {
   width: 45%;
 }
 .panel > div > form > span {
@@ -803,6 +812,90 @@ a.bookTitle:hover {
 }
 .user-head-img {
   cursor: pointer;
+}
+.changeUserInfoForm {
+  max-width: 400px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+}
+.changeUserInfoForm h1,
+.changeUserInfoForm h2,
+.changeUserInfoForm h3,
+.changeUserInfoForm h4,
+.changeUserInfoForm h5,
+.changeUserInfoForm h6 {
+  color: #394347;
+}
+.changeUserInfoForm input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 14px auto;
+  height: 42px;
+  line-height: 42px;
+}
+.changeUserInfoForm input[type=text],
+.changeUserInfoForm input[type=password],
+.changeUserInfoForm input[type=email] {
+  display: block;
+  border: 2px solid #F2F2F2;
+  border-radius: 7px;
+  width: 100%;
+  text-indent: 7px;
+  outline: none;
+}
+.changeUserInfoForm input[type=submit],
+.changeUserInfoForm input[type=reset],
+.changeUserInfoForm input[type=button] {
+  border: 0 solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 3px 7px;
+  line-height: 28px;
+  background-color: #394347;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  line-height: 30px;
+  min-width: 64px;
+}
+.changeUserInfoForm input[type=submit]:hover,
+.changeUserInfoForm input[type=reset]:hover,
+.changeUserInfoForm input[type=button]:hover {
+  background-color: #22282b;
+}
+.changeUserInfoForm input[type=checkbox] {
+  display: inline-block;
+  margin-right: 0;
+  vertical-align: middle;
+}
+.changeUserInfoForm input[type=submit],
+.changeUserInfoForm input[type=reset] {
+  width: 45%;
+}
+.changeUserInfoForm > span {
+  display: inline-block;
+  margin: 14px 0;
+  height: 24px;
+  vertical-align: middle;
+  line-height: 24px;
+}
+.changeUserInfoForm .form-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.changeUserInfoForm input[type=text],
+.changeUserInfoForm input[type=password],
+.changeUserInfoForm input[type=email] {
+  display: inline-block;
+  height: 28px;
+  width: 50%;
 }
 .container > ul,
 .user > ul {

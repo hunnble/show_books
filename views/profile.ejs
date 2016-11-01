@@ -10,8 +10,14 @@
     <% if (userInfo.name === user.name) { %>
       <button class="changeUserInfoBtn" type="button">修改信息</button>
     <% } %>
-    <form class="changeUserInfoForm" method="post">
-
+    <form class="changeUserInfoForm hide" method="post" action="/profile">
+      <div>
+        <label for="summary">个人简介</label><input type="text" name="summary">
+      </div>
+      <div>
+        <label for="email">邮箱地址</label><input type="email" name="email">
+      </div>
+      <button type="submit">确认修改</button>
     </form>
   </div>
   <div class="user">

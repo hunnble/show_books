@@ -84,7 +84,7 @@ $(document).ready(function () {
 	 * profile
 	 */
 	$('.changeUserInfoBtn').click(function () {
-		$('.changeUserInfoForm').fadeIn(300);
+		$('.changeUserInfoForm').toggleClass('hide');
 	});
 
 	$('.user-head-img').click(function () {

@@ -72,6 +72,9 @@ router.get('/', function (req, res) {
         cb(err);
       });
     }, function (err) {
+      if (err) {
+        return console.error(err);
+      }
       for (var key in books) {
         var _book = books[key];
         _book.userhead = userheads[_book.username];
@@ -141,6 +144,25 @@ router.get('/profile/:username', function(req, res, next) {
       isLastPage: ((page - 1) * book.perPage + result[0][0].length >= result[0][1]),
       success: req.flash('success').toString(),
       error: req.flash('error').toString()
+    });
+  });
+});
+
+router.post('/profile', checkLogin);
+router.post('/profile', function (req, res) {
+  var body = req.body;
+
+  body.name = req.session.user.name;
+  user.update(body, function (err) {
+    if (err) {
+      return console.error(err);
+    }
+    user.get(body.name, function (err, _user) {
+      if (err) {
+        return console.error(err);
+      }
+      req.session.user = _user;
+      return res.redirect('/profile');
     });
   });
 });
@@ -479,19 +501,6 @@ router.post('/editcomment/:username/:bookId', function (req, res) {
     req.flash('success', '提交成功');
     res.redirect('/comment/' + req.session.user.name + '/' + req.params.bookId);
   });
-});
-
-router.post('/profile', checkLogin);
-router.post('/profile', function (req, res) {
-  var body = req.body;
-
-  body.name = req.session.user.name;
-  user.update(body, function (err) {
-    if (err) {
-      console.error(err);
-    }
-  });
-
 });
 
 function checkLogin(req, res, next) {
