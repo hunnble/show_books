@@ -418,9 +418,10 @@ router.post('/book', function (req, res) {
 
 router.get('/comment/:username/:bookId', checkLogin);
 router.get('/comment/:username/:bookId', function (req, res) {
+  var username = decodeURIComponent(req.params.username)
   book.get({
     bookId: req.params.bookId,
-    username: decodeURIComponent(req.params.username)
+    username: username
   }, function (err, _book) {
     if (!_book || err) {
       req.flash('error', '获取书籍信息失败');
@@ -429,6 +430,7 @@ router.get('/comment/:username/:bookId', function (req, res) {
     res.render('comment', {
       title: '笔记',
       user: req.session.user,
+      username: username,
       book: _book,
       success: req.flash('success').toString(),
       error: req.flash('error').toString()

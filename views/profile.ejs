@@ -35,6 +35,9 @@
       <% }) %>
     </ul>
     <div class="page">
+      <a class="link" href="/archive/<%= userInfo.name %>">
+        <h4>查看全部收藏</h4>
+      </a>
       <% if (!isFirstPage) { %>
         <span class="prepage">
           <a href="/?page=<%- page - 1 %>">上一页</a>

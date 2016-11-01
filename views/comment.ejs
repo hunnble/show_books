@@ -16,10 +16,14 @@
     <script>
       <%- include ../node_modules/markdown/lib/markdown.js %>
     </script>
-  <% } else { %>
+  <% } else if (user.name === username) { %>
     <div class="center nocomment">
       <h4>你还没有写过这本书的笔记</h4>
       <button type="button" class="createCommentBtn">创建笔记</button>
+    </div>
+  <% } else { %>
+    <div class="center nocomment">
+      <h4>收藏者还没有写过这本书的笔记</h4>
     </div>
   <% } %>
 <%- include footer -%>
