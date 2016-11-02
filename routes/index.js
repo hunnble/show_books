@@ -106,6 +106,7 @@ router.get('/profile', function (req, res) {
   return res.redirect('/profile/' + req.session.user.name);
 });
 
+router.get('/profile/:username', checkLogin);
 router.get('/profile/:username', function(req, res, next) {
   var page = req.query.page ? req.query.page : 1;
   var username = '';
@@ -153,6 +154,22 @@ router.post('/profile', function (req, res) {
   var body = req.body;
 
   body.name = req.session.user.name;
+  if (body.password) {
+    if (validateRegister(body.name, body.password, body.password2).success) {
+      var password = crypto.createHash('md5').update(body.password).digest('hex');
+
+      if (password === req.session.user.password) {
+        body.password = crypto.createHash('md5').update(body.password2).digest('hex');
+      } else {
+        // flash: 旧密码不对
+        return res.redirect('/a');
+      }
+    } else {
+      // flash: 密码格式错误
+      return res.redirect('/b');
+    }
+    delete body.password2;
+  }
   user.update(body, function (err) {
     if (err) {
       return console.error(err);

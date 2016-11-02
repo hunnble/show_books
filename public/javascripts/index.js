@@ -85,13 +85,23 @@ $(document).ready(function () {
 	 */
 	$('.changeUserInfoBtn').click(function () {
 		$('.changeUserInfoForm').toggleClass('hide');
+		$('.changeUserPswordForm').addClass('hide');
 	});
 
-	$('.user-head-img').click(function () {
-		$('.user-head-file').click();
+	$('.changeUserPswordBtn').click(function () {
+		$('.changeUserPswordForm').toggleClass('hide');
+		$('.changeUserInfoForm').addClass('hide');
 	});
 
-	$('.user-head-file').on('change', function (e) {
+	var $userHeadFile = $('.userHeadFile');
+
+	$('.userHeadImg').click(function () {
+		if ($userHeadFile) {
+			$userHeadFile.click();
+		}
+	});
+
+	$userHeadFile && $userHeadFile.on('change', function (e) {
 		var reader = new FileReader();
 		var file = e.target.files[0];
 
@@ -106,7 +116,7 @@ $(document).ready(function () {
 			$.post('/profile', {
 				head: result
 			});
-			$('.user-head-img').attr('src', result);
+			$('.userHeadImg').attr('src', result);
 		};
 	});
 

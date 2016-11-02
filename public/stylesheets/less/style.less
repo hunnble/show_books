@@ -683,32 +683,31 @@ a.bookTitle {
   padding: 0 12px 12px;
   background-color: @white;
   text-align: center;
-  >.user-head {
+  >.userHead {
     .borderRadius(50%);
     display: inline-block;
     margin-top: -1 * @avatarSizeBg / 2;
     width: @avatarSizeBg;
     height: @avatarSizeBg;
-    background-color: @mainColor;
     >img {
       .borderRadius(50%);
       height: 100%;
       width: 100%;
     }
   }
-  >.user-text {
+  >.userText {
     display: block;
     height: 21px;
     line-height: 21px;
   }
 }
-.user-head-file {
+.userHeadFile {
   display: none;
 }
-.user-head-img {
+.userHeadImg {
   cursor: pointer;
 }
-.changeUserInfoForm {
+.changeUserForm {
   .form();
   margin: 0 auto;
   input[type=text], input[type=password], input[type=email] {

@@ -789,55 +789,54 @@ a.bookTitle:hover {
   background-color: #FFFFFF;
   text-align: center;
 }
-.userInfoDetail > .user-head {
+.userInfoDetail > .userHead {
   border-radius: 50%;
   display: inline-block;
   margin-top: -64px;
   width: 128px;
   height: 128px;
-  background-color: #394347;
 }
-.userInfoDetail > .user-head > img {
+.userInfoDetail > .userHead > img {
   border-radius: 50%;
   height: 100%;
   width: 100%;
 }
-.userInfoDetail > .user-text {
+.userInfoDetail > .userText {
   display: block;
   height: 21px;
   line-height: 21px;
 }
-.user-head-file {
+.userHeadFile {
   display: none;
 }
-.user-head-img {
+.userHeadImg {
   cursor: pointer;
 }
-.changeUserInfoForm {
+.changeUserForm {
   max-width: 400px;
   background-color: #FFFFFF;
   border-radius: 5px;
   text-align: center;
   margin: 0 auto;
 }
-.changeUserInfoForm h1,
-.changeUserInfoForm h2,
-.changeUserInfoForm h3,
-.changeUserInfoForm h4,
-.changeUserInfoForm h5,
-.changeUserInfoForm h6 {
+.changeUserForm h1,
+.changeUserForm h2,
+.changeUserForm h3,
+.changeUserForm h4,
+.changeUserForm h5,
+.changeUserForm h6 {
   color: #394347;
 }
-.changeUserInfoForm input {
+.changeUserForm input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 14px auto;
   height: 42px;
   line-height: 42px;
 }
-.changeUserInfoForm input[type=text],
-.changeUserInfoForm input[type=password],
-.changeUserInfoForm input[type=email] {
+.changeUserForm input[type=text],
+.changeUserForm input[type=password],
+.changeUserForm input[type=email] {
   display: block;
   border: 2px solid #F2F2F2;
   border-radius: 7px;
@@ -845,9 +844,9 @@ a.bookTitle:hover {
   text-indent: 7px;
   outline: none;
 }
-.changeUserInfoForm input[type=submit],
-.changeUserInfoForm input[type=reset],
-.changeUserInfoForm input[type=button] {
+.changeUserForm input[type=submit],
+.changeUserForm input[type=reset],
+.changeUserForm input[type=button] {
   border: 0 solid transparent;
   border-radius: 4px;
   display: inline-block;
@@ -862,37 +861,37 @@ a.bookTitle:hover {
   line-height: 30px;
   min-width: 64px;
 }
-.changeUserInfoForm input[type=submit]:hover,
-.changeUserInfoForm input[type=reset]:hover,
-.changeUserInfoForm input[type=button]:hover {
+.changeUserForm input[type=submit]:hover,
+.changeUserForm input[type=reset]:hover,
+.changeUserForm input[type=button]:hover {
   background-color: #22282b;
 }
-.changeUserInfoForm input[type=checkbox] {
+.changeUserForm input[type=checkbox] {
   display: inline-block;
   margin-right: 0;
   vertical-align: middle;
 }
-.changeUserInfoForm input[type=submit],
-.changeUserInfoForm input[type=reset] {
+.changeUserForm input[type=submit],
+.changeUserForm input[type=reset] {
   width: 45%;
 }
-.changeUserInfoForm > span {
+.changeUserForm > span {
   display: inline-block;
   margin: 14px 0;
   height: 24px;
   vertical-align: middle;
   line-height: 24px;
 }
-.changeUserInfoForm .form-footer {
+.changeUserForm .form-footer {
   position: absolute;
   bottom: 14px;
   left: 0;
   width: 100%;
   text-align: center;
 }
-.changeUserInfoForm input[type=text],
-.changeUserInfoForm input[type=password],
-.changeUserInfoForm input[type=email] {
+.changeUserForm input[type=text],
+.changeUserForm input[type=password],
+.changeUserForm input[type=email] {
   display: inline-block;
   height: 28px;
   width: 50%;
