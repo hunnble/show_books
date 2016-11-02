@@ -1,4 +1,13 @@
-$(document).ready(function () {
+// $(document).ready(function () {
+define(['jquery'], function ($) {
+	var start = function () {
+		$(doucment).ready(run());
+	};
+});
+
+return start;
+
+function run () {
 
 	/**
 	 * all
@@ -120,4 +129,5 @@ $(document).ready(function () {
 		};
 	});
 
-});
+// });
+}
