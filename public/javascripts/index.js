@@ -3,7 +3,7 @@ $(document).ready(function () {
 	/**
 	 * all
 	 */
-	// $('.ratyli').ratyli();
+	$('.flashWrapper').delay(5000).fadeOut(1000);
 
 	$('.navSwitcher').click(function () {
 		var $navSwitcher = $('.navSwitcher');
@@ -15,7 +15,7 @@ $(document).ready(function () {
 			$nav.animate({
 				'top': '-' + $nav.css('height')
 			}, 300);
-			$navSwitcher.find('span').css('backgroundColor', '#6699CC');
+			$navSwitcher.find('span').css('backgroundColor', '#222222');
 		} else {
 			$nav.animate({
 				'top': 0

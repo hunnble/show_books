@@ -73,6 +73,7 @@ router.get('/', function (req, res) {
       });
     }, function (err) {
       if (err) {
+        req.flash('error', '加载失败, 请重试');
         return console.error(err);
       }
       for (var key in books) {
@@ -159,11 +160,11 @@ router.post('/profile', function (req, res) {
       var password = crypto.createHash('md5').update(body.oldPassword).digest('hex');
 
       if (password !== req.session.user.password) {
-        // flash: 旧密码不对
+        req.flash('error', '修改失败, 当前密码填写错误')
         return res.redirect('/profile');
       }
     } else {
-      // flash: 密码格式错误
+      req.flash('error', '修改失败, 密码应当是6-20位英文或数字的组合');
       return res.redirect('/profile');
     }
     delete body.oldPassword;
@@ -177,30 +178,11 @@ router.post('/profile', function (req, res) {
         return console.error(err);
       }
       req.session.user = _user;
+      req.flash('success', '修改成功');
       return res.redirect('/profile');
     });
   });
 });
-
-// router.get('/logs', function(req, res) {
-//   var page = req.query.p ? parseInt(req.query.p, 10) : 1;
-
-//   log.getAll({}, page, function (err, logs, total, page) {
-//     if (!Array.isArray(logs)) {
-//         logs = [];
-//     }
-//     res.render('log', {
-//       title: '书单',
-//       logs: logs,
-//       user: req.session.user,
-//       page: page,
-//       isFirstPage: page <= 1,
-//       isLastPage: ((page - 1) * log.perPage + logs.length) >= total,
-//       success: req.flash('success').toString(),
-//       error: req.flash('error').toString()
-//     });
-//   });
-// });
 
 router.get('/register', checkNotLogin);
 router.get('/register', function (req, res) {
@@ -378,7 +360,7 @@ router.post('/book', function (req, res) {
       },
       function (_book, cb) {
         if (_book) {
-          req.flash('error', '已经收藏了此书籍');
+          req.flash('error', '已经收藏过这本书');
           return res.send({
             success: false
           });
@@ -400,7 +382,6 @@ router.post('/book', function (req, res) {
           summary: body.summary,
           username: _user.name,
           img: body.img || ''
-          // userhead: _user.head
         };
 
         book.add(op, function (err) {
@@ -463,10 +444,12 @@ router.post('/comment', function (req, res) {
       username: req.session.user.name
     }, function (err) {
       if (err) {
+        req.flash('error', '提交失败, 请重试');
         res.send({
           success: false
         });
       } else {
+        req.flash('success', '提交成功');
         res.send({
           success: true
         });

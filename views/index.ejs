@@ -58,12 +58,13 @@
   <ul>
     <% books.forEach(function (book) { %>
       <li>
-        <a href="/profile/<%= book.username %>">
-          <img class="avatar" src="<%= book.userhead %>" alt="" title="<%= book.username %>" />
+        <a href="/comment/<%= book.username %>/<%= book.bookId %>">
+          <img class="avatar" src="<%= book.img %>" alt="" title="<%= book.name %>" />
         </a>
         <section class="bookList">
           <a class="bookTitle" href="/comment/<%= book.username %>/<%= book.bookId %>"><%= book.name %></a>
-          <span class="bookAuthor"><%= book.author %></span>
+          作者:<span class="bookAuthor"><%= book.author %></span>
+          收藏者:<a class="link" href="/profile/<%= book.username %>"><%= book.username %></a>
         </section>
       </li>
     <% }) %>

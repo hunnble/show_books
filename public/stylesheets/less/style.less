@@ -170,20 +170,26 @@ a {
   font-size: 21px;
 }
 
-.success {
-  color: @green;
-}
-.error {
-  color: @red;
-}
-.success, .error {
-  display: none;
-  // display: block;
-  padding: 7px;
+.flashWrapper {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   text-align: center;
-  background-color: @white;
-  font-size: 16px;
+  .success {
+    color: @green;
+  }
+  .error {
+    color: @red;
+  }
+  .flash {
+    // display: none;
+    display: block;
+    padding: 7px;
+    width: 100%;
+    text-align: center;
+    background-color: @white;
+    font-size: 16px;
+  }
 }
 .link {
   color: @lightBlue;
@@ -689,6 +695,7 @@ a.bookTitle {
     margin-top: -1 * @avatarSizeBg / 2;
     width: @avatarSizeBg;
     height: @avatarSizeBg;
+    background-color: @white;
     >img {
       .borderRadius(50%);
       height: 100%;

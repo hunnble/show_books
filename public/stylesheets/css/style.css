@@ -122,15 +122,20 @@ a {
   color: #99CCFF;
   font-size: 21px;
 }
-.success {
+.flashWrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.flashWrapper .success {
   color: #99FF66;
 }
-.error {
+.flashWrapper .error {
   color: #FF0033;
 }
-.success,
-.error {
-  display: none;
+.flashWrapper .flash {
+  display: block;
   padding: 7px;
   width: 100%;
   text-align: center;
@@ -795,6 +800,7 @@ a.bookTitle:hover {
   margin-top: -64px;
   width: 128px;
   height: 128px;
+  background-color: #FFFFFF;
 }
 .userInfoDetail > .userHead > img {
   border-radius: 50%;

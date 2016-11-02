@@ -1,4 +1,16 @@
 </article>
+<div class="flashWrapper">
+  <% if (success) { %>
+    <span class="flash success">
+      <%- success %>
+    </span>
+  <% } %>
+  <% if (error) { %>
+    <span class="flash error">
+      <%- error %>
+    </span>
+  <% } %>
+</div>
 <script>
   <%- include ../public/javascripts/jquery.min.js %>
 </script>
