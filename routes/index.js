@@ -155,20 +155,18 @@ router.post('/profile', function (req, res) {
 
   body.name = req.session.user.name;
   if (body.password) {
-    if (validateRegister(body.name, body.password, body.password2).success) {
-      var password = crypto.createHash('md5').update(body.password).digest('hex');
+    if (validateRegister(body.name, body.oldPassword, body.password).success) {
+      var password = crypto.createHash('md5').update(body.oldPassword).digest('hex');
 
-      if (password === req.session.user.password) {
-        body.password = crypto.createHash('md5').update(body.password2).digest('hex');
-      } else {
+      if (password !== req.session.user.password) {
         // flash: 旧密码不对
-        return res.redirect('/a');
+        return res.redirect('/profile');
       }
     } else {
       // flash: 密码格式错误
-      return res.redirect('/b');
+      return res.redirect('/profile');
     }
-    delete body.password2;
+    delete body.oldPassword;
   }
   user.update(body, function (err) {
     if (err) {
@@ -321,7 +319,6 @@ router.get('/archive/:username', function (req, res) {
       req.flash('error', '获取书籍信息失败');
       return res.redirect('/');
     }
-    console.log(total);
     res.render('archive', {
       title: '目录',
       books: books,
