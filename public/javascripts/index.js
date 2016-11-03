@@ -1,13 +1,8 @@
-// $(document).ready(function () {
 define(['jquery'], function ($) {
-	var start = function () {
-		$(doucment).ready(run());
-	};
+	start($);
 });
 
-return start;
-
-function run () {
+function start ($) {
 
 	/**
 	 * all
@@ -46,7 +41,7 @@ function run () {
 				'bookId': $(this).parent().find('.bookId').val(),
         'name': $removeItem.find('.name').html(),
         'author': $removeItem.find('.author').html(),
-								'commentId': null
+				'commentId': null
 			}, function (data) {
 				data.success && $removeItem.remove();
 			});
@@ -128,6 +123,5 @@ function run () {
 			$('.userHeadImg').attr('src', result);
 		};
 	});
-
-// });
+	
 }

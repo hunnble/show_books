@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -32,7 +32,7 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({
     db: settings.db,
-    url: 'mongodb://localhost/' + settings.db
+    url: settings.url
   })
 }));
 app.use(flash());
