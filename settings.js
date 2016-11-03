@@ -5,7 +5,6 @@ var settings = {
     port: 27017,
     USERNAME: 'booklist_users',
     BOOKNAME: 'booklist_books',
-    LOGNAME: 'booklist_logs',
     BOOKSRANK: 'booklist_booksRank',
     // url: 'mongodb://localhost:27017/booklist'
     url: 'mongodb://booker:booker0000@ds021922.mlab.com:21922/booklist'
