@@ -1,5 +1,9 @@
 <%- include header -%>
-  <h1><%= message %></h1>
-  <h2><%= error.status %></h2>
-  <pre><%= error.stack %></pre>
+  <div class="center textCenter">
+    <img src="/images/error.jpeg" alt="">
+    <p class="textCenter">你和你想打开的页面没有缘分, <a href="/" class="link">放弃</a>吧</p>
+  </div>
+  <script>
+    <%- include ../public/javascripts/error.js %>
+  </script>
 <%- include footer -%>

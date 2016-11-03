@@ -115,6 +115,10 @@ a {
 .btn-sm:hover {
   background-color: #6cc9ef;
 }
+.textCenter {
+  text-align: center;
+  vertical-align: middle;
+}
 #dialog {
   position: fixed;
   top: 0;
@@ -139,12 +143,6 @@ a {
   width: 100%;
   text-align: center;
 }
-.flashWrapper .success {
-  color: #99FF66;
-}
-.flashWrapper .error {
-  color: #FF0033;
-}
 .flashWrapper .flash {
   display: block;
   padding: 7px;
@@ -152,6 +150,12 @@ a {
   text-align: center;
   background-color: #FFFFFF;
   font-size: 16px;
+}
+.success {
+  color: #99FF66;
+}
+.error {
+  color: #FF0033;
 }
 .link {
   color: #99CCFF;
