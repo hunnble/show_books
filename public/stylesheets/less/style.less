@@ -1,5 +1,5 @@
-@mainColor: #394347;
-@subMainColor: #CCCCCC;
+@mainColor: #1382af;
+@subMainColor: #5abbeb;
 @black: #000000;
 @white: #FFFFFF;
 @lightGrey: #BBBBBB;
@@ -15,6 +15,7 @@
 @avatarSizeBg: 128px;
 @avatarSize: 80px;
 @avatarSizeSm: 48px;
+@level0: 100;
 @level1: 10;
 @level2: 9;
 
@@ -162,12 +163,23 @@ a {
   box-sizing: border-box;
 }
 
-.ratyli {
-  color: @lightBlue;
+#dialog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: @black;
+  opacity: 0.5;
+  z-index: @level0;
 }
-.ratyli .rate{
-  color: @lightBlue;
-  font-size: 21px;
+#loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .flashWrapper {
@@ -526,7 +538,6 @@ a.bookTitle {
 
 .booksWrapper {
   padding: 12px;
-  overflow-x: scroll;
 }
 .book {
   .topLinearBgColorMixin(@white, rgba(255, 255, 255, 0.2));
@@ -742,6 +753,9 @@ a.bookTitle {
         margin-left: @avatarSizeSm + 12px;
         min-height: @avatarSizeSm;
         font-size: 12px;
+        .bookCommentNum {
+          float: right;
+        }
       }
       padding: 6px 0;
     }

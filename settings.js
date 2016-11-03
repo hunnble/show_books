@@ -7,8 +7,8 @@ var settings = {
     BOOKNAME: 'booklist_books',
     LOGNAME: 'booklist_logs',
     BOOKSRANK: 'booklist_booksRank',
-    url: 'mongodb://localhost:27017/booklist'
-    // url: 'mongodb://booklist-user:booklist0000@ds055564.mlab.com:55564/booklist'
+    // url: 'mongodb://localhost:27017/booklist'
+    url: 'mongodb://booker:booker0000@ds021922.mlab.com:21922/booklist'
 };
 
 module.exports = settings;

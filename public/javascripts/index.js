@@ -7,7 +7,21 @@ function start ($) {
 	/**
 	 * all
 	 */
-	$('.flashWrapper').delay(5000).fadeOut(1000);
+	var $dialog = $('#dialog');
+	hideDialog();
+
+	$('form').submit(showDialog);
+	$('a').click(showDialog);
+
+	function showDialog () {
+		$dialog.removeClass('hide');
+	}
+
+	function hideDialog () {
+		$dialog.addClass('hide');
+	}
+
+	$('.flashWrapper').delay(3000).fadeOut(500);
 
 	$('.navSwitcher').click(function () {
 		var $navSwitcher = $('.navSwitcher');
@@ -35,6 +49,7 @@ function start ($) {
     var $removeItem = $(this).parent().parent();
 
     if (confirm('确认删除?')) {
+			showDialog();
 			$.post('/book', {
 				'_method': 'delete',
 				'username': window.location.href.split('/').reverse()[0],
@@ -43,7 +58,10 @@ function start ($) {
         'author': $removeItem.find('.author').html(),
 				'commentId': null
 			}, function (data) {
-				data.success && $removeItem.remove();
+				if (data.success) {
+					$removeItem.remove();
+					hideDialog();
+				}
 			});
     }
   });
@@ -59,14 +77,17 @@ function start ($) {
     var $removeItem = $(this).parent();
 
     if (confirm('确认删除?')) {
+			showDialog();
 			$.post('/comment', {
 				'_method': 'delete',
         'name': decodeURI(window.location.href.split('/').reverse()[0]),
         'commentId': $removeItem.find('.commentId').val()
       }, function (data) {
-				data.success && $removeItem.remove();
+				if (data.success) {
+					$removeItem.remove();
+					hideDialog();
+				}
 			});
-
     }
   });
 
@@ -123,5 +144,5 @@ function start ($) {
 			$('.userHeadImg').attr('src', result);
 		};
 	});
-	
+
 }

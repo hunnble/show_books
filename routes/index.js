@@ -5,13 +5,11 @@ var crypto = require('crypto');
 var markdown = require('markdown').markdown;
 var Book = require('../models/book.js');
 var User = require('../models/user.js');
-var Log = require('../models/log.js');
 var BooksRank = require('../models/booksRank.js');
 
 var router = express.Router();
 var book = new Book();
 var user = new User();
-var log  = new Log();
 var booksRank = new BooksRank();
 
 router.get('/', function (req, res) {

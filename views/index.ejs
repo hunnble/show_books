@@ -65,6 +65,9 @@
           <a class="bookTitle" href="/comment/<%= book.username %>/<%= book.bookId %>"><%= book.name %></a>
           作者:<span class="bookAuthor"><%= book.author %></span>
           收藏者:<a class="link" href="/profile/<%= book.username %>"><%= book.username %></a>
+          <% if (book.comments.length > 0) { %>
+            <span class="bookCommentNum"><%= book.comments.length %>篇笔记</span>
+          <% } %>
         </section>
       </li>
     <% }) %>
