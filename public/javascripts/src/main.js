@@ -1,8 +1,8 @@
 requirejs.config({
-  baseUrl: '/javascripts',
+  baseUrl: '/javascripts/dist',
   paths: {
     jquery: 'jquery.min'
   }
 });
 
-requirejs(['index']);
+requirejs(['index.min']);
