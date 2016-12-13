@@ -1,11 +1,11 @@
-@mainColor: #1382af;
-@subMainColor: #5abbeb;
+@mainColor: #444444;
+@subMainColor: #e1e1e1;
 @black: #000000;
 @white: #FFFFFF;
 @lightGrey: #BBBBBB;
 @darkGrey: #222222;
 @lightBlue: #99CCFF;
-@green: #99FF66;
+@green: #80bd01;
 @red: #FF0033;
 @lightYellow: #FFFF66;
 @sliver: #F2F2F2;
@@ -15,6 +15,7 @@
 @avatarSizeBg: 128px;
 @avatarSize: 80px;
 @avatarSizeSm: 48px;
+@radius: 3px;
 @level0: 100;
 @level1: 10;
 @level2: 9;
@@ -221,12 +222,12 @@ a {
   cursor: pointer;
   >span {
     display: block;
-    margin-top: percentage(0.8 / 6);
-    width: 80%;
-    height: percentage(0.8 / 9);
+    margin-top: percentage(0.4 / 6);
+    width: 40%;
+    height: percentage(0.4 / 9);
     background-color: @white;
     &:first-child {
-      margin-top: 20%;
+      margin-top: 40%;
     }
   }
 }
@@ -275,7 +276,7 @@ a {
   height: 100%;
   width: 100%;
   background-color: @sliver;
-  // background-image: url('../../images/lowpoly.png');
+  background-image: url('../../images/bg.png');
 }
 
 // .logs {
@@ -399,14 +400,16 @@ a {
   }
 }
 .panel {
+  border-radius: @radius;
   margin: 12px;
   background-color: @white;
   >header {
+    border-radius: @radius @radius 0 0;
     height: 32px;
     background-color: @subMainColor;
     line-height: 32px;
     text-indent: 12px;
-    color: @white;
+    // color: @white;
   }
   >div {
     padding: 12px;

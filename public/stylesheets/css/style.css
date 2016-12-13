@@ -96,10 +96,10 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   cursor: pointer;
-  border: 1px solid #1382af;
+  border: 1px solid #444444;
   margin: 6px 0 6px 6px;
   padding: 3px;
   min-width: 42px;
@@ -107,13 +107,13 @@ a {
   font-size: 12px;
   background-color: #FFFFFF;
   text-align: center;
-  color: #1382af;
+  color: #444444;
 }
 .btn-sm:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .btn-sm:hover {
-  background-color: #6cc9ef;
+  background-color: #919191;
 }
 .textCenter {
   text-align: center;
@@ -152,7 +152,7 @@ a {
   font-size: 16px;
 }
 .success {
-  color: #99FF66;
+  color: #80bd01;
 }
 .error {
   color: #FF0033;
@@ -171,20 +171,20 @@ a {
 }
 .navSwitcher > span {
   display: block;
-  margin-top: 13.33333333%;
-  width: 80%;
-  height: 8.88888889%;
+  margin-top: 6.66666667%;
+  width: 40%;
+  height: 4.44444444%;
   background-color: #FFFFFF;
 }
 .navSwitcher > span:first-child {
-  margin-top: 20%;
+  margin-top: 40%;
 }
 .nav {
   position: fixed;
   z-index: 9;
   width: 100%;
   height: 50px;
-  background-color: #1382af;
+  background-color: #444444;
   opacity: 1;
 }
 .nav > ul {
@@ -206,7 +206,7 @@ a {
   background-color: #FFFFFF;
 }
 .nav > ul > li:hover > a {
-  color: #1382af;
+  color: #444444;
 }
 .nav > ul > li > a {
   display: inline-block;
@@ -227,6 +227,7 @@ a {
   height: 100%;
   width: 100%;
   background-color: #F2F2F2;
+  background-image: url('../../images/bg.png');
 }
 .hide {
   display: none;
@@ -249,13 +250,13 @@ a {
   transition: background-color 0.3s;
   display: inline-block;
   padding: 7px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
 }
 .prepage > a:hover,
 .nextpage > a:hover {
   background-color: #F2F2F2;
-  color: #1382af;
+  color: #444444;
 }
 .avatar-sm {
   border-radius: 50%;
@@ -287,7 +288,7 @@ a {
 .form h4,
 .form h5,
 .form h6 {
-  color: #1382af;
+  color: #444444;
 }
 .form input {
   -webkit-box-sizing: border-box;
@@ -314,7 +315,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -326,7 +327,7 @@ a {
 .form input[type=submit]:hover,
 .form input[type=reset]:hover,
 .form input[type=button]:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .form input[type=checkbox] {
   display: inline-block;
@@ -352,15 +353,16 @@ a {
   text-align: center;
 }
 .panel {
+  border-radius: 3px;
   margin: 12px;
   background-color: #FFFFFF;
 }
 .panel > header {
+  border-radius: 3px 3px 0 0;
   height: 32px;
-  background-color: #5abbeb;
+  background-color: #e1e1e1;
   line-height: 32px;
   text-indent: 12px;
-  color: #FFFFFF;
 }
 .panel > div {
   padding: 12px;
@@ -377,7 +379,7 @@ a {
 .panel > div > form h4,
 .panel > div > form h5,
 .panel > div > form h6 {
-  color: #1382af;
+  color: #444444;
 }
 .panel > div > form input {
   -webkit-box-sizing: border-box;
@@ -404,7 +406,7 @@ a {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -416,7 +418,7 @@ a {
 .panel > div > form input[type=submit]:hover,
 .panel > div > form input[type=reset]:hover,
 .panel > div > form input[type=button]:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .panel > div > form input[type=checkbox] {
   display: inline-block;
@@ -464,13 +466,13 @@ button {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
 }
 button:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .userBooks {
   border-radius: 5px;
@@ -572,10 +574,10 @@ a.bookTitle:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   cursor: pointer;
-  border: 1px solid #1382af;
+  border: 1px solid #444444;
   margin: 6px 0 6px 6px;
   padding: 3px;
   min-width: 42px;
@@ -583,15 +585,15 @@ a.bookTitle:hover {
   font-size: 12px;
   background-color: #FFFFFF;
   text-align: center;
-  color: #1382af;
+  color: #444444;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 #books > div > section > header .bookBtn:hover,
 #books > div > section > header .addBtn:hover {
-  background-color: #6cc9ef;
+  background-color: #919191;
 }
 #books > div > section .bookTags {
   overflow: hidden;
@@ -620,7 +622,7 @@ a.bookTitle:hover {
   -o-animation: float 1s;
   animation: float 1s;
   display: inline-block;
-  border-right: 4px solid #1382af;
+  border-right: 4px solid #444444;
   margin: 0 0 6px 1%;
   height: 136px;
   width: 31.33333333%;
@@ -697,10 +699,10 @@ a.bookTitle:hover {
   display: block;
   margin: 12px 12px 0 auto;
   font-size: 12px;
-  background-color: #1382af;
+  background-color: #444444;
 }
 .comments .removeComment:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .nocomment {
   text-align: center;
@@ -783,7 +785,7 @@ a.bookTitle:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -791,7 +793,7 @@ a.bookTitle:hover {
   height: auto;
 }
 .newcommentForm > div > input[type=submit]:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .sidebar {
   width: 30%;
@@ -845,7 +847,7 @@ a.bookTitle:hover {
 .changeUserForm h4,
 .changeUserForm h5,
 .changeUserForm h6 {
-  color: #1382af;
+  color: #444444;
 }
 .changeUserForm input {
   -webkit-box-sizing: border-box;
@@ -872,7 +874,7 @@ a.bookTitle:hover {
   display: inline-block;
   padding: 3px 7px;
   line-height: 28px;
-  background-color: #1382af;
+  background-color: #444444;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
@@ -884,7 +886,7 @@ a.bookTitle:hover {
 .changeUserForm input[type=submit]:hover,
 .changeUserForm input[type=reset]:hover,
 .changeUserForm input[type=button]:hover {
-  background-color: #0e6081;
+  background-color: #2b2b2b;
 }
 .changeUserForm input[type=checkbox] {
   display: inline-block;

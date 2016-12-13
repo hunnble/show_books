@@ -7,19 +7,19 @@ function start ($) {
 	/**
 	 * all
 	 */
-	var $dialog = $('#dialog');
-	hideDialog();
+	// var $dialog = $('#dialog');
+	// hideDialog();
 
-	$('form').submit(showDialog);
-	$('a').click(showDialog);
+	// $('form').submit(showDialog);
+	// $('a').click(showDialog);
 
-	function showDialog () {
-		$dialog.removeClass('hide');
-	}
-
-	function hideDialog () {
-		$dialog.addClass('hide');
-	}
+	// function showDialog () {
+	// 	$dialog.removeClass('hide');
+	// }
+	//
+	// function hideDialog () {
+	// 	$dialog.addClass('hide');
+	// }
 
 	$('.flashWrapper').delay(3000).fadeOut(500);
 
@@ -33,7 +33,7 @@ function start ($) {
 			$nav.animate({
 				'top': '-' + $nav.css('height')
 			}, 300);
-			$navSwitcher.find('span').css('backgroundColor', '#222222');
+			$navSwitcher.find('span').css('backgroundColor', '#444444');
 		} else {
 			$nav.animate({
 				'top': 0
@@ -49,7 +49,7 @@ function start ($) {
     var $removeItem = $(this).parent().parent();
 
     if (confirm('确认删除?')) {
-			showDialog();
+			// showDialog();
 			$.post('/book', {
 				'_method': 'delete',
 				'username': window.location.href.split('/').reverse()[0],
@@ -60,7 +60,7 @@ function start ($) {
 			}, function (data) {
 				if (data.success) {
 					$removeItem.remove();
-					hideDialog();
+					// hideDialog();
 				}
 			});
     }
@@ -120,7 +120,7 @@ function start ($) {
 
 	var $userHeadFile = $('.userHeadFile');
 
-	$('.userHeadImg').click(function () {
+	$('.userHeadFileBtn').click(function () {
 		if ($userHeadFile) {
 			$userHeadFile.click();
 		}

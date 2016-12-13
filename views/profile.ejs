@@ -2,7 +2,9 @@
 <div class="userInfo">
   <div class="userInfoDetail">
     <div class="userHead">
-      <img class="userHeadImg" src="<%= userInfo.head %>" alt="">
+      <% if (userInfo.head) { %>
+        <img class="userHeadImg" src="<%= userInfo.head %>" alt="">
+      <% } %>
       <% if (userInfo.name === user.name) { %>
         <input type="file" class="userHeadFile">
       <% } %>
@@ -12,6 +14,7 @@
     <% if (userInfo.name === user.name) { %>
       <button class="changeUserInfoBtn" type="button">修改信息</button>
       <button class="changeUserPswordBtn" type="button">修改密码</button>
+      <button class="userHeadFileBtn" type="button">设置头像</button>
       <form class="changeUserForm changeUserInfoForm hide" method="post" action="/profile">
         <div>
           <label for="summary">个人简介</label><input type="text" name="summary">
@@ -33,36 +36,36 @@
     <% } %>
   </div>
   <div class="user">
-    <ul>
-      <% books.forEach(function (book) { %>
-        <li>
-          <a href="/book/<%= book.bookId %>">
-            <img class="avatar" src="<%= book.img %>" alt="" title="<%= book.name %>" />
-          </a>
-          <section class="bookList">
-            <a class="bookTitle" href="/comment/<%= book.username %>/<%= book.bookId %>"><%= book.name %></a>
-            <span class="bookAuthor"><%= book.author %></span>
-          </section>
-        </li>
-      <% }) %>
-    </ul>
-    <div class="page">
-      <a class="link" href="/archive/<%= userInfo.name %>">
-        <h4>查看全部收藏</h4>
-      </a>
-      <% if (!isFirstPage) { %>
-        <span class="prepage">
-          <a href="/?page=<%- page - 1 %>">上一页</a>
-        </span>
-      <% } %>
-      <% if (!isLastPage) { %>
-        <span class="nextpage">
-          <a href="/?page=<%- page + 1 %>">下一页</a>
-        </span>
-      <% } %>
-      <span>第<%= page %>页</span>
-      <span>共<%= pageNum %>页<span>
-    </div>
+    <% if (books.length > 0) { %>
+      <ul>
+        <% books.forEach(function (book) { %>
+          <li>
+            <a href="/book/<%= book.bookId %>">
+              <img class="avatar" src="<%= book.img %>" alt="" title="<%= book.name %>" />
+            </a>
+            <section class="bookList">
+              <a class="bookTitle" href="/comment/<%= book.username %>/<%= book.bookId %>"><%= book.name %></a>
+              <span class="bookAuthor"><%= book.author %></span>
+            </section>
+          </li>
+        <% }) %>
+      </ul>
+      <div class="page">
+        <a href="/archive/<%= userInfo.name %>">所有收藏</a>
+        <% if (!isFirstPage) { %>
+          <span class="prepage">
+            <a href="/?page=<%- page - 1 %>">上一页</a>
+          </span>
+        <% } %>
+        <% if (!isLastPage) { %>
+          <span class="nextpage">
+            <a href="/?page=<%- page + 1 %>">下一页</a>
+          </span>
+        <% } %>
+        <span>第<%= page %>页</span>
+        <span>共<%= pageNum %>页<span>
+      </div>
+    <% } %>
   </div>
 </div>
 <%- include footer %>
